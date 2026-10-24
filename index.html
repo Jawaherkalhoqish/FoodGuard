@@ -1,561 +1,1241 @@
+```html
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>FoodGuard AI</title>
+  <meta
+    name="description"
+    content="FoodGuard AI — Early Stress Monitoring for Date Palms."
+  >
+
+  <meta name="theme-color" content="#0D4F36">
+
+  <title>FoodGuard | Early Stress Monitoring for Date Palms</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+    :root {
+      --bg: #F0FAF6;
+      --surface: #FFFFFF;
+      --surface-2: #DDF4E9;
+
+      --deep: #0D4F36;
+      --deep-2: #0C3F2C;
+      --green: #188B5A;
+      --green-dark: #116C46;
+
+      --text: #263238;
+      --muted: #5E7169;
+
+      --gold: #F2B544;
+      --danger: #FDE7E7;
+
+      --line: rgba(13, 79, 54, .13);
+      --shadow: rgba(13, 79, 54, .15);
+
+      --cream: #FFFFFF;
+    }
+
+    body.dark {
+      --bg: #081E16;
+      --surface: #0E2B20;
+      --surface-2: #123D2D;
+
+      --deep: #DDF4E9;
+      --deep-2: #BFE8D3;
+
+      --green: #39B979;
+      --green-dark: #188B5A;
+
+      --text: #F0FAF6;
+      --muted: #AFC8BC;
+
+      --line: rgba(221, 244, 233, .14);
+      --shadow: rgba(0, 0, 0, .35);
+
+      --cream: #FFFFFF;
+    }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    :root {
-      --bg: #061c22;
-      --bg2: #082831;
-      --text: #f4fbfc;
-      --muted: #a8c0c5;
-      --line: rgba(105, 220, 224, 0.18);
-      --card: rgba(7, 39, 48, 0.72);
-      --card-border: rgba(92, 216, 222, 0.35);
-      --accent: #4ed9dc;
-      --accent2: #70e8df;
-      --shadow: rgba(0, 0, 0, 0.35);
-    }
-
-    body.light {
-      --bg: #edf7f7;
-      --bg2: #dceff0;
-      --text: #12333a;
-      --muted: #527078;
-      --line: rgba(20, 120, 125, 0.14);
-      --card: rgba(255, 255, 255, 0.78);
-      --card-border: rgba(37, 157, 163, 0.3);
-      --accent: #149da3;
-      --accent2: #27bfc0;
-      --shadow: rgba(25, 90, 95, 0.15);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Cairo", sans-serif;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(30, 150, 160, 0.16), transparent 28%),
-        linear-gradient(135deg, var(--bg), var(--bg2));
+      margin: 0;
       color: var(--text);
-      min-height: 100vh;
+      background: var(--bg);
+      font-family:
+        "DM Sans",
+        "IBM Plex Sans Arabic",
+        sans-serif;
+
       overflow-x: hidden;
-      transition: 0.35s ease;
+      transition:
+        background .35s ease,
+        color .35s ease;
     }
 
-    /* الشبكة بالخلفية */
-    body::before {
+    body.ar {
+      font-family:
+        "IBM Plex Sans Arabic",
+        "DM Sans",
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    /* =========================================
+       PAGE BACKGROUND
+    ========================================= */
+
+    .page {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 82% 25%,
+          rgba(24, 139, 90, .16),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 8% 82%,
+          rgba(17, 108, 70, .12),
+          transparent 34%
+        ),
+        var(--bg);
+
+      transition: background .35s ease;
+    }
+
+    .page::before {
       content: "";
-      position: fixed;
+      position: absolute;
       inset: 0;
+
       pointer-events: none;
-      opacity: 0.45;
+
+      opacity: .32;
 
       background-image:
-        linear-gradient(rgba(111, 213, 218, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(111, 213, 218, 0.055) 1px, transparent 1px);
+        linear-gradient(
+          rgba(24, 139, 90, .06) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(24, 139, 90, .06) 1px,
+          transparent 1px
+        );
 
-      background-size: 64px 64px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      background-size: 72px 72px;
     }
 
-    /* توهج خفيف */
-    body::after {
-      content: "";
-      position: fixed;
-      width: 700px;
-      height: 700px;
-      left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: rgba(39, 196, 201, 0.07);
-      filter: blur(90px);
-      pointer-events: none;
+    .container {
+      width: min(1160px, calc(100% - 44px));
+      margin: auto;
+
+      position: relative;
+      z-index: 1;
     }
+
+    /* =========================================
+       HEADER
+    ========================================= */
 
     header {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      padding: 26px 0 20px;
+      min-height: 86px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
+      gap: 20px;
+
       border-bottom: 1px solid var(--line);
-      position: relative;
-      z-index: 10;
     }
 
-    .brand {
+    .brand,
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      gap: 14px;
     }
 
-    /* شعار دائري بسيط - بدون صورة */
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(92, 224, 225, 0.6);
+    .logo-box {
+      width: 60px;
+      height: 60px;
 
       display: grid;
       place-items: center;
 
-      background:
-        radial-gradient(circle at center,
-        rgba(78, 217, 220, 0.5) 0 7px,
-        transparent 8px);
+      border-radius: 16px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--line);
 
       box-shadow:
-        0 0 22px rgba(78, 217, 220, 0.22),
-        inset 0 0 15px rgba(78, 217, 220, 0.1);
+        0 12px 30px var(--shadow);
+
+      overflow: hidden;
     }
 
-    .brand-logo::before {
-      content: "";
-      width: 21px;
-      height: 21px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      position: absolute;
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
     }
 
-    .brand span {
-      color: var(--accent);
-    }
+    .brand-name {
+      color: var(--green);
 
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+      font-weight: 700;
 
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      color: var(--text);
-      background: rgba(255,255,255,0.035);
-      border: 1px solid var(--card-border);
-      border-radius: 30px;
-      transition: 0.25s ease;
-    }
-
-    button:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 18px rgba(78, 217, 220, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .language-btn {
-      padding: 9px 17px;
-      font-size: 13px;
-    }
-
-    .theme-btn {
-      width: 42px;
-      height: 42px;
       font-size: 18px;
+
+      letter-spacing: .13em;
     }
 
-    main {
-      width: min(1120px, 92%);
-      margin: auto;
-      position: relative;
-      z-index: 2;
+    .brand-sub {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      margin-top: 2px;
     }
+
+    .header-right {
+      gap: 9px;
+    }
+
+    /* =========================================
+       HEADER BUTTONS
+    ========================================= */
+
+    .header-button {
+      min-height: 42px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 999px;
+
+      padding: 9px 14px;
+
+      color: var(--text);
+
+      background: var(--surface);
+
+      cursor: pointer;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .header-button:hover {
+      transform: translateY(-2px);
+
+      border-color: var(--green);
+
+      background: var(--surface-2);
+    }
+
+    #themeButton {
+      width: 43px;
+      height: 43px;
+
+      padding: 0;
+
+      display: grid;
+      place-items: center;
+
+      font-size: 17px;
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
 
     .hero {
-      min-height: calc(100vh - 90px);
       display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
+
+      grid-template-columns:
+        1.08fr
+        .92fr;
+
+      gap: 45px;
+
       align-items: center;
-      gap: 40px;
-      direction: ltr;
+
+      padding: 48px 0 58px;
     }
 
-    .hero-text {
-      direction: rtl;
-      max-width: 470px;
+    .hero-copy {
+      min-width: 0;
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      color: var(--green);
 
-      color: var(--accent);
-      font-size: 13px;
+      letter-spacing: .14em;
+
+      font-size: 11px;
+
       font-weight: 700;
-
-      border: 1px solid var(--card-border);
-      background: rgba(78, 217, 220, 0.055);
-      padding: 7px 13px;
-      border-radius: 20px;
-      margin-bottom: 22px;
     }
 
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
+    .eyebrow::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 8px;
+      height: 8px;
+
+      margin-inline-end: 10px;
+
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 14px rgba(24, 139, 90, .7);
     }
 
     h1 {
-      font-size: clamp(40px, 5vw, 70px);
+      margin: 18px 0 22px;
+
+      max-width: 720px;
+
+      font-size:
+        clamp(42px, 5vw, 65px);
+
       line-height: 1.08;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
+
+      font-weight: 600;
+
+      letter-spacing: -.05em;
     }
 
-    h1 span {
-      color: var(--accent);
+    body.ar h1 {
+      letter-spacing: 0;
+
+      line-height: 1.3;
+
+      font-size:
+        clamp(39px, 4.7vw, 61px);
+    }
+
+    h1 .highlight {
+      color: var(--green);
     }
 
     .description {
+      max-width: 600px;
+
+      margin: 0;
+
       color: var(--muted);
-      line-height: 2;
+
       font-size: 16px;
-      max-width: 470px;
-      margin-bottom: 28px;
+
+      line-height: 1.85;
     }
 
-    .main-btn {
-      padding: 13px 23px;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #062329;
-      border: none;
-      font-weight: 800;
-      font-size: 14px;
-      box-shadow: 0 10px 30px rgba(50, 210, 213, 0.18);
+    .small-note {
+      margin: 13px 0 0;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      opacity: .85;
     }
 
-    /* =========================
-       الدائرة الرئيسية
-       ========================= */
+    /* =========================================
+       ACTION BUTTONS
+    ========================================= */
 
-    .visual {
-      position: relative;
-      height: 600px;
+    .buttons {
       display: grid;
-      place-items: center;
-      direction: ltr;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+      width: min(100%, 620px);
+
+      gap: 13px;
+
+      margin: 28px 0 0;
     }
 
-    .circle-system {
-      width: 470px;
-      height: 470px;
-      position: relative;
-      display: grid;
-      place-items: center;
+    .button {
+      min-height: 64px;
+
+      display: inline-flex;
+
+      justify-content: center;
+      align-items: center;
+
+      padding: 12px 20px;
+
+      border-radius: 17px;
+
+      font-size: 15px;
+
+      line-height: 1.4;
+
+      font-weight: 700;
+
+      text-align: center;
+
+      box-shadow:
+        0 13px 30px var(--shadow);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease;
     }
 
-    .circle-system::before,
-    .circle-system::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
+    .button:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 18px 38px var(--shadow);
+    }
+
+    .primary {
+      color: #FFFFFF;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+    }
+
+    .secondary {
+      color: var(--deep);
+
+      background: var(--surface);
+
       border: 1px solid var(--line);
     }
 
-    .circle-system::before {
-      width: 470px;
-      height: 470px;
+    /* =========================================
+       CIRCULAR AI VISUAL
+       NO PALM IMAGE
+    ========================================= */
+
+    .visual {
+      height: 430px;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
     }
 
-    .circle-system::after {
-      width: 370px;
-      height: 370px;
-      border-color: rgba(78, 217, 220, 0.25);
+    .glow {
+      width: 400px;
+      height: 400px;
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(24, 139, 90, .22),
+          rgba(24, 139, 90, .08) 38%,
+          transparent 70%
+        );
+
+      filter: blur(12px);
     }
 
     .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(78, 217, 220, 0.14);
-    }
+      width: 360px;
+      height: 360px;
 
-    .ring.one {
-      width: 290px;
-      height: 290px;
-    }
+      position: relative;
 
-    .ring.two {
-      width: 210px;
-      height: 210px;
-      border-color: rgba(78, 217, 220, 0.25);
-    }
-
-    .ring.three {
-      width: 145px;
-      height: 145px;
-      border-color: rgba(78, 217, 220, 0.4);
-    }
-
-    /* مركز الدائرة */
-    .center {
-      width: 125px;
-      height: 125px;
       border-radius: 50%;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(78, 217, 220, 0.28),
-          rgba(5, 38, 47, 0.92) 65%
-        );
-
-      border: 1px solid rgba(101, 228, 226, 0.65);
+      border:
+        1px solid
+        rgba(24, 139, 90, .30);
 
       box-shadow:
-        0 0 50px rgba(78, 217, 220, 0.13),
-        inset 0 0 30px rgba(78, 217, 220, 0.1);
+        inset 0 0 60px
+        rgba(24, 139, 90, .06),
+
+        0 0 70px
+        rgba(24, 139, 90, .08);
     }
 
-    body.light .center {
+    .ring::before,
+    .ring::after {
+      content: "";
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      inset: 43px;
+
+      border:
+        1px dashed
+        rgba(24, 139, 90, .32);
+
+      animation:
+        rotate 50s linear infinite;
+    }
+
+    .ring::after {
+      inset: 96px;
+
+      border-style: solid;
+
+      opacity: .55;
+
+      animation-direction: reverse;
+
+      animation-duration: 34s;
+    }
+
+    /* =========================================
+       CENTER
+    ========================================= */
+
+    .center {
+      position: absolute;
+
+      width: 125px;
+      height: 125px;
+
+      top: 50%;
+      left: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
       background:
         radial-gradient(
-          circle at center,
-          rgba(78, 217, 220, 0.25),
-          rgba(255,255,255,0.95) 70%
+          circle at 35% 30%,
+          #188B5A,
+          #0D4F36 75%
         );
+
+      border:
+        1px solid
+        rgba(221, 244, 233, .55);
+
+      box-shadow:
+        0 0 0 16px
+        rgba(24, 139, 90, .07),
+
+        0 0 65px
+        rgba(24, 139, 90, .35);
+
+      animation:
+        pulse 4s ease-in-out infinite;
     }
 
     .center-symbol {
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
       position: relative;
-      margin-bottom: 8px;
+
+      width: 58px;
+      height: 58px;
+
+      border:
+        2px solid
+        rgba(255,255,255,.82);
+
+      border-radius: 50%;
     }
 
     .center-symbol::before,
     .center-symbol::after {
       content: "";
+
       position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
       border-radius: 50%;
-      background: var(--accent);
+
+      border:
+        2px solid
+        rgba(255,255,255,.68);
     }
 
     .center-symbol::before {
-      width: 6px;
-      height: 6px;
-      left: 3px;
-      top: 5px;
-      box-shadow: 15px 12px 0 var(--accent);
+      width: 30px;
+      height: 30px;
     }
 
     .center-symbol::after {
-      width: 22px;
-      height: 1px;
-      left: 3px;
-      top: 14px;
-      opacity: 0.5;
-      transform: rotate(35deg);
-    }
-
-    .center-title {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: 1px;
-    }
-
-    .center-sub {
-      font-size: 9px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* النقاط حول الدائرة */
-    .orbit-dot {
-      position: absolute;
       width: 9px;
       height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-    }
 
-    .dot1 { top: 76px; left: 105px; }
-    .dot2 { top: 185px; right: 18px; }
-    .dot3 { bottom: 72px; right: 102px; }
-    .dot4 { bottom: 135px; left: 28px; }
+      background: #F2B544;
 
-    /* الكروت */
-    .info-card {
-      position: absolute;
-      min-width: 175px;
-      padding: 15px 18px;
-
-      background: var(--card);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
+      border: none;
 
       box-shadow:
-        0 20px 50px var(--shadow),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-
-      direction: rtl;
+        0 0 14px
+        rgba(242,181,68,.75);
     }
 
-    .card-top {
-      color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 5px;
-    }
+    /* =========================================
+       INFO CHIPS
+    ========================================= */
 
-    .card-value {
-      font-size: 23px;
-      font-weight: 800;
-    }
-
-    .card-value span {
-      color: var(--accent);
-    }
-
-    .card-status {
-      margin-top: 6px;
-      font-size: 10px;
-      color: var(--accent);
-    }
-
-    .card1 {
-      top: 68px;
-      right: -15px;
-    }
-
-    .card2 {
-      left: -5px;
-      top: 220px;
-    }
-
-    .card3 {
-      right: 20px;
-      bottom: 63px;
-    }
-
-    .card4 {
-      left: 38px;
-      bottom: 100px;
-    }
-
-    /* خط صغير أسفل البطل */
-    .status-pill {
+    .chip {
       position: absolute;
-      bottom: 34px;
-      left: 50%;
-      transform: translateX(-50%);
 
-      padding: 8px 15px;
-      border-radius: 30px;
+      min-width: 155px;
 
-      border: 1px solid rgba(78, 217, 220, 0.35);
-      background: rgba(78, 217, 220, 0.06);
+      padding: 12px 15px;
+
+      border:
+        1px solid
+        rgba(24, 139, 90, .28);
+
+      border-radius: 17px;
+
+      background:
+        color-mix(
+          in srgb,
+          var(--surface) 92%,
+          transparent
+        );
+
+      backdrop-filter: blur(12px);
+
+      box-shadow:
+        0 15px 30px var(--shadow);
+    }
+
+    .chip small {
+      display: block;
+
+      color: var(--gold);
+
+      letter-spacing: .1em;
+
+      font-size: 9px;
+
+      font-weight: 700;
+
+      margin-bottom: 4px;
+    }
+
+    .chip strong {
+      color: var(--text);
+
+      font-size: 13px;
+    }
+
+    .chip.one {
+      top: 12%;
+      left: -10%;
+    }
+
+    .chip.two {
+      top: 55%;
+      left: -15%;
+    }
+
+    .chip.three {
+      right: -11%;
+      bottom: 10%;
+
+      border-color: var(--green);
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green-dark),
+          var(--deep)
+        );
+    }
+
+    .chip.three strong {
+      color: #FFFFFF;
+    }
+
+    .dot {
+      position: absolute;
+
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 17px
+        rgba(24, 139, 90, .85);
+
+      animation:
+        float 3s ease-in-out infinite;
+    }
+
+    .dot.a {
+      top: 16%;
+      right: 23%;
+    }
+
+    .dot.b {
+      bottom: 20%;
+      left: 21%;
+
+      animation-delay: 1s;
+    }
+
+    /* =========================================
+       STATS
+    ========================================= */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+
+      padding: 25px 0;
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
+    }
+
+    .stat:not(:last-child) {
+      border-inline-end:
+        1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+
+      color: var(--green);
+
+      font-size: 26px;
+
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* =========================================
+       SECTION
+    ========================================= */
+
+    .section {
+      padding: 78px 0 60px;
+    }
+
+    .label {
+      color: var(--green);
+
+      font-size: 11px;
+
+      letter-spacing: .16em;
+
+      font-weight: 700;
+    }
+
+    body.ar .label {
+      letter-spacing: 0;
+    }
+
+    h2 {
+      max-width: 850px;
+
+      margin: 12px 0 32px;
+
+      font-size:
+        clamp(30px, 4vw, 48px);
+
+      line-height: 1.16;
+
+      font-weight: 600;
+
+      letter-spacing: -.04em;
+    }
+
+    body.ar h2 {
+      letter-spacing: 0;
+
+      line-height: 1.4;
+    }
+
+    /* =========================================
+       CARDS
+    ========================================= */
+
+    .cards {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 190px;
+
+      padding: 25px;
+
+      border-radius: 20px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--surface-2),
+          var(--surface)
+        );
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+
+      border-color:
+        rgba(24, 139, 90, .55);
+
+      box-shadow:
+        0 18px 38px var(--shadow);
+    }
+
+    .card b {
+      color: var(--gold);
+
+      font-size: 11px;
+
+      letter-spacing: .08em;
+    }
+
+    .card h3 {
+      margin: 23px 0 8px;
+
+      font-size: 20px;
+
+      color: var(--text);
+    }
+
+    .card p {
+      margin: 0;
 
       color: var(--muted);
-      font-size: 11px;
-      white-space: nowrap;
+
+      line-height: 1.75;
+
+      font-size: 14px;
     }
 
-    .status-pill b {
-      color: var(--accent);
+    .disclaimer {
+      max-width: 780px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      margin: 34px 0 0;
     }
 
-    /* الجوال */
-    @media (max-width: 850px) {
-      header {
-        padding-top: 18px;
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer {
+      border-top:
+        1px solid var(--line);
+
+      padding: 25px 0 35px;
+
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .creator strong {
+      color: var(--green);
+    }
+
+    .footer-mark {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+    .footer-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      box-shadow:
+        0 0 10px
+        rgba(242,181,68,.6);
+    }
+
+    /* =========================================
+       ANIMATIONS
+    ========================================= */
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
       }
+    }
+
+    @keyframes pulse {
+      50% {
+        box-shadow:
+          0 0 0 27px
+          rgba(24, 139, 90, .025),
+
+          0 0 85px
+          rgba(24, 139, 90, .42);
+      }
+    }
+
+    @keyframes float {
+      50% {
+        transform:
+          translateY(-14px);
+      }
+    }
+
+    /* =========================================
+       TABLET
+    ========================================= */
+
+    @media (max-width: 850px) {
 
       .hero {
         grid-template-columns: 1fr;
-        padding: 55px 0 80px;
-        text-align: center;
-      }
 
-      .hero-text {
-        margin: auto;
-      }
+        gap: 25px;
 
-      .description {
-        margin-left: auto;
-        margin-right: auto;
+        padding-top: 38px;
       }
 
       .visual {
-        height: 500px;
-        transform: scale(0.82);
-        margin-top: -30px;
+        height: 370px;
       }
 
-      .circle-system {
-        width: 430px;
-        height: 430px;
+      .ring {
+        width: 325px;
+        height: 325px;
       }
 
-      .circle-system::before {
-        width: 430px;
-        height: 430px;
+      .buttons {
+        width: min(100%, 620px);
       }
 
-      .circle-system::after {
-        width: 340px;
-        height: 340px;
+      .chip.one {
+        left: 0;
       }
 
-      .card1 {
-        right: -30px;
+      .chip.two {
+        left: -3%;
       }
 
-      .card2 {
-        left: -30px;
+      .chip.three {
+        right: 0;
       }
     }
 
-    @media (max-width: 520px) {
-      .brand {
-        font-size: 18px;
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+      .container {
+        width:
+          min(
+            100% - 30px,
+            1160px
+          );
       }
 
-      .language-btn {
-        padding: 8px 12px;
+      header {
+        min-height: 76px;
       }
 
-      .visual {
-        transform: scale(0.65);
-        height: 420px;
-        margin-top: -60px;
+      .brand,
+      .header-right {
+        gap: 8px;
+      }
+
+      .logo-box {
+        width: 51px;
+        height: 51px;
+
+        border-radius: 13px;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .brand-sub {
+        font-size: 9px;
+      }
+
+      .header-button {
+        min-height: 38px;
+
+        padding: 7px 10px;
+
+        font-size: 11px;
+      }
+
+      #themeButton {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero {
+        padding:
+          34px 0 40px;
       }
 
       h1 {
-        font-size: 40px;
+        font-size:
+          clamp(39px, 10vw, 49px);
+
+        line-height: 1.1;
+      }
+
+      body.ar h1 {
+        font-size:
+          clamp(37px, 9vw, 47px);
+
+        line-height: 1.35;
+      }
+
+      .description {
+        font-size: 14px;
+
+        line-height: 1.8;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+        margin-top: 23px;
+      }
+
+      .button {
+        min-height: 60px;
+      }
+
+      .visual {
+        height: 310px;
+      }
+
+      .glow {
+        width: 310px;
+        height: 310px;
+      }
+
+      .ring {
+        width: 270px;
+        height: 270px;
+      }
+
+      .ring::before {
+        inset: 31px;
+      }
+
+      .ring::after {
+        inset: 76px;
+      }
+
+      .center {
+        width: 94px;
+        height: 94px;
+      }
+
+      .center-symbol {
+        width: 45px;
+        height: 45px;
+      }
+
+      .center-symbol::before {
+        width: 24px;
+        height: 24px;
+      }
+
+      .center-symbol::after {
+        width: 7px;
+        height: 7px;
+      }
+
+      .chip {
+        min-width: 110px;
+
+        padding: 8px;
+
+        border-radius: 13px;
+      }
+
+      .chip small {
+        font-size: 7px;
+      }
+
+      .chip strong {
+        font-size: 10px;
+      }
+
+      .chip.one {
+        left: -8%;
+      }
+
+      .chip.two {
+        left: -11%;
+      }
+
+      .chip.three {
+        right: -8%;
+      }
+
+      .stats {
+        gap: 7px;
+      }
+
+      .stat strong {
+        font-size: 18px;
+      }
+
+      .stat span {
+        font-size: 9px;
+
+        line-height: 1.5;
+      }
+
+      .section {
+        padding:
+          60px 0 48px;
+      }
+
+      h2 {
+        font-size:
+          clamp(29px, 8vw, 38px);
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+
+      footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+    }
+
+    /* =========================================
+       ACCESSIBILITY
+    ========================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+
+        transition: none !important;
+
+        scroll-behavior: auto !important;
       }
     }
   </style>
@@ -563,281 +1243,580 @@
 
 <body>
 
-  <header>
-    <div class="brand">
-      <div class="brand-logo"></div>
-      <div>Food<span>Guard</span></div>
-    </div>
+  <div class="page">
 
-    <div class="controls">
-      <button class="language-btn" id="languageBtn">
-        English →
-      </button>
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-        ☾
-      </button>
-    </div>
-  </header>
+    <header class="container">
 
+      <div class="brand">
 
-  <main>
-
-    <section class="hero">
-
-      <!-- النص -->
-      <div class="hero-text">
-
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          <span id="eyebrowText">FoodGuard AI</span>
+        <div class="logo-box">
+          <img
+            src="logo (2).jpg"
+            alt="FoodGuard logo"
+          >
         </div>
 
-        <h1 id="title">
-          اكتشف إجهاد النخيل<br>
-          <span>قبل أن يتحول إلى مشكلة.</span>
-        </h1>
+        <div>
+          <div class="brand-name">
+            FOODGUARD
+          </div>
 
-        <p class="description" id="description">
-          منصة FoodGuard AI تساعدك على فهم حالة النخيل
-          واكتشاف مؤشرات الإجهاد مبكرًا باستخدام الذكاء الاصطناعي،
-          لتتخذ القرار المناسب في الوقت المناسب.
-        </p>
+          <div
+            class="brand-sub"
+            data-en="Early stress monitoring for date palms"
+            data-ar="المراقبة المبكرة لإجهاد النخيل"
+          >
+            Early stress monitoring for date palms
+          </div>
+        </div>
 
-        <button class="main-btn" id="mainBtn">
-          ابدأ الآن →
+      </div>
+
+
+      <div class="header-right">
+
+        <button
+          id="themeButton"
+          class="header-button"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
+          ☾
+        </button>
+
+        <button
+          id="langButton"
+          class="header-button"
+          type="button"
+          aria-label="Switch language"
+        >
+          العربية →
         </button>
 
       </div>
 
+    </header>
 
-      <!-- الدائرة -->
-      <div class="visual">
 
-        <div class="circle-system">
+    <main>
 
-          <div class="ring one"></div>
-          <div class="ring two"></div>
-          <div class="ring three"></div>
+      <!-- =====================================
+           HERO
+      ====================================== -->
 
-          <div class="orbit-dot dot1"></div>
-          <div class="orbit-dot dot2"></div>
-          <div class="orbit-dot dot3"></div>
-          <div class="orbit-dot dot4"></div>
+      <section class="hero container">
 
-          <!-- المركز بدون أي صورة -->
-          <div class="center">
+        <div class="hero-copy">
 
-            <div class="center-symbol"></div>
+          <div
+            class="eyebrow"
+            data-en="AI · DATE PALM HEALTH · EARLY WARNING"
+            data-ar="ذكاء اصطناعي · صحة النخيل · إنذار مبكر"
+          >
+            AI · DATE PALM HEALTH · EARLY WARNING
+          </div>
 
-            <div class="center-title">
-              FOODGUARD
-            </div>
 
-            <div class="center-sub">
-              AI ANALYSIS
-            </div>
+          <h1>
+
+            <span
+              data-en="Detect palm stress"
+              data-ar="اكتشف إجهاد النخيل"
+            >
+              Detect palm stress
+            </span>
+
+            <br>
+
+            <span
+              class="highlight"
+              data-en="before it becomes visible."
+              data-ar="قبل أن يصبح ظاهرًا."
+            >
+              before it becomes visible.
+            </span>
+
+          </h1>
+
+
+          <div class="buttons">
+
+            <a
+              class="button primary"
+              href="https://radiant-palm-guard-flow.base44.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-en="Try the prototype →"
+              data-ar="جرّب النموذج الأولي →"
+            >
+              Try the prototype →
+            </a>
+
+
+            <a
+              class="button secondary"
+              href="#innovation"
+              data-en="Discover FoodGuard →"
+              data-ar="اكتشف FoodGuard →"
+            >
+              Discover FoodGuard →
+            </a>
 
           </div>
 
 
-          <!-- الكروت المحيطة -->
+          <p
+            class="description"
+            data-en="FoodGuard AI combines plant signals with environmental and agricultural data to identify early signs of date-palm stress and turn them into clear, explainable warnings and recommended actions."
+            data-ar="يجمع FoodGuard AI بين إشارات النخلة والبيانات البيئية والزراعية لاكتشاف مؤشرات الإجهاد مبكرًا وتحويلها إلى تنبيهات واضحة وقابلة للتفسير وإجراءات مقترحة."
+          >
+            FoodGuard AI combines plant signals with environmental and agricultural data to identify early signs of date-palm stress and turn them into clear, explainable warnings and recommended actions.
+          </p>
 
-          <div class="info-card card1">
 
-            <div class="card-top" id="card1Title">
-              حالة الإجهاد
+          <p
+            class="small-note"
+            data-en="AI decision support · Designed for early detection and informed action"
+            data-ar="دعم القرار بالذكاء الاصطناعي · مصمم للاكتشاف المبكر واتخاذ القرار بوعي"
+          >
+            AI decision support · Designed for early detection and informed action
+          </p>
+
+        </div>
+
+
+        <!-- =================================
+             CIRCULAR VISUAL
+             ================================= -->
+
+        <div
+          class="visual"
+          aria-hidden="true"
+        >
+
+          <div class="glow"></div>
+
+
+          <div class="ring">
+
+            <div class="center">
+
+              <div class="center-symbol"></div>
+
             </div>
 
-            <div class="card-value">
-              <span>31°</span>
+
+            <div class="chip one">
+
+              <small
+                data-en="SIGNALS"
+                data-ar="الإشارات"
+              >
+                SIGNALS
+              </small>
+
+              <strong
+                data-en="Plant + environment"
+                data-ar="النخلة + البيئة"
+              >
+                Plant + environment
+              </strong>
+
             </div>
 
-            <div class="card-status" id="card1Status">
-              مستقرة
+
+            <div class="chip two">
+
+              <small
+                data-en="RISK"
+                data-ar="المخاطر"
+              >
+                RISK
+              </small>
+
+              <strong
+                data-en="Early stress detected"
+                data-ar="اكتشاف الإجهاد مبكرًا"
+              >
+                Early stress detected
+              </strong>
+
             </div>
 
-          </div>
 
+            <div class="chip three">
 
-          <div class="info-card card2">
+              <small
+                data-en="ACTION"
+                data-ar="الإجراء"
+              >
+                ACTION
+              </small>
 
-            <div class="card-top" id="card2Title">
-              رطوبة التربة
+              <strong
+                data-en="Recommended response →"
+                data-ar="الإجراء المقترح →"
+              >
+                Recommended response →
+              </strong>
+
             </div>
 
-            <div class="card-value">
-              <span>64%</span>
-            </div>
 
-            <div class="card-status" id="card2Status">
-              جيدة
-            </div>
-
-          </div>
-
-
-          <div class="info-card card3">
-
-            <div class="card-top" id="card3Title">
-              مؤشر الصحة
-            </div>
-
-            <div class="card-value">
-              <span>87%</span>
-            </div>
-
-            <div class="card-status" id="card3Status">
-              طبيعية
-            </div>
-
-          </div>
-
-
-          <div class="info-card card4">
-
-            <div class="card-top" id="card4Title">
-              تحليل AI
-            </div>
-
-            <div class="card-value">
-              <span>●</span> 92%
-            </div>
-
-            <div class="card-status" id="card4Status">
-              منخفض الإجهاد
-            </div>
+            <i class="dot a"></i>
+            <i class="dot b"></i>
 
           </div>
 
         </div>
 
-        <div class="status-pill">
-          <b>● AI</b>
-          <span id="statusText"> تحليل مستمر ومبكر</span>
+      </section>
+
+
+      <!-- =====================================
+           STATS
+      ====================================== -->
+
+      <section class="stats container">
+
+        <div class="stat">
+
+          <strong>EARLY</strong>
+
+          <span
+            data-en="stress detection"
+            data-ar="اكتشاف مبكر للإجهاد"
+          >
+            stress detection
+          </span>
+
         </div>
+
+
+        <div class="stat">
+
+          <strong>AI</strong>
+
+          <span
+            data-en="explainable risk signals"
+            data-ar="مؤشرات مخاطر قابلة للتفسير"
+          >
+            explainable risk signals
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <strong>SMART</strong>
+
+          <span
+            data-en="action-oriented monitoring"
+            data-ar="مراقبة مرتبطة بالإجراء"
+          >
+            action-oriented monitoring
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           INNOVATION
+      ====================================== -->
+
+      <section
+        class="section container"
+        id="innovation"
+      >
+
+        <div
+          class="label"
+          data-en="THE INNOVATION"
+          data-ar="الابتكار"
+        >
+          THE INNOVATION
+        </div>
+
+
+        <h2
+          data-en="FoodGuard turns hidden signals into an earlier decision."
+          data-ar="يحوّل FoodGuard الإشارات الخفية إلى قرار أبكر."
+        >
+          FoodGuard turns hidden signals into an earlier decision.
+        </h2>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <b>01 / SENSE</b>
+
+            <h3
+              data-en="Read the signals"
+              data-ar="قراءة الإشارات"
+            >
+              Read the signals
+            </h3>
+
+            <p
+              data-en="Bring together plant electrophysiological signals with soil, weather, temperature, and irrigation information."
+              data-ar="دمج الإشارات الكهروفسيولوجية للنخلة مع بيانات التربة والطقس ودرجة الحرارة والري."
+            >
+              Bring together plant electrophysiological signals with soil, weather, temperature, and irrigation information.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <b>02 / DETECT</b>
+
+            <h3
+              data-en="Identify stress early"
+              data-ar="اكتشاف الإجهاد مبكرًا"
+            >
+              Identify stress early
+            </h3>
+
+            <p
+              data-en="Analyze changing patterns to identify potential stress before visible symptoms become obvious."
+              data-ar="تحليل الأنماط المتغيرة لاكتشاف مؤشرات الإجهاد المحتملة قبل ظهور الأعراض بشكل واضح."
+            >
+              Analyze changing patterns to identify potential stress before visible symptoms become obvious.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <b>03 / ACT</b>
+
+            <h3
+              data-en="Turn risk into action"
+              data-ar="تحويل الخطر إلى إجراء"
+            >
+              Turn risk into action
+            </h3>
+
+            <p
+              data-en="Translate detected risk into clear warnings, understandable explanations, and recommended next actions."
+              data-ar="تحويل مستوى الخطر المكتشف إلى تنبيهات واضحة وتفسيرات مفهومة وإجراءات مقترحة."
+            >
+              Translate detected risk into clear warnings, understandable explanations, and recommended next actions.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <p
+          class="disclaimer"
+          data-en="FoodGuard AI is an early decision-support concept for date-palm health monitoring. It is designed to support growers and specialists with earlier signals and informed decisions, not to replace field expertise or professional assessment."
+          data-ar="FoodGuard AI مفهوم مبكر لدعم القرار في مراقبة صحة النخيل. صُمم لمساعدة المزارعين والمختصين على الوصول إلى مؤشرات أبكر وقرارات أكثر وعيًا، وليس لاستبدال الخبرة الميدانية أو التقييم المتخصص."
+        >
+          FoodGuard AI is an early decision-support concept for date-palm health monitoring. It is designed to support growers and specialists with earlier signals and informed decisions, not to replace field expertise or professional assessment.
+        </p>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="container">
+
+      <div class="creator">
+
+        <span
+          data-en="Designed & built by"
+          data-ar="تصميم وشغل"
+        >
+          Designed & built by
+        </span>
+
+        <strong>
+          Jawaher Alhoqish
+        </strong>
+
+        <span>
+          · جواهر الهقيش
+        </span>
 
       </div>
 
-    </section>
 
-  </main>
+      <div class="footer-mark">
+
+        <span class="footer-dot"></span>
+
+        <span
+          data-en="FoodGuard AI"
+          data-ar="FoodGuard AI"
+        >
+          FoodGuard AI
+        </span>
+
+      </div>
+
+    </footer>
+
+  </div>
 
 
   <script>
 
-    let arabic = true;
+    /* =========================================
+       LANGUAGE
+    ========================================= */
 
-    const languageBtn = document.getElementById("languageBtn");
-    const themeBtn = document.getElementById("themeBtn");
+    const langButton =
+      document.getElementById("langButton");
 
-    const title = document.getElementById("title");
-    const description = document.getElementById("description");
-    const eyebrowText = document.getElementById("eyebrowText");
-    const mainBtn = document.getElementById("mainBtn");
-
-    const card1Title = document.getElementById("card1Title");
-    const card1Status = document.getElementById("card1Status");
-
-    const card2Title = document.getElementById("card2Title");
-    const card2Status = document.getElementById("card2Status");
-
-    const card3Title = document.getElementById("card3Title");
-    const card3Status = document.getElementById("card3Status");
-
-    const card4Title = document.getElementById("card4Title");
-    const card4Status = document.getElementById("card4Status");
-
-    const statusText = document.getElementById("statusText");
+    let language = "en";
 
 
-    /* اللغة */
+    langButton.addEventListener("click", () => {
 
-    languageBtn.addEventListener("click", () => {
+      language =
+        language === "en"
+          ? "ar"
+          : "en";
 
-      arabic = !arabic;
 
-      if (arabic) {
+      document.documentElement.lang =
+        language;
 
-        document.documentElement.lang = "ar";
-        document.documentElement.dir = "rtl";
 
-        languageBtn.textContent = "English →";
+      document.documentElement.dir =
+        language === "ar"
+          ? "rtl"
+          : "ltr";
 
-        eyebrowText.textContent = "FoodGuard AI";
 
-        title.innerHTML =
-          "اكتشف إجهاد النخيل<br><span>قبل أن يتحول إلى مشكلة.</span>";
+      document.body.classList.toggle(
+        "ar",
+        language === "ar"
+      );
 
-        description.textContent =
-          "منصة FoodGuard AI تساعدك على فهم حالة النخيل واكتشاف مؤشرات الإجهاد مبكرًا باستخدام الذكاء الاصطناعي، لتتخذ القرار المناسب في الوقت المناسب.";
 
-        mainBtn.textContent = "ابدأ الآن →";
+      document
+        .querySelectorAll(
+          "[data-en][data-ar]"
+        )
+        .forEach(element => {
 
-        card1Title.textContent = "حالة الإجهاد";
-        card1Status.textContent = "مستقرة";
+          element.textContent =
+            element.getAttribute(
+              "data-" + language
+            );
 
-        card2Title.textContent = "رطوبة التربة";
-        card2Status.textContent = "جيدة";
+        });
 
-        card3Title.textContent = "مؤشر الصحة";
-        card3Status.textContent = "طبيعية";
 
-        card4Title.textContent = "تحليل AI";
-        card4Status.textContent = "منخفض الإجهاد";
+      langButton.textContent =
+        language === "ar"
+          ? "English →"
+          : "العربية →";
 
-        statusText.textContent = " تحليل مستمر ومبكر";
 
-      } else {
-
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
-
-        languageBtn.textContent = "← العربية";
-
-        eyebrowText.textContent = "FoodGuard AI";
-
-        title.innerHTML =
-          "Detect palm stress<br><span>before it becomes a problem.</span>";
-
-        description.textContent =
-          "FoodGuard AI helps you understand palm health and detect early stress indicators using artificial intelligence, so you can make the right decision at the right time.";
-
-        mainBtn.textContent = "Get Started →";
-
-        card1Title.textContent = "Stress Level";
-        card1Status.textContent = "Stable";
-
-        card2Title.textContent = "Soil Moisture";
-        card2Status.textContent = "Good";
-
-        card3Title.textContent = "Health Index";
-        card3Status.textContent = "Normal";
-
-        card4Title.textContent = "AI Analysis";
-        card4Status.textContent = "Low Stress";
-
-        statusText.textContent = " Continuous early analysis";
-      }
+      document.title =
+        language === "ar"
+          ? "FoodGuard | المراقبة المبكرة لإجهاد النخيل"
+          : "FoodGuard | Early Stress Monitoring for Date Palms";
 
     });
 
 
-    /* Dark / Light */
+    /* =========================================
+       DARK / LIGHT MODE
+    ========================================= */
 
-    themeBtn.addEventListener("click", () => {
+    const themeButton =
+      document.getElementById("themeButton");
 
-      document.body.classList.toggle("light");
 
-      if (document.body.classList.contains("light")) {
-        themeBtn.textContent = "☀";
-      } else {
-        themeBtn.textContent = "☾";
+    function updateThemeButton() {
+
+      const isDark =
+        document.body.classList.contains("dark");
+
+
+      themeButton.textContent =
+        isDark
+          ? "☀"
+          : "☾";
+
+
+      themeButton.setAttribute(
+        "aria-label",
+        isDark
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
+
+    }
+
+
+    const savedTheme =
+      localStorage.getItem(
+        "foodguard-theme"
+      );
+
+
+    if (savedTheme === "dark") {
+
+      document.body.classList.add("dark");
+
+    }
+
+
+    updateThemeButton();
+
+
+    themeButton.addEventListener(
+      "click",
+      () => {
+
+        document.body.classList.toggle(
+          "dark"
+        );
+
+
+        const isDark =
+          document.body.classList.contains(
+            "dark"
+          );
+
+
+        localStorage.setItem(
+          "foodguard-theme",
+          isDark
+            ? "dark"
+            : "light"
+        );
+
+
+        updateThemeButton();
+
       }
-
-    });
+    );
 
   </script>
 
 </body>
 </html>
+```
