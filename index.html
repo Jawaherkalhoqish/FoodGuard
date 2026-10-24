@@ -1,69 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta
-    name="description"
-    content="FoodGuard AI — Early Stress Monitoring for Date Palms using multimodal data fusion."
-  >
+  <title>FoodGuard AI</title>
 
-  <meta name="theme-color" content="#1F5C48">
-
-  <title>FoodGuard AI | Early Stress Monitoring</title>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-
-    /* =========================================================
-       FOODGUARD AI
-       Design & Development — Jawaher Alhoqish
-       ========================================================= */
-
     :root {
-
-      /* Brand */
-      --primary: #2E8B57;
-      --primary-dark: #1F5C48;
-      --primary-deep: #123D31;
-      --primary-soft: #E8F5EF;
-
-      /* Accent */
-      --mint: #35A66F;
-      --gold: #E7A83B;
-      --danger: #E87575;
-
-      /* Neutral */
-      --white: #FFFFFF;
-      --background: #F7FAF8;
-      --surface: #FFFFFF;
-      --text: #1F2937;
-      --muted: #68766F;
-      --border: #E1EAE5;
-
-      /* Effects */
-      --shadow-sm: 0 8px 24px rgba(18, 61, 49, .07);
-      --shadow-md: 0 18px 45px rgba(18, 61, 49, .11);
-      --shadow-lg: 0 30px 80px rgba(18, 61, 49, .16);
-
-      --radius-sm: 12px;
-      --radius-md: 20px;
-      --radius-lg: 28px;
+      --bg: #061b21;
+      --bg-2: #08262d;
+      --surface: rgba(12, 48, 56, 0.72);
+      --surface-strong: rgba(13, 57, 66, 0.9);
+      --text: #f4fbfc;
+      --muted: #9bb8bd;
+      --line: rgba(89, 220, 224, 0.24);
+      --accent: #54d9d9;
+      --accent-2: #39bfc7;
+      --gold: #e4c47b;
+      --shadow: rgba(0, 0, 0, 0.35);
     }
 
-
-    /* =========================================================
-       RESET
-       ========================================================= */
+    body.light {
+      --bg: #eef8f8;
+      --bg-2: #dceff0;
+      --surface: rgba(255, 255, 255, 0.78);
+      --surface-strong: rgba(255, 255, 255, 0.95);
+      --text: #12343a;
+      --muted: #668086;
+      --line: rgba(38, 164, 171, 0.25);
+      --accent: #159da5;
+      --accent-2: #087f89;
+      --gold: #b78d36;
+      --shadow: rgba(18, 65, 70, 0.14);
+    }
 
     * {
       box-sizing: border-box;
@@ -76,2676 +50,876 @@
     }
 
     body {
-      background: var(--background);
-      color: var(--text);
-      font-family:
-        "DM Sans",
-        "IBM Plex Sans Arabic",
-        sans-serif;
-      overflow-x: hidden;
-    }
-
-    body.ar {
-      font-family:
-        "IBM Plex Sans Arabic",
-        "DM Sans",
-        sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-
-    /* =========================================================
-       BACKGROUND
-       ========================================================= */
-
-    .page {
-      position: relative;
       min-height: 100vh;
-      overflow: hidden;
+      font-family: "Cairo", sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(
-          circle at 88% 8%,
-          rgba(53, 166, 111, .13),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 5% 45%,
-          rgba(46, 139, 87, .08),
-          transparent 28%
-        ),
-        var(--background);
+        radial-gradient(circle at 50% 45%,
+          rgba(49, 196, 201, 0.13),
+          transparent 24%),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      overflow-x: hidden;
+      transition: background .4s ease, color .4s ease;
     }
 
-    .page::before {
+    /* الخلفية الشبكية */
+    body::before {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .25;
-
+      opacity: .32;
       background-image:
-        linear-gradient(
-          rgba(46, 139, 87, .05) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(46, 139, 87, .05) 1px,
-          transparent 1px
-        );
-
-      background-size: 70px 70px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 75%
-        );
+        linear-gradient(rgba(100, 220, 220, .055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 220, 220, .055) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
 
-
-    /* =========================================================
-       CONTAINER
-       ========================================================= */
-
-    .container {
-      width: min(
-        1180px,
-        calc(100% - 44px)
-      );
-
-      margin-inline: auto;
+    .page {
+      width: min(1200px, calc(100% - 44px));
+      margin: auto;
       position: relative;
       z-index: 2;
     }
 
+    /* NAVBAR */
 
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
-    header {
-      height: 88px;
-
+    nav {
+      height: 92px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--line);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 23px;
+      letter-spacing: -.5px;
     }
 
-    .logo-box {
-      width: 58px;
-      height: 58px;
-
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
       display: grid;
       place-items: center;
-
-      background: var(--white);
-
-      border: 1px solid var(--border);
-      border-radius: 16px;
-
-      box-shadow: var(--shadow-sm);
-
-      overflow: hidden;
+      background: rgba(84, 217, 217, .08);
+      box-shadow: 0 0 25px rgba(84, 217, 217, .12);
     }
 
-    .logo-box img {
-      width: 48px;
-      height: 48px;
-
-      object-fit: contain;
-    }
-
-    .brand-name {
-      color: var(--primary-dark);
-
-      font-size: 18px;
-      font-weight: 700;
-
-      letter-spacing: .08em;
-    }
-
-    .brand-sub {
-      margin-top: 2px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      font-weight: 500;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .status-pill {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 9px 13px;
-
-      color: var(--primary-dark);
-
-      background: var(--primary-soft);
-
-      border: 1px solid rgba(46, 139, 87, .16);
-
-      border-radius: 999px;
-
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-
+    .brand-mark span {
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
-
-      background: var(--mint);
-
-      box-shadow: 0 0 10px rgba(53, 166, 111, .6);
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
     }
 
-    #langButton {
-      padding: 10px 15px;
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-      color: var(--primary-dark);
-      background: var(--white);
-
-      border: 1px solid var(--border);
-      border-radius: 999px;
-
-      font: inherit;
-      font-size: 12px;
-      font-weight: 600;
-
+    button {
+      font-family: inherit;
       cursor: pointer;
-
-      transition:
-        transform .25s,
-        border-color .25s,
-        background .25s;
+      color: var(--text);
     }
 
-    #langButton:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary);
-      background: var(--primary-soft);
+    .nav-btn {
+      height: 44px;
+      padding: 0 17px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(84, 217, 217, .055);
+      backdrop-filter: blur(12px);
+      font-size: 14px;
+      transition: .25s ease;
     }
 
+    .nav-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(84, 217, 217, .12);
+      transform: translateY(-1px);
+    }
 
-    /* =========================================================
-       HERO
-       ========================================================= */
+    .theme-btn {
+      width: 44px;
+      padding: 0;
+      font-size: 19px;
+    }
+
+    /* HERO */
 
     .hero {
-      min-height: 650px;
-
+      min-height: 720px;
       display: grid;
-      grid-template-columns: 1fr .92fr;
-
-      align-items: center;
-
-      gap: 60px;
-
-      padding: 68px 0 70px;
+      place-items: center;
+      position: relative;
     }
 
     .hero-copy {
-      max-width: 650px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      color: var(--primary);
-
-      font-size: 12px;
-      font-weight: 700;
-
-      letter-spacing: .12em;
-    }
-
-    .eyebrow::before {
-      content: "";
-
-      width: 8px;
-      height: 8px;
-
-      border-radius: 50%;
-
-      background: var(--mint);
-
-      box-shadow:
-        0 0 0 5px rgba(53, 166, 111, .10),
-        0 0 15px rgba(53, 166, 111, .35);
-    }
-
-    h1 {
-      margin: 20px 0 22px;
-
-      color: var(--primary-deep);
-
-      font-size: clamp(
-        45px,
-        5.3vw,
-        70px
-      );
-
-      line-height: 1.08;
-
-      letter-spacing: -.055em;
-
-      font-weight: 700;
-    }
-
-    body.ar h1 {
-      letter-spacing: 0;
-      line-height: 1.35;
-    }
-
-    .highlight {
-      color: var(--primary);
-    }
-
-    .hero-description {
-      max-width: 610px;
-
-      color: var(--muted);
-
-      font-size: 17px;
-      line-height: 1.85;
-
-      margin-bottom: 27px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .button {
-      min-height: 57px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 13px 23px;
-
-      border-radius: 15px;
-
-      font-size: 14px;
-      font-weight: 700;
-
-      transition:
-        transform .25s,
-        box-shadow .25s,
-        background .25s;
-    }
-
-    .button:hover {
-      transform: translateY(-4px);
-    }
-
-    .primary-button {
-      color: var(--white);
-      background: var(--primary);
-
-      box-shadow:
-        0 12px 28px rgba(46, 139, 87, .24);
-    }
-
-    .primary-button:hover {
-      background: var(--primary-dark);
-
-      box-shadow:
-        0 17px 35px rgba(46, 139, 87, .28);
-    }
-
-    .secondary-button {
-      color: var(--primary-dark);
-
-      background: var(--white);
-
-      border: 1px solid var(--border);
-    }
-
-    .secondary-button:hover {
-      border-color: var(--primary);
-      background: var(--primary-soft);
-    }
-
-    .hero-note {
-      margin-top: 15px;
-
-      color: #8A958F;
-
-      font-size: 11px;
-    }
-
-
-    /* =========================================================
-       HERO VISUAL
-       ========================================================= */
-
-    .hero-visual {
-      position: relative;
-
-      min-height: 480px;
-
-      display: grid;
-      place-items: center;
-    }
-
-    .visual-glow {
       position: absolute;
-
-      width: 420px;
-      height: 420px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(53, 166, 111, .19),
-          transparent 68%
-        );
-
-      filter: blur(12px);
-    }
-
-    .dashboard-card {
-      position: relative;
-
-      width: min(
-        470px,
-        100%
-      );
-
-      padding: 18px;
-
-      background:
-        rgba(255,255,255,.94);
-
-      border: 1px solid rgba(46, 139, 87, .14);
-
-      border-radius: 25px;
-
-      box-shadow: var(--shadow-lg);
-
-      backdrop-filter: blur(12px);
-
-      transform: rotate(1.5deg);
-
-      animation: cardFloat 6s ease-in-out infinite;
-    }
-
-    .dashboard-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      padding-bottom: 15px;
-
-      border-bottom: 1px solid var(--border);
-    }
-
-    .dashboard-title {
-      font-size: 13px;
-      font-weight: 700;
-
-      color: var(--primary-deep);
-    }
-
-    .live {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-
-      padding: 6px 9px;
-
-      color: var(--primary);
-
-      background: var(--primary-soft);
-
-      border-radius: 999px;
-
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .live i {
-      width: 5px;
-      height: 5px;
-
-      background: var(--mint);
-
-      border-radius: 50%;
-    }
-
-    .risk-box {
-      margin-top: 16px;
-
-      padding: 18px;
-
-      border-radius: 18px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #F0FAF5,
-          #E8F5EF
-        );
-
-      border: 1px solid rgba(53, 166, 111, .14);
-    }
-
-    .risk-label {
-      color: var(--muted);
-
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-    .risk-number {
-      display: flex;
-      align-items: end;
-      gap: 8px;
-
-      margin-top: 6px;
-    }
-
-    .risk-number strong {
-      color: var(--primary-dark);
-
-      font-size: 39px;
-      line-height: 1;
-
-      letter-spacing: -.05em;
-    }
-
-    .risk-number span {
-      color: var(--mint);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      margin-bottom: 4px;
-    }
-
-    .progress {
-      height: 8px;
-
-      margin-top: 16px;
-
-      background: #DCEAE3;
-
-      border-radius: 999px;
-
-      overflow: hidden;
-    }
-
-    .progress span {
-      display: block;
-
-      width: 24%;
-      height: 100%;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--mint),
-          var(--primary)
-        );
-
-      border-radius: inherit;
-    }
-
-    .sensor-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 10px;
-
-      margin-top: 12px;
-    }
-
-    .sensor {
-      padding: 13px;
-
-      background: #FBFDFC;
-
-      border: 1px solid var(--border);
-
-      border-radius: 15px;
-    }
-
-    .sensor-label {
-      color: #87938D;
-
-      font-size: 9px;
-    }
-
-    .sensor-value {
-      margin-top: 5px;
-
-      color: var(--text);
-
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .sensor-value.good {
-      color: var(--mint);
-    }
-
-    .sensor-value.warning {
-      color: var(--gold);
-    }
-
-    .alert-card {
-      position: absolute;
-
-      right: -25px;
-      bottom: 40px;
-
-      width: 205px;
-
-      padding: 15px;
-
-      background: var(--primary-deep);
-
-      color: var(--white);
-
-      border: 1px solid rgba(255,255,255,.12);
-
-      border-radius: 18px;
-
-      box-shadow: var(--shadow-md);
-
-      animation: alertFloat 5s ease-in-out infinite;
-    }
-
-    .alert-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin-bottom: 9px;
-    }
-
-    .alert-head span {
-      color: #B6D8CA;
-
-      font-size: 9px;
-      font-weight: 600;
-    }
-
-    .alert-icon {
-      width: 26px;
-      height: 26px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 9px;
-
-      background: rgba(231,168,59,.15);
-
-      color: var(--gold);
-
-      font-size: 12px;
-    }
-
-    .alert-card strong {
-      display: block;
-
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .alert-card p {
-      color: #AFC8BD;
-
-      font-size: 9px;
-      line-height: 1.6;
-    }
-
-
-    /* =========================================================
-       TRUST STRIP
-       ========================================================= */
-
-    .trust-strip {
-      padding: 23px 0;
-
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-
-      background: rgba(255,255,255,.55);
-    }
-
-    .trust-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 0;
-    }
-
-    .trust-item {
-      padding-inline: 22px;
-
-      border-inline-end:
-        1px solid var(--border);
-    }
-
-    .trust-item:first-child {
-      padding-inline-start: 0;
-    }
-
-    .trust-item:last-child {
-      border-inline-end: none;
-    }
-
-    .trust-number {
-      color: var(--primary);
-
-      font-size: 26px;
-      font-weight: 700;
-
-      letter-spacing: -.04em;
-    }
-
-    .trust-label {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-
-    /* =========================================================
-       SECTIONS
-       ========================================================= */
-
-    .section {
-      padding: 95px 0;
-    }
-
-    .section-label {
-      color: var(--primary);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: .16em;
-    }
-
-    h2 {
-      max-width: 780px;
-
-      margin: 12px 0 17px;
-
-      color: var(--primary-deep);
-
-      font-size: clamp(
-        32px,
-        4vw,
-        51px
-      );
-
-      line-height: 1.14;
-
-      letter-spacing: -.045em;
-
-      font-weight: 700;
-    }
-
-    body.ar h2 {
-      letter-spacing: 0;
-      line-height: 1.4;
-    }
-
-    .section-intro {
-      max-width: 680px;
-
-      color: var(--muted);
-
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-
-    /* =========================================================
-       FEATURE CARDS
-       ========================================================= */
-
-    .feature-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 15px;
-
-      margin-top: 38px;
-    }
-
-    .feature-card {
-      position: relative;
-
-      min-height: 245px;
-
-      padding: 25px;
-
-      background: var(--white);
-
-      border: 1px solid var(--border);
-
-      border-radius: var(--radius-md);
-
-      box-shadow: var(--shadow-sm);
-
-      overflow: hidden;
-
-      transition:
-        transform .3s,
-        box-shadow .3s,
-        border-color .3s;
-    }
-
-    .feature-card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 100px;
-      height: 100px;
-
-      right: -35px;
-      bottom: -35px;
-
-      border-radius: 50%;
-
-      background: var(--primary-soft);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-7px);
-
-      border-color:
-        rgba(46,139,87,.30);
-
-      box-shadow: var(--shadow-md);
-    }
-
-    .feature-number {
-      display: inline-flex;
-
-      width: 34px;
-      height: 34px;
-
-      align-items: center;
-      justify-content: center;
-
-      color: var(--primary);
-
-      background: var(--primary-soft);
-
-      border-radius: 10px;
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .feature-card h3 {
-      margin: 28px 0 9px;
-
-      color: var(--primary-deep);
-
-      font-size: 20px;
-    }
-
-    .feature-card p {
-      color: var(--muted);
-
-      font-size: 13px;
-
-      line-height: 1.8;
-    }
-
-
-    /* =========================================================
-       DATA FLOW
-       ========================================================= */
-
-    .flow-section {
-      background:
-        linear-gradient(
-          135deg,
-          #123D31,
-          #1F5C48
-        );
-
-      color: white;
-
-      border-radius: 32px;
-
-      overflow: hidden;
-
-      position: relative;
-    }
-
-    .flow-section::before {
-      content: "";
-
-      position: absolute;
-
-      width: 420px;
-      height: 420px;
-
-      right: -120px;
-      top: -180px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(118,223,195,.17),
-          transparent 67%
-        );
-    }
-
-    .flow-inner {
-      padding: 67px 60px;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .flow-section .section-label {
-      color: #76DFC3;
-    }
-
-    .flow-section h2 {
-      color: white;
-    }
-
-    .flow-section .section-intro {
-      color: #B6CEC3;
-    }
-
-    .flow {
-      display: grid;
-
-      grid-template-columns:
-        repeat(5, 1fr);
-
-      gap: 10px;
-
-      margin-top: 40px;
-    }
-
-    .flow-step {
-      position: relative;
-
-      padding: 20px 16px;
-
-      background:
-        rgba(255,255,255,.06);
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      border-radius: 17px;
-    }
-
-    .flow-step:not(:last-child)::after {
-      content: "→";
-
-      position: absolute;
-
-      right: -16px;
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      color: #76DFC3;
-
-      font-size: 17px;
-
+      top: 70px;
+      text-align: center;
       z-index: 5;
     }
 
-    .flow-step span {
-      color: #76DFC3;
-
-      font-size: 9px;
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
       font-weight: 700;
-
-      letter-spacing: .12em;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
     }
 
-    .flow-step strong {
-      display: block;
-
-      margin-top: 11px;
-
-      font-size: 14px;
+    h1 {
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -2px;
     }
 
-    .flow-step p {
-      margin-top: 6px;
-
-      color: #AFC8BD;
-
-      font-size: 10px;
-
-      line-height: 1.6;
+    .gradient-text {
+      background: linear-gradient(90deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
-
-    /* =========================================================
-       ALERT SECTION
-       ========================================================= */
-
-    .alert-layout {
-      display: grid;
-
-      grid-template-columns:
-        .95fr 1.05fr;
-
-      gap: 55px;
-
-      align-items: center;
-
-      margin-top: 40px;
+    .hero-copy p {
+      max-width: 650px;
+      margin: 17px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2;
     }
 
-    .alert-preview {
-      padding: 25px;
+    /* الدائرة الرئيسية */
 
-      background: var(--white);
-
-      border: 1px solid var(--border);
-
-      border-radius: 25px;
-
-      box-shadow: var(--shadow-md);
+    .visual {
+      width: min(650px, 88vw);
+      aspect-ratio: 1;
+      position: relative;
+      margin-top: 150px;
     }
 
-    .alert-preview-head {
+    .orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      inset: 8%;
+    }
+
+    .orbit.two {
+      inset: 15%;
+      border-color: rgba(84, 217, 217, .14);
+    }
+
+    .orbit.three {
+      inset: 24%;
+      border-color: rgba(84, 217, 217, .10);
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 5%;
+      left: 50%;
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    .core {
+      position: absolute;
+      width: 235px;
+      height: 235px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%,
+          rgba(84, 217, 217, .22),
+          transparent 45%),
+        var(--surface);
+      border: 1px solid rgba(84, 217, 217, .35);
+      box-shadow:
+        0 0 70px rgba(84, 217, 217, .13),
+        inset 0 0 40px rgba(84, 217, 217, .07);
+      backdrop-filter: blur(20px);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-
-      margin-bottom: 20px;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 3;
     }
 
-    .alert-preview-head strong {
-      color: var(--primary-deep);
-
-      font-size: 14px;
+    .core-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid rgba(84, 217, 217, .45);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: rgba(84, 217, 217, .08);
+      box-shadow: 0 0 30px rgba(84, 217, 217, .12);
     }
 
-    .risk-tag {
-      padding: 6px 10px;
-
-      color: #A46A08;
-
-      background: #FFF4DB;
-
-      border-radius: 999px;
-
-      font-size: 9px;
-      font-weight: 700;
+    .core-icon::before {
+      content: "✦";
+      color: var(--accent);
+      font-size: 30px;
+      text-shadow: 0 0 18px var(--accent);
     }
 
-    .warning-box {
-      padding: 19px;
-
-      background: #FFF9ED;
-
-      border: 1px solid #F6E4B7;
-
-      border-radius: 18px;
+    .core h2 {
+      font-size: 25px;
+      margin-bottom: 5px;
     }
 
-    .warning-title {
+    .core p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* CARDS */
+
+    .info-card {
+      position: absolute;
+      min-width: 190px;
+      padding: 16px 19px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 20px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px var(--shadow);
+      z-index: 5;
+    }
+
+    .card-top {
       display: flex;
       align-items: center;
       gap: 9px;
-
-      color: #A46A08;
-
+      color: var(--muted);
       font-size: 12px;
-      font-weight: 700;
+      margin-bottom: 5px;
     }
 
-    .warning-title i {
-      width: 28px;
-      height: 28px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 9px;
-
-      background: #FCEBC6;
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
     }
 
-    .warning-box p {
-      margin-top: 13px;
-
-      color: #7A6A4D;
-
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    .recommendation {
-      margin-top: 11px;
-
-      padding: 17px;
-
-      background: var(--primary-soft);
-
-      border: 1px solid rgba(53,166,111,.13);
-
-      border-radius: 17px;
-    }
-
-    .recommendation-label {
-      color: var(--primary);
-
-      font-size: 9px;
-      font-weight: 700;
-
-      letter-spacing: .1em;
-    }
-
-    .recommendation strong {
+    .info-card strong {
       display: block;
-
-      margin-top: 7px;
-
-      color: var(--primary-deep);
-
-      font-size: 13px;
+      font-size: 22px;
+      font-weight: 800;
     }
 
-    .recommendation p {
-      margin-top: 5px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-      line-height: 1.6;
+    .info-card small {
+      color: var(--accent);
+      font-size: 12px;
     }
 
-    .check-list {
-      display: grid;
-
-      gap: 17px;
-
-      margin-top: 28px;
+    .card-1 {
+      top: 23%;
+      right: 0;
     }
 
-    .check-item {
-      display: grid;
-
-      grid-template-columns: 38px 1fr;
-
-      gap: 13px;
-
-      align-items: start;
+    .card-2 {
+      top: 50%;
+      left: 0;
     }
 
-    .check-icon {
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-      place-items: center;
-
-      color: var(--primary);
-
-      background: var(--primary-soft);
-
-      border-radius: 11px;
-
-      font-size: 13px;
-      font-weight: 700;
+    .card-3 {
+      bottom: 15%;
+      right: 5%;
     }
 
-    .check-item strong {
-      color: var(--primary-deep);
-
-      font-size: 14px;
+    .status {
+      position: absolute;
+      bottom: 7%;
+      left: 10%;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 15px;
+      border: 1px solid rgba(84, 217, 217, .38);
+      border-radius: 999px;
+      background: rgba(84, 217, 217, .09);
+      color: var(--text);
+      font-size: 12px;
+      backdrop-filter: blur(15px);
     }
 
-    .check-item p {
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.6;
+    .status .dot {
+      width: 7px;
+      height: 7px;
     }
 
+    /* SECTION */
 
-    /* =========================================================
-       CTA
-       ========================================================= */
-
-    .cta {
-      margin-bottom: 80px;
-
-      padding: 55px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          135deg,
-          #E8F5EF,
-          #F4FAF7
-        );
-
-      border:
-        1px solid rgba(46,139,87,.12);
-
-      border-radius: 30px;
-
+    .section {
+      padding: 70px 0 100px;
+      border-top: 1px solid var(--line);
       text-align: center;
     }
 
-    .cta::before {
-      content: "";
-
-      position: absolute;
-
-      width: 280px;
-      height: 280px;
-
-      left: -100px;
-      bottom: -170px;
-
-      border-radius: 50%;
-
-      background: rgba(53,166,111,.10);
+    .section h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
     }
 
-    .cta h2 {
-      margin-inline: auto;
-
-      max-width: 720px;
-    }
-
-    .cta p {
-      max-width: 590px;
-
-      margin: 0 auto 25px;
-
+    .section > p {
       color: var(--muted);
-
-      font-size: 14px;
-      line-height: 1.8;
+      max-width: 650px;
+      margin: auto;
+      line-height: 2;
     }
 
-    .cta .button {
-      position: relative;
-      z-index: 2;
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 38px;
     }
 
+    .feature {
+      text-align: right;
+      padding: 25px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 22px;
+      backdrop-filter: blur(15px);
+    }
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: rgba(84, 217, 217, .09);
+      color: var(--accent);
+      margin-bottom: 17px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 13px;
+    }
 
     footer {
-      padding: 25px 0 32px;
-
-      border-top: 1px solid var(--border);
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 20px;
-
+      padding: 25px 0 40px;
       color: var(--muted);
-
-      font-size: 11px;
-    }
-
-    .footer-brand {
-      color: var(--primary-dark);
-
-      font-weight: 700;
-
-      letter-spacing: .08em;
-    }
-
-    .creator {
-      text-align: end;
-    }
-
-    .creator strong {
-      display: block;
-
-      color: var(--primary-dark);
-
+      text-align: center;
       font-size: 12px;
     }
 
-    .creator span {
-      display: block;
+    /* ENGLISH */
 
-      margin-top: 2px;
-
-      color: var(--muted);
+    html[dir="ltr"] .feature {
+      text-align: left;
     }
 
-
-    /* =========================================================
-       ANIMATIONS
-       ========================================================= */
-
-    @keyframes cardFloat {
-
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          rotate(1.5deg);
-      }
-
-      50% {
-        transform:
-          translateY(-9px)
-          rotate(1.5deg);
-      }
+    html[dir="ltr"] .card-1 {
+      right: auto;
+      left: 0;
     }
 
-    @keyframes alertFloat {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
+    html[dir="ltr"] .card-2 {
+      left: auto;
+      right: 0;
     }
 
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 950px) {
-
-      .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 55px;
-      }
-
-      .hero-copy {
-        max-width: 750px;
-      }
-
-      .hero-visual {
-        min-height: 440px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .flow {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .flow-step:not(:last-child)::after {
-        display: none;
-      }
-
-      .alert-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-
-        gap: 20px;
-      }
-
-      .trust-item {
-        border-inline-end: none;
-      }
-
-      .trust-item:nth-child(odd) {
-        border-inline-end:
-          1px solid var(--border);
-      }
+    html[dir="ltr"] .card-3 {
+      right: auto;
+      left: 5%;
     }
 
+    html[dir="ltr"] .status {
+      left: auto;
+      right: 10%;
+    }
 
-    @media (max-width: 650px) {
+    /* MOBILE */
 
-      .container {
-        width:
-          calc(100% - 30px);
+    @media (max-width: 760px) {
+
+      .page {
+        width: min(100% - 28px, 600px);
       }
 
-      header {
+      nav {
         height: 78px;
       }
 
-      .brand-sub {
-        display: none;
+      .brand {
+        font-size: 19px;
       }
 
-      .status-pill {
-        display: none;
-      }
-
-      .logo-box {
-        width: 50px;
-        height: 50px;
-      }
-
-      .logo-box img {
-        width: 42px;
-        height: 42px;
-      }
-
-      .brand-name {
-        font-size: 16px;
+      .nav-btn {
+        padding: 0 13px;
       }
 
       .hero {
-        padding:
-          42px 0 55px;
-
-        gap: 35px;
+        min-height: 670px;
       }
 
-      h1 {
-        font-size:
-          clamp(
-            41px,
-            11vw,
-            53px
-          );
-      }
-
-      body.ar h1 {
-        font-size:
-          clamp(
-            36px,
-            10vw,
-            49px
-          );
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .hero-actions {
-        display: grid;
-
-        grid-template-columns: 1fr;
-      }
-
-      .button {
+      .hero-copy {
+        top: 50px;
         width: 100%;
       }
 
-      .hero-visual {
-        min-height: 350px;
+      h1 {
+        font-size: 39px;
       }
 
-      .dashboard-card {
-        width: 94%;
-
-        transform: none;
-
-        animation: none;
-      }
-
-      .alert-card {
-        right: -4px;
-        bottom: 5px;
-
-        width: 175px;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .trust-item {
+      .hero-copy p {
+        font-size: 13px;
         padding: 0 10px;
       }
 
-      .trust-number {
-        font-size: 22px;
+      .visual {
+        width: 94vw;
+        margin-top: 155px;
       }
 
-      .trust-label {
-        font-size: 9px;
+      .core {
+        width: 175px;
+        height: 175px;
       }
 
-      .section {
-        padding: 70px 0;
+      .core-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 10px;
       }
 
-      h2 {
-        font-size: 34px;
+      .core-icon::before {
+        font-size: 23px;
       }
 
-      .feature-grid {
+      .core h2 {
+        font-size: 20px;
+      }
+
+      .info-card {
+        min-width: 145px;
+        padding: 12px 14px;
+        border-radius: 16px;
+      }
+
+      .info-card strong {
+        font-size: 17px;
+      }
+
+      .card-1 {
+        right: -3px;
+        top: 23%;
+      }
+
+      .card-2 {
+        left: -3px;
+        top: 50%;
+      }
+
+      .card-3 {
+        right: 0;
+        bottom: 14%;
+      }
+
+      .status {
+        left: 2%;
+        bottom: 5%;
+      }
+
+      .features {
         grid-template-columns: 1fr;
       }
-
-      .flow-inner {
-        padding:
-          45px 23px;
-      }
-
-      .flow {
-        grid-template-columns: 1fr;
-      }
-
-      .flow-step:not(:last-child)::after {
-        display: none;
-      }
-
-      .cta {
-        margin-bottom: 55px;
-
-        padding:
-          42px 22px;
-      }
-
-      footer {
-        flex-direction: column;
-
-        align-items: flex-start;
-      }
-
-      .creator {
-        text-align: start;
-      }
     }
-
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
   </style>
 </head>
 
-
 <body>
 
-<div class="page">
+  <div class="page">
 
+    <nav>
 
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
-
-  <header class="container">
-
-    <a href="#" class="brand">
-
-      <div class="logo-box">
-        <!-- Your uploaded logo -->
-        <img
-          src="logo (2).jpg"
-          alt="FoodGuard AI logo"
-        >
+      <div class="brand">
+        <div class="brand-mark">
+          <span></span>
+        </div>
+        <span>FoodGuard</span>
       </div>
 
-      <div>
-        <div class="brand-name">
-          FOODGUARD
-        </div>
+      <div class="nav-actions">
 
-        <div
-          class="brand-sub"
-          data-en="AI · Early Stress Monitoring"
-          data-ar="الذكاء الاصطناعي · المراقبة المبكرة للإجهاد"
-        >
-          AI · Early Stress Monitoring
-        </div>
-      </div>
+        <button class="nav-btn" id="languageBtn">
+          English →
+        </button>
 
-    </a>
-
-
-    <div class="header-actions">
-
-      <div class="status-pill">
-        <span class="status-dot"></span>
-
-        <span
-          data-en="Prototype active"
-          data-ar="النموذج الأولي نشط"
-        >
-          Prototype active
-        </span>
-      </div>
-
-
-      <button
-        id="langButton"
-        type="button"
-        aria-label="Switch language"
-      >
-        العربية →
-      </button>
-
-    </div>
-
-  </header>
-
-
-
-  <!-- =======================================================
-       MAIN
-       ======================================================= -->
-
-  <main>
-
-
-    <!-- HERO -->
-
-    <section class="hero container">
-
-      <div class="hero-copy">
-
-        <div
-          class="eyebrow"
-          data-en="FOODGUARD AI · EARLY WARNING"
-          data-ar="FOODGUARD AI · الإنذار المبكر"
-        >
-          FOODGUARD AI · EARLY WARNING
-        </div>
-
-
-        <h1>
-
-          <span
-            data-en="See stress"
-            data-ar="اكتشف الإجهاد"
-          >
-            See stress
-          </span>
-
-          <br>
-
-          <span
-            class="highlight"
-            data-en="before it becomes visible."
-            data-ar="قبل أن يصبح ظاهرًا."
-          >
-            before it becomes visible.
-          </span>
-
-        </h1>
-
-
-        <p
-          class="hero-description"
-          data-en="FoodGuard AI combines plant electrophysiological signals with soil, weather, and irrigation data to support earlier detection of water stress in date palms."
-          data-ar="يجمع FoodGuard AI الإشارات الكهروفسيولوجية للنبات مع بيانات التربة والطقس والري لدعم الكشف المبكر عن الإجهاد المائي في نخيل التمر."
-        >
-          FoodGuard AI combines plant electrophysiological signals with soil,
-          weather, and irrigation data to support earlier detection of water
-          stress in date palms.
-        </p>
-
-
-        <div class="hero-actions">
-
-          <!-- IMPORTANT:
-               This button opens your Base44 prototype -->
-
-          <a
-            class="button primary-button"
-            href="https://radiant-palm-guard-flow.base44.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-en="Try the Prototype →"
-            data-ar="جرّب النموذج الأولي →"
-          >
-            Try the Prototype →
-          </a>
-
-
-          <a
-            class="button secondary-button"
-            href="#how-it-works"
-            data-en="Explore FoodGuard"
-            data-ar="تعرّف على FoodGuard"
-          >
-            Explore FoodGuard
-          </a>
-
-        </div>
-
-
-        <p
-          class="hero-note"
-          data-en="Conceptual framework · Simulated-data prototype · Research project"
-          data-ar="إطار مفاهيمي · نموذج أولي ببيانات محاكاة · مشروع بحثي"
-        >
-          Conceptual framework · Simulated-data prototype · Research project
-        </p>
+        <button class="nav-btn theme-btn" id="themeBtn">
+          ☾
+        </button>
 
       </div>
 
+    </nav>
 
+    <main>
 
-      <!-- HERO DASHBOARD VISUAL -->
+      <section class="hero">
 
-      <div class="hero-visual">
+        <div class="hero-copy">
 
-        <div class="visual-glow"></div>
-
-
-        <div class="dashboard-card">
-
-          <div class="dashboard-top">
-
-            <div
-              class="dashboard-title"
-              data-en="Palm Health Overview"
-              data-ar="نظرة عامة على صحة النخيل"
-            >
-              Palm Health Overview
-            </div>
-
-            <div class="live">
-              <i></i>
-
-              <span
-                data-en="MONITORING"
-                data-ar="مراقبة"
-              >
-                MONITORING
-              </span>
-            </div>
-
+          <div class="eyebrow" id="eyebrow">
+            FOODGUARD AI
           </div>
 
+          <h1 id="title">
+            اكتشف إجهاد النخيل<br>
+            <span class="gradient-text">قبل أن يتحول إلى مشكلة.</span>
+          </h1>
 
-          <div class="risk-box">
-
-            <div
-              class="risk-label"
-              data-en="CURRENT WATER-STRESS RISK"
-              data-ar="مستوى خطر الإجهاد المائي الحالي"
-            >
-              CURRENT WATER-STRESS RISK
-            </div>
-
-
-            <div class="risk-number">
-
-              <strong>24%</strong>
-
-              <span
-                data-en="LOW RISK"
-                data-ar="خطر منخفض"
-              >
-                LOW RISK
-              </span>
-
-            </div>
-
-
-            <div class="progress">
-              <span></span>
-            </div>
-
-          </div>
-
-
-          <div class="sensor-grid">
-
-            <div class="sensor">
-
-              <div
-                class="sensor-label"
-                data-en="SOIL MOISTURE"
-                data-ar="رطوبة التربة"
-              >
-                SOIL MOISTURE
-              </div>
-
-              <div class="sensor-value good">
-                68%
-              </div>
-
-            </div>
-
-
-            <div class="sensor">
-
-              <div
-                class="sensor-label"
-                data-en="TEMPERATURE"
-                data-ar="درجة الحرارة"
-              >
-                TEMPERATURE
-              </div>
-
-              <div class="sensor-value">
-                34°C
-              </div>
-
-            </div>
-
-
-            <div class="sensor">
-
-              <div
-                class="sensor-label"
-                data-en="SOIL SALINITY"
-                data-ar="ملوحة التربة"
-              >
-                SOIL SALINITY
-              </div>
-
-              <div class="sensor-value warning">
-                2.1 dS/m
-              </div>
-
-            </div>
-
-
-            <div class="sensor">
-
-              <div
-                class="sensor-label"
-                data-en="PLANT SIGNAL"
-                data-ar="إشارة النبات"
-              >
-                PLANT SIGNAL
-              </div>
-
-              <div class="sensor-value good">
-                Stable
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ALERT -->
-
-        <div class="alert-card">
-
-          <div class="alert-head">
-
-            <span
-              data-en="EARLY WARNING"
-              data-ar="تنبيه مبكر"
-            >
-              EARLY WARNING
-            </span>
-
-            <div class="alert-icon">
-              !
-            </div>
-
-          </div>
-
-
-          <strong
-            data-en="No immediate stress detected"
-            data-ar="لا يوجد إجهاد فوري مكتشف"
-          >
-            No immediate stress detected
-          </strong>
-
-
-          <p
-            data-en="FoodGuard continuously combines multiple signals to identify changes before visible symptoms."
-            data-ar="يجمع FoodGuard الإشارات المتعددة باستمرار لاكتشاف التغيرات قبل ظهور الأعراض."
-          >
-            FoodGuard continuously combines multiple signals to identify
-            changes before visible symptoms.
+          <p id="description">
+            يحلل FoodGuard AI المؤشرات الزراعية ويجمع البيانات
+            لمساعدتك على اكتشاف مؤشرات الإجهاد مبكرًا واتخاذ
+            قرارات أذكى.
           </p>
 
         </div>
 
-      </div>
 
-    </section>
+        <div class="visual">
 
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="orbit three"></div>
 
+          <!-- الدائرة الرئيسية بدون أي صورة -->
+          <div class="core">
 
-    <!-- TRUST / RESEARCH NUMBERS -->
+            <div class="core-icon"></div>
 
-    <section class="trust-strip">
+            <h2 id="coreTitle">
+              FoodGuard AI
+            </h2>
 
-      <div class="container trust-grid">
-
-
-        <div class="trust-item">
-
-          <div class="trust-number">
-            50
-          </div>
-
-          <span
-            class="trust-label"
-            data-en="Date palm growers surveyed"
-            data-ar="مزارع نخيل شملهم الاستبيان"
-          >
-            Date palm growers surveyed
-          </span>
-
-        </div>
-
-
-        <div class="trust-item">
-
-          <div class="trust-number">
-            76%
-          </div>
-
-          <span
-            class="trust-label"
-            data-en="Detected problems only at an advanced stage"
-            data-ar="اكتشفوا المشكلات في مرحلة متقدمة"
-          >
-            Detected problems only at an advanced stage
-          </span>
-
-        </div>
-
-
-        <div class="trust-item">
-
-          <div class="trust-number">
-            58%
-          </div>
-
-          <span
-            class="trust-label"
-            data-en="Highly trust explained AI alerts"
-            data-ar="يثقون بدرجة عالية بالتنبيهات المفسرة"
-          >
-            Highly trust explained AI alerts
-          </span>
-
-        </div>
-
-
-        <div class="trust-item">
-
-          <div class="trust-number">
-            76%
-          </div>
-
-          <span
-            class="trust-label"
-            data-en="Willing to use the system"
-            data-ar="مستعدون لاستخدام النظام"
-          >
-            Willing to use the system
-          </span>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         HOW IT WORKS
-         ===================================================== -->
-
-    <section
-      class="section container"
-      id="how-it-works"
-    >
-
-      <div
-        class="section-label"
-        data-en="HOW FOODGUARD WORKS"
-        data-ar="كيف يعمل FOODGUARD"
-      >
-        HOW FOODGUARD WORKS
-      </div>
-
-
-      <h2
-        data-en="Multiple signals. One clearer picture of palm health."
-        data-ar="إشارات متعددة. صورة أوضح لصحة النخلة."
-      >
-        Multiple signals. One clearer picture of palm health.
-      </h2>
-
-
-      <p
-        class="section-intro"
-        data-en="Instead of relying only on visible symptoms, FoodGuard brings together the signals around the palm and uses multimodal analysis to support earlier decisions."
-        data-ar="بدل الاعتماد فقط على الأعراض الظاهرة، يجمع FoodGuard الإشارات المحيطة بالنخلة ويستخدم التحليل متعدد الوسائط لدعم القرارات المبكرة."
-      >
-        Instead of relying only on visible symptoms, FoodGuard brings together
-        the signals around the palm and uses multimodal analysis to support
-        earlier decisions.
-      </p>
-
-
-
-      <div class="feature-grid">
-
-
-        <article class="feature-card">
-
-          <div class="feature-number">
-            01
-          </div>
-
-          <h3
-            data-en="Sense"
-            data-ar="الاستشعار"
-          >
-            Sense
-          </h3>
-
-          <p
-            data-en="Collect plant electrophysiological signals together with soil, weather, temperature, and irrigation data."
-            data-ar="جمع الإشارات الكهروفسيولوجية للنبات مع بيانات التربة والطقس ودرجة الحرارة والري."
-          >
-            Collect plant electrophysiological signals together with soil,
-            weather, temperature, and irrigation data.
-          </p>
-
-        </article>
-
-
-
-        <article class="feature-card">
-
-          <div class="feature-number">
-            02
-          </div>
-
-          <h3
-            data-en="Understand"
-            data-ar="التحليل"
-          >
-            Understand
-          </h3>
-
-          <p
-            data-en="Fuse multimodal data, assess risk, and classify potential water-stress conditions."
-            data-ar="دمج البيانات متعددة الوسائط وتقييم مستوى الخطر وتصنيف حالات الإجهاد المائي المحتملة."
-          >
-            Fuse multimodal data, assess risk, and classify potential
-            water-stress conditions.
-          </p>
-
-        </article>
-
-
-
-        <article class="feature-card">
-
-          <div class="feature-number">
-            03
-          </div>
-
-          <h3
-            data-en="Act Early"
-            data-ar="التدخل المبكر"
-          >
-            Act Early
-          </h3>
-
-          <p
-            data-en="Generate an explainable early warning and guide the grower toward a simple recommended action."
-            data-ar="إنتاج تنبيه مبكر قابل للتفسير وتوجيه المزارع نحو إجراء بسيط وموصى به."
-          >
-            Generate an explainable early warning and guide the grower toward
-            a simple recommended action.
-          </p>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         DATA FLOW
-         ===================================================== -->
-
-    <section class="section container">
-
-      <div class="flow-section">
-
-        <div class="flow-inner">
-
-          <div
-            class="section-label"
-            data-en="THE FOODGUARD PIPELINE"
-            data-ar="منظومة FOODGUARD"
-          >
-            THE FOODGUARD PIPELINE
-          </div>
-
-
-          <h2
-            data-en="From the palm's signals to an actionable warning."
-            data-ar="من إشارات النخلة إلى تنبيه قابل للتنفيذ."
-          >
-            From the palm's signals to an actionable warning.
-          </h2>
-
-
-          <p
-            class="section-intro"
-            data-en="FoodGuard follows a five-layer architecture designed to move from raw measurements to meaningful information for the grower."
-            data-ar="يتبع FoodGuard بنية من خمس طبقات تنتقل من القياسات الأولية إلى معلومات مفيدة للمزارع."
-          >
-            FoodGuard follows a five-layer architecture designed to move from
-            raw measurements to meaningful information for the grower.
-          </p>
-
-
-
-          <div class="flow">
-
-
-            <div class="flow-step">
-
-              <span>
-                01
-              </span>
-
-              <strong
-                data-en="Data Sources"
-                data-ar="مصادر البيانات"
-              >
-                Data Sources
-              </strong>
-
-              <p
-                data-en="Plant, soil, weather & irrigation"
-                data-ar="النبات والتربة والطقس والري"
-              >
-                Plant, soil, weather & irrigation
-              </p>
-
-            </div>
-
-
-
-            <div class="flow-step">
-
-              <span>
-                02
-              </span>
-
-              <strong
-                data-en="Preprocessing"
-                data-ar="المعالجة"
-              >
-                Preprocessing
-              </strong>
-
-              <p
-                data-en="Clean, synchronize & normalize"
-                data-ar="تنظيف ومزامنة وتوحيد البيانات"
-              >
-                Clean, synchronize & normalize
-              </p>
-
-            </div>
-
-
-
-            <div class="flow-step">
-
-              <span>
-                03
-              </span>
-
-              <strong
-                data-en="AI Analysis"
-                data-ar="تحليل الذكاء الاصطناعي"
-              >
-                AI Analysis
-              </strong>
-
-              <p
-                data-en="Fusion, detection & risk assessment"
-                data-ar="الدمج والكشف وتقييم المخاطر"
-              >
-                Fusion, detection & risk assessment
-              </p>
-
-            </div>
-
-
-
-            <div class="flow-step">
-
-              <span>
-                04
-              </span>
-
-              <strong
-                data-en="Cloud"
-                data-ar="السحابة"
-              >
-                Cloud
-              </strong>
-
-              <p
-                data-en="Data storage, models & results"
-                data-ar="تخزين البيانات والنماذج والنتائج"
-              >
-                Data storage, models & results
-              </p>
-
-            </div>
-
-
-
-            <div class="flow-step">
-
-              <span>
-                05
-              </span>
-
-              <strong
-                data-en="Early Warning"
-                data-ar="الإنذار المبكر"
-              >
-                Early Warning
-              </strong>
-
-              <p
-                data-en="Risk, alert & recommended action"
-                data-ar="الخطر والتنبيه والإجراء المقترح"
-              >
-                Risk, alert & recommended action
-              </p>
-
-            </div>
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         EXPLAINABLE ALERT
-         ===================================================== -->
-
-    <section class="section container">
-
-      <div
-        class="section-label"
-        data-en="EXPLAINABLE ALERTS"
-        data-ar="تنبيهات قابلة للتفسير"
-      >
-        EXPLAINABLE ALERTS
-      </div>
-
-
-      <h2
-        data-en="Don't just say there is a risk. Explain why."
-        data-ar="لا تخبر المزارع بوجود خطر فقط، بل وضّح السبب."
-      >
-        Don't just say there is a risk. Explain why.
-      </h2>
-
-
-      <div class="alert-layout">
-
-
-        <div class="alert-preview">
-
-          <div class="alert-preview-head">
-
-            <strong
-              data-en="Early Warning"
-              data-ar="إنذار مبكر"
-            >
-              Early Warning
-            </strong>
-
-            <span class="risk-tag">
-              MODERATE RISK
-            </span>
-
-          </div>
-
-
-          <div class="warning-box">
-
-            <div class="warning-title">
-
-              <i>!</i>
-
-              <span
-                data-en="Potential water-stress signal"
-                data-ar="إشارة محتملة لإجهاد مائي"
-              >
-                Potential water-stress signal
-              </span>
-
-            </div>
-
-
-            <p
-              data-en="The system detected a change across multiple inputs. The combination of soil moisture, temperature, and plant signals suggests increased attention may be needed."
-              data-ar="اكتشف النظام تغيرًا في عدة مدخلات. ويشير الجمع بين رطوبة التربة ودرجة الحرارة وإشارات النبات إلى الحاجة لمزيد من المتابعة."
-            >
-              The system detected a change across multiple inputs.
-              The combination of soil moisture, temperature, and plant
-              signals suggests increased attention may be needed.
+            <p id="coreText">
+              تحليل ذكي للمزرعة
             </p>
 
           </div>
 
 
-          <div class="recommendation">
+          <!-- البطاقة الأولى -->
+          <div class="info-card card-1">
 
-            <div
-              class="recommendation-label"
-              data-en="RECOMMENDED ACTION"
-              data-ar="الإجراء المقترح"
-            >
-              RECOMMENDED ACTION
+            <div class="card-top">
+              <span class="dot"></span>
+              <span id="card1Label">حالة الحرارة</span>
             </div>
 
+            <strong>31°</strong>
+            <small id="card1Value">مستقرة</small>
 
-            <strong
-              data-en="Inspect irrigation coverage and re-check soil moisture."
-              data-ar="فحص تغطية الري وإعادة التحقق من رطوبة التربة."
-            >
-              Inspect irrigation coverage and re-check soil moisture.
-            </strong>
+          </div>
 
 
-            <p
-              data-en="Simple actions help growers respond without unnecessary complexity."
-              data-ar="الإجراءات البسيطة تساعد المزارع على الاستجابة دون تعقيد غير ضروري."
-            >
-              Simple actions help growers respond without unnecessary
-              complexity.
-            </p>
+          <!-- البطاقة الثانية -->
+          <div class="info-card card-2">
 
+            <div class="card-top">
+              <span class="dot"></span>
+              <span id="card2Label">رطوبة التربة</span>
+            </div>
+
+            <strong>64%</strong>
+            <small id="card2Value">جيدة</small>
+
+          </div>
+
+
+          <!-- البطاقة الثالثة -->
+          <div class="info-card card-3">
+
+            <div class="card-top">
+              <span class="dot"></span>
+              <span id="card3Label">رطوبة الهواء</span>
+            </div>
+
+            <strong>48%</strong>
+            <small id="card3Value">طبيعية</small>
+
+          </div>
+
+
+          <div class="status">
+            <span class="dot"></span>
+            <span id="statusText">مستوى الإجهاد منخفض</span>
           </div>
 
         </div>
 
+      </section>
 
 
-        <div>
+      <section class="section">
 
-          <p
-            class="section-intro"
-            data-en="Transparency is part of the FoodGuard design. The research findings showed that growers place higher trust in AI alerts when the system explains its reasoning."
-            data-ar="الشفافية جزء أساسي من تصميم FoodGuard. وأظهرت نتائج البحث أن ثقة المزارعين ترتفع عندما يوضح النظام أسباب التنبيه."
-          >
-            Transparency is part of the FoodGuard design. The research findings
-            showed that growers place higher trust in AI alerts when the system
-            explains its reasoning.
-          </p>
-
-
-          <div class="check-list">
-
-
-            <div class="check-item">
-
-              <div class="check-icon">
-                ✓
-              </div>
-
-              <div>
-
-                <strong
-                  data-en="Explain the signal"
-                  data-ar="تفسير الإشارة"
-                >
-                  Explain the signal
-                </strong>
-
-                <p
-                  data-en="Show which inputs contributed to the warning."
-                  data-ar="إظهار البيانات التي ساهمت في إصدار التنبيه."
-                >
-                  Show which inputs contributed to the warning.
-                </p>
-
-              </div>
-
-            </div>
-
-
-
-            <div class="check-item">
-
-              <div class="check-icon">
-                ✓
-              </div>
-
-              <div>
-
-                <strong
-                  data-en="Keep the action simple"
-                  data-ar="تبسيط الإجراء"
-                >
-                  Keep the action simple
-                </strong>
-
-                <p
-                  data-en="Translate complex analysis into an understandable next step."
-                  data-ar="تحويل التحليل المعقد إلى خطوة تالية واضحة ومفهومة."
-                >
-                  Translate complex analysis into an understandable next
-                  step.
-                </p>
-
-              </div>
-
-            </div>
-
-
-
-            <div class="check-item">
-
-              <div class="check-icon">
-                ✓
-              </div>
-
-              <div>
-
-                <strong
-                  data-en="Support, not replace, the grower"
-                  data-ar="دعم المزارع وليس استبداله"
-                >
-                  Support, not replace, the grower
-                </strong>
-
-                <p
-                  data-en="FoodGuard is designed as decision support, keeping human judgment in the loop."
-                  data-ar="صُمم FoodGuard لدعم القرار مع إبقاء الحكم البشري جزءًا أساسيًا من العملية."
-                >
-                  FoodGuard is designed as decision support, keeping human
-                  judgment in the loop.
-                </p>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         CTA
-         ===================================================== -->
-
-    <section class="container">
-
-      <div class="cta">
-
-        <div
-          class="section-label"
-          data-en="FOODGUARD AI"
-          data-ar="FOODGUARD AI"
-        >
-          FOODGUARD AI
-        </div>
-
-
-        <h2
-          data-en="Explore the early-warning prototype."
-          data-ar="استكشف النموذج الأولي للإنذار المبكر."
-        >
-          Explore the early-warning prototype.
+        <h2 id="sectionTitle">
+          تحليل أذكى، قرارات أفضل
         </h2>
 
-
-        <p
-          data-en="See how FoodGuard brings together farm data, risk assessment, early warnings, and recommended actions in one interface."
-          data-ar="شاهد كيف يجمع FoodGuard بيانات المزرعة وتقييم المخاطر والتنبيهات المبكرة والإجراءات المقترحة في واجهة واحدة."
-        >
-          See how FoodGuard brings together farm data, risk assessment,
-          early warnings, and recommended actions in one interface.
+        <p id="sectionText">
+          منصة FoodGuard AI تساعدك على فهم مؤشرات المزرعة
+          بطريقة واضحة وسريعة، قبل أن تتحول المشكلة إلى خسارة.
         </p>
 
 
-        <!-- Base44 link -->
+        <div class="features">
 
-        <a
-          class="button primary-button"
-          href="https://radiant-palm-guard-flow.base44.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-en="Try the Prototype →"
-          data-ar="جرّب النموذج الأولي →"
-        >
-          Try the Prototype →
-        </a>
+          <div class="feature">
 
-      </div>
+            <div class="feature-icon">✦</div>
 
-    </section>
+            <h3 id="feature1Title">
+              الكشف المبكر
+            </h3>
 
-  </main>
+            <p id="feature1Text">
+              اكتشاف مؤشرات الإجهاد الزراعي في وقت مبكر.
+            </p>
+
+          </div>
 
 
+          <div class="feature">
 
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
+            <div class="feature-icon">◌</div>
 
-  <footer class="container">
+            <h3 id="feature2Title">
+              تحليل البيانات
+            </h3>
 
-    <div>
+            <p id="feature2Text">
+              تحويل البيانات الزراعية إلى معلومات سهلة الفهم.
+            </p>
 
-      <div class="footer-brand">
-        FOODGUARD AI
-      </div>
-
-      <span
-        data-en="Early Stress Monitoring for Date Palms"
-        data-ar="المراقبة المبكرة لإجهاد نخيل التمر"
-      >
-        Early Stress Monitoring for Date Palms
-      </span>
-
-    </div>
+          </div>
 
 
-    <div class="creator">
+          <div class="feature">
 
-      <strong
-        data-en="Design & Development"
-        data-ar="التصميم والتطوير"
-      >
-        Design & Development
-      </strong>
+            <div class="feature-icon">⌁</div>
 
-      <span>
-        جواهر الهقيش - Jawaher Alhoqish
-      </span>
+            <h3 id="feature3Title">
+              دعم القرار
+            </h3>
 
-    </div>
+            <p id="feature3Text">
+              مساعدتك على اتخاذ قرارات أسرع وأكثر دقة.
+            </p>
 
-  </footer>
+          </div>
 
+        </div>
 
-</div>
+      </section>
 
-
-
-<!-- =========================================================
-     LANGUAGE SCRIPT
-     ========================================================= -->
-
-<script>
-
-  const langButton =
-    document.getElementById("langButton");
-
-  let language = "en";
+    </main>
 
 
-  langButton.addEventListener(
-    "click",
-    () => {
+    <footer id="footer">
+      FoodGuard AI — Smart Agricultural Intelligence
+    </footer>
 
-      language =
-        language === "en"
-          ? "ar"
-          : "en";
+  </div>
 
 
-      document.documentElement.lang =
-        language;
+  <script>
 
-      document.documentElement.dir =
-        language === "ar"
-          ? "rtl"
-          : "ltr";
+    const languageBtn = document.getElementById("languageBtn");
+    const themeBtn = document.getElementById("themeBtn");
+
+    let english = false;
+
+    languageBtn.addEventListener("click", () => {
+
+      english = !english;
+
+      if (english) {
+
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+
+        languageBtn.textContent = "العربية ←";
+
+        document.getElementById("eyebrow").textContent =
+          "FOODGUARD AI";
+
+        document.getElementById("title").innerHTML =
+          'Detect Palm Stress<br><span class="gradient-text">Before It Becomes a Problem.</span>';
+
+        document.getElementById("description").textContent =
+          "FoodGuard AI analyzes agricultural indicators and combines data to help detect early stress signals and support smarter decisions.";
+
+        document.getElementById("coreTitle").textContent =
+          "FoodGuard AI";
+
+        document.getElementById("coreText").textContent =
+          "Smart farm analysis";
+
+        document.getElementById("card1Label").textContent =
+          "Temperature";
+
+        document.getElementById("card1Value").textContent =
+          "Stable";
+
+        document.getElementById("card2Label").textContent =
+          "Soil moisture";
+
+        document.getElementById("card2Value").textContent =
+          "Good";
+
+        document.getElementById("card3Label").textContent =
+          "Air humidity";
+
+        document.getElementById("card3Value").textContent =
+          "Normal";
+
+        document.getElementById("statusText").textContent =
+          "Low stress level";
+
+        document.getElementById("sectionTitle").textContent =
+          "Smarter Analysis. Better Decisions.";
+
+        document.getElementById("sectionText").textContent =
+          "FoodGuard AI helps you understand farm indicators clearly and quickly, before a problem turns into a loss.";
+
+        document.getElementById("feature1Title").textContent =
+          "Early Detection";
+
+        document.getElementById("feature1Text").textContent =
+          "Detect agricultural stress indicators at an early stage.";
+
+        document.getElementById("feature2Title").textContent =
+          "Data Analysis";
+
+        document.getElementById("feature2Text").textContent =
+          "Turn agricultural data into clear and useful insights.";
+
+        document.getElementById("feature3Title").textContent =
+          "Decision Support";
+
+        document.getElementById("feature3Text").textContent =
+          "Make faster and more informed agricultural decisions.";
+
+        document.getElementById("footer").textContent =
+          "FoodGuard AI — Smart Agricultural Intelligence";
+
+      } else {
+
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+        languageBtn.textContent = "English →";
+
+        document.getElementById("title").innerHTML =
+          'اكتشف إجهاد النخيل<br><span class="gradient-text">قبل أن يتحول إلى مشكلة.</span>';
+
+        document.getElementById("description").textContent =
+          "يحلل FoodGuard AI المؤشرات الزراعية ويجمع البيانات لمساعدتك على اكتشاف مؤشرات الإجهاد مبكرًا واتخاذ قرارات أذكى.";
+
+        document.getElementById("coreText").textContent =
+          "تحليل ذكي للمزرعة";
+
+        document.getElementById("card1Label").textContent =
+          "حالة الحرارة";
+
+        document.getElementById("card1Value").textContent =
+          "مستقرة";
+
+        document.getElementById("card2Label").textContent =
+          "رطوبة التربة";
+
+        document.getElementById("card2Value").textContent =
+          "جيدة";
+
+        document.getElementById("card3Label").textContent =
+          "رطوبة الهواء";
+
+        document.getElementById("card3Value").textContent =
+          "طبيعية";
+
+        document.getElementById("statusText").textContent =
+          "مستوى الإجهاد منخفض";
+
+        document.getElementById("sectionTitle").textContent =
+          "تحليل أذكى، قرارات أفضل";
+
+        document.getElementById("sectionText").textContent =
+          "منصة FoodGuard AI تساعدك على فهم مؤشرات المزرعة بطريقة واضحة وسريعة، قبل أن تتحول المشكلة إلى خسارة.";
+
+        document.getElementById("feature1Title").textContent =
+          "الكشف المبكر";
+
+        document.getElementById("feature1Text").textContent =
+          "اكتشاف مؤشرات الإجهاد الزراعي في وقت مبكر.";
+
+        document.getElementById("feature2Title").textContent =
+          "تحليل البيانات";
+
+        document.getElementById("feature2Text").textContent =
+          "تحويل البيانات الزراعية إلى معلومات سهلة الفهم.";
+
+        document.getElementById("feature3Title").textContent =
+          "دعم القرار";
+
+        document.getElementById("feature3Text").textContent =
+          "مساعدتك على اتخاذ قرارات أسرع وأكثر دقة.";
+
+        document.getElementById("footer").textContent =
+          "FoodGuard AI — Smart Agricultural Intelligence";
+      }
+
+    });
 
 
-      document.body.classList.toggle(
-        "ar",
-        language === "ar"
-      );
+    themeBtn.addEventListener("click", () => {
 
+      document.body.classList.toggle("light");
 
-      document
-        .querySelectorAll(
-          "[data-en][data-ar]"
-        )
-        .forEach(element => {
+      if (document.body.classList.contains("light")) {
+        themeBtn.textContent = "☀";
+      } else {
+        themeBtn.textContent = "☾";
+      }
 
-          element.textContent =
-            element.getAttribute(
-              "data-" + language
-            );
+    });
 
-        });
-
-
-      langButton.textContent =
-        language === "ar"
-          ? "English →"
-          : "العربية →";
-
-
-      document.title =
-        language === "ar"
-          ? "FoodGuard AI | المراقبة المبكرة لإجهاد النخيل"
-          : "FoodGuard AI | Early Stress Monitoring";
-
-    }
-
-  );
-
-</script>
-
+  </script>
 
 </body>
 </html>
