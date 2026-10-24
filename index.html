@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="#188B5A">
-
   <meta
     name="description"
-    content="FoodGuard AI — Early warning for date palm stress using multimodal data fusion."
+    content="FoodGuard AI — Early Stress Monitoring for Date Palms"
   >
 
-  <title>FoodGuard | Early Stress Monitoring for Date Palms</title>
+  <title>FoodGuard AI | Early Stress Monitoring for Date Palms</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,36 +25,34 @@
 
     /* =========================================================
        FOODGUARD AI
-       Color System
+       Early Stress Monitoring for Date Palms
        ========================================================= */
 
     :root {
-
-      /* Main FoodGuard colors */
-      --primary: #188B5A;
-      --primary-dark: #116C46;
-      --primary-deep: #0D4F36;
+      --green: #188B5A;
+      --green-dark: #116A45;
+      --green-deep: #0C4D34;
 
       --light-green: #DDF4E9;
       --mint: #F0FAF6;
 
       --warning: #F2B544;
-      --warning-light: #FFF4D8;
+      --warning-soft: #FFF5D9;
 
-      --danger: #D96B6B;
-      --danger-light: #FDE7E7;
+      --risk: #FDE7E7;
+      --risk-text: #B94A48;
 
       --text: #263238;
-      --muted: #63756D;
+      --text-soft: #607078;
 
       --white: #FFFFFF;
-      --border: rgba(24, 139, 90, 0.14);
+      --cream: #FAFCFA;
 
-      --shadow:
-        0 18px 50px rgba(13, 79, 54, 0.10);
+      --border: rgba(38, 50, 56, 0.10);
 
-      --shadow-hover:
-        0 24px 65px rgba(13, 79, 54, 0.16);
+      --shadow-sm: 0 8px 25px rgba(17, 74, 52, 0.07);
+      --shadow-md: 0 18px 45px rgba(17, 74, 52, 0.11);
+      --shadow-lg: 0 30px 80px rgba(17, 74, 52, 0.15);
     }
 
 
@@ -66,8 +62,6 @@
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -75,20 +69,21 @@
     }
 
     body {
+      margin: 0;
       color: var(--text);
       background: var(--white);
       font-family:
-        "DM Sans",
         "IBM Plex Sans Arabic",
+        "DM Sans",
         sans-serif;
 
       overflow-x: hidden;
     }
 
-    body.ar {
+    body.en {
       font-family:
-        "IBM Plex Sans Arabic",
         "DM Sans",
+        "IBM Plex Sans Arabic",
         sans-serif;
     }
 
@@ -110,7 +105,7 @@
 
 
     /* =========================================================
-       PAGE
+       BACKGROUND
        ========================================================= */
 
     .page {
@@ -120,20 +115,20 @@
 
       background:
         radial-gradient(
-          circle at 88% 8%,
-          rgba(24, 139, 90, 0.11),
-          transparent 27%
+          circle at 82% 12%,
+          rgba(24, 139, 90, 0.10),
+          transparent 30%
         ),
+
         radial-gradient(
-          circle at 5% 55%,
+          circle at 8% 52%,
           rgba(221, 244, 233, 0.65),
           transparent 32%
         ),
+
         var(--white);
     }
 
-
-    /* subtle grid */
 
     .page::before {
       content: "";
@@ -141,26 +136,32 @@
       inset: 0;
 
       pointer-events: none;
-      opacity: 0.28;
+
+      opacity: 0.32;
 
       background-image:
         linear-gradient(
           rgba(24, 139, 90, 0.045) 1px,
           transparent 1px
         ),
+
         linear-gradient(
           90deg,
           rgba(24, 139, 90, 0.045) 1px,
           transparent 1px
         );
 
-      background-size: 70px 70px;
+      background-size: 72px 72px;
     }
 
 
     .container {
-      width: min(1180px, calc(100% - 44px));
-      margin: auto;
+      width: min(
+        1160px,
+        calc(100% - 44px)
+      );
+
+      margin-inline: auto;
 
       position: relative;
       z-index: 2;
@@ -180,7 +181,8 @@
 
       gap: 20px;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
     }
 
 
@@ -198,14 +200,14 @@
       display: grid;
       place-items: center;
 
-      border-radius: 17px;
-
       background: var(--white);
 
-      border: 1px solid rgba(24, 139, 90, 0.13);
+      border-radius: 17px;
 
-      box-shadow:
-        0 12px 35px rgba(13, 79, 54, 0.12);
+      border:
+        1px solid rgba(24, 139, 90, 0.12);
+
+      box-shadow: var(--shadow-sm);
 
       overflow: hidden;
     }
@@ -216,26 +218,32 @@
       height: 54px;
 
       object-fit: contain;
+
+      border-radius: 12px;
     }
 
 
     .brand-name {
-      color: var(--primary);
+      color: var(--green);
 
-      font-size: 19px;
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 20px;
       font-weight: 700;
 
-      letter-spacing: 0.08em;
+      letter-spacing: -0.02em;
     }
 
 
     .brand-sub {
       margin-top: 2px;
 
-      color: var(--muted);
+      color: var(--text-soft);
 
       font-size: 11px;
-      font-weight: 500;
+      line-height: 1.5;
     }
 
 
@@ -247,35 +255,38 @@
 
 
     #langButton {
-      border: 1px solid rgba(24, 139, 90, 0.25);
+      border:
+        1px solid rgba(24, 139, 90, 0.25);
 
-      border-radius: 50px;
+      border-radius: 999px;
 
-      padding: 10px 16px;
+      padding: 10px 17px;
 
-      color: var(--primary);
+      color: var(--green);
 
-      background: rgba(221, 244, 233, 0.55);
+      background:
+        rgba(221, 244, 233, 0.45);
 
       cursor: pointer;
 
-      font: inherit;
+      font-family: inherit;
       font-size: 13px;
       font-weight: 600;
 
       transition:
         background 0.25s,
         transform 0.25s,
-        border-color 0.25s;
+        box-shadow 0.25s;
     }
 
 
     #langButton:hover {
       background: var(--light-green);
 
-      border-color: rgba(24, 139, 90, 0.45);
-
       transform: translateY(-2px);
+
+      box-shadow:
+        0 8px 20px rgba(24, 139, 90, 0.10);
     }
 
 
@@ -284,21 +295,21 @@
        ========================================================= */
 
     .hero {
-      min-height: 610px;
+      min-height: 680px;
 
       display: grid;
 
       grid-template-columns:
-        minmax(0, 1.05fr)
-        minmax(400px, 0.95fr);
+        1.02fr
+        0.98fr;
 
-      gap: 50px;
+      gap: 60px;
 
       align-items: center;
 
       padding:
-        60px 0
-        55px;
+        70px 0
+        75px;
     }
 
 
@@ -311,79 +322,77 @@
       display: inline-flex;
       align-items: center;
 
-      gap: 9px;
-
-      color: var(--primary);
+      color: var(--green);
 
       font-size: 12px;
-      font-weight: 700;
 
       letter-spacing: 0.13em;
+
+      font-weight: 700;
     }
 
 
     .eyebrow::before {
       content: "";
 
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
+
+      margin-inline-end: 9px;
 
       border-radius: 50%;
 
-      background: var(--primary);
+      background: var(--green);
 
       box-shadow:
         0 0 0 5px rgba(24, 139, 90, 0.10),
-        0 0 18px rgba(24, 139, 90, 0.35);
+        0 0 16px rgba(24, 139, 90, 0.25);
     }
 
 
     h1 {
-      max-width: 720px;
+      margin:
+        20px 0
+        22px;
 
-      margin: 18px 0 22px;
+      max-width: 690px;
 
       color: var(--text);
 
       font-size:
-        clamp(43px, 5vw, 68px);
+        clamp(42px, 5vw, 67px);
 
-      font-weight: 700;
-
-      line-height: 1.08;
+      line-height: 1.16;
 
       letter-spacing: -0.045em;
+
+      font-weight: 700;
     }
 
 
-    body.ar h1 {
-      letter-spacing: 0;
-
+    body:not(.en) h1 {
       line-height: 1.35;
+      letter-spacing: 0;
     }
 
 
     h1 .highlight {
-      color: var(--primary);
+      color: var(--green);
     }
 
 
     .hero-description {
-      max-width: 650px;
+      max-width: 620px;
 
-      color: var(--muted);
+      margin: 0 0 27px;
+
+      color: var(--text-soft);
 
       font-size: 17px;
 
-      line-height: 1.85;
-
-      margin-bottom: 28px;
+      line-height: 1.9;
     }
 
-
-    /* =========================================================
-       BUTTONS
-       ========================================================= */
 
     .buttons {
       display: flex;
@@ -402,11 +411,13 @@
       align-items: center;
       justify-content: center;
 
-      padding: 13px 24px;
+      padding:
+        12px 24px;
 
       border-radius: 15px;
 
       font-size: 15px;
+
       font-weight: 700;
 
       transition:
@@ -418,9 +429,6 @@
 
     .button:hover {
       transform: translateY(-4px);
-
-      box-shadow:
-        0 15px 32px rgba(13, 79, 54, 0.15);
     }
 
 
@@ -430,28 +438,42 @@
       background:
         linear-gradient(
           135deg,
-          var(--primary),
-          var(--primary-dark)
+          var(--green),
+          #22A66F
         );
 
       box-shadow:
-        0 12px 28px rgba(24, 139, 90, 0.22);
+        0 14px 30px rgba(24, 139, 90, 0.23);
+    }
+
+
+    .primary:hover {
+      box-shadow:
+        0 20px 38px rgba(24, 139, 90, 0.29);
     }
 
 
     .secondary {
-      color: var(--primary);
+      color: var(--green);
 
+      background: var(--white);
+
+      border:
+        1px solid rgba(24, 139, 90, 0.22);
+
+      box-shadow: var(--shadow-sm);
+    }
+
+
+    .secondary:hover {
       background: var(--light-green);
-
-      border: 1px solid rgba(24, 139, 90, 0.13);
     }
 
 
     .small-note {
-      margin-top: 14px;
+      margin-top: 16px;
 
-      color: #81938B;
+      color: #829096;
 
       font-size: 11px;
     }
@@ -462,11 +484,12 @@
        ========================================================= */
 
     .visual {
-      min-height: 450px;
+      min-height: 440px;
 
       position: relative;
 
       display: grid;
+
       place-items: center;
     }
 
@@ -474,8 +497,8 @@
     .visual-glow {
       position: absolute;
 
-      width: 430px;
-      height: 430px;
+      width: 390px;
+      height: 390px;
 
       border-radius: 50%;
 
@@ -483,80 +506,84 @@
         radial-gradient(
           circle,
           rgba(24, 139, 90, 0.18),
-          transparent 68%
+          transparent 67%
         );
 
-      filter: blur(5px);
+      filter: blur(9px);
     }
 
 
-    .orbit {
-      width: 380px;
-      height: 380px;
+    .monitor {
+      width: 390px;
+      height: 390px;
 
       position: relative;
 
       border-radius: 50%;
 
+      display: grid;
+
+      place-items: center;
+
       border:
-        1px solid rgba(24, 139, 90, 0.20);
+        1px solid rgba(24, 139, 90, 0.18);
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(221, 244, 233, 0.9),
+          rgba(255,255,255,0.75) 55%,
+          rgba(255,255,255,0)
+        );
 
       box-shadow:
-        inset 0 0 60px rgba(24, 139, 90, 0.05);
+        inset 0 0 60px rgba(24, 139, 90, 0.06);
     }
 
 
-    .orbit::before {
+    .monitor::before {
       content: "";
 
       position: absolute;
 
-      inset: 43px;
+      inset: 38px;
+
+      border:
+        1px dashed
+        rgba(24, 139, 90, 0.22);
 
       border-radius: 50%;
 
-      border:
-        1px dashed rgba(24, 139, 90, 0.24);
-
       animation:
-        rotate 40s linear infinite;
+        rotate 42s linear infinite;
     }
 
 
-    .orbit::after {
+    .monitor::after {
       content: "";
 
       position: absolute;
 
-      inset: 95px;
-
-      border-radius: 50%;
+      inset: 88px;
 
       border:
-        1px solid rgba(24, 139, 90, 0.15);
+        1px solid
+        rgba(24, 139, 90, 0.14);
 
-      animation:
-        rotateReverse 32s linear infinite;
+      border-radius: 50%;
     }
 
 
-    /* =========================================================
-       CENTER LOGO
-       ========================================================= */
+    .monitor-center {
+      width: 142px;
+      height: 142px;
 
-    .center-logo {
-      position: absolute;
+      position: relative;
 
-      top: 50%;
-      left: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      width: 132px;
-      height: 132px;
+      z-index: 4;
 
       display: grid;
+
       place-items: center;
 
       border-radius: 50%;
@@ -565,29 +592,77 @@
         linear-gradient(
           145deg,
           #ffffff,
-          var(--mint)
+          var(--light-green)
         );
 
       border:
-        2px solid rgba(24, 139, 90, 0.35);
+        2px solid rgba(24, 139, 90, 0.45);
 
       box-shadow:
-        0 0 0 14px rgba(24, 139, 90, 0.055),
-        0 0 0 30px rgba(24, 139, 90, 0.025),
-        0 25px 55px rgba(13, 79, 54, 0.18);
+        0 0 0 13px rgba(24, 139, 90, 0.055),
+        0 0 0 26px rgba(24, 139, 90, 0.025),
+        0 20px 50px rgba(24, 139, 90, 0.16);
 
       animation:
         pulse 4s ease-in-out infinite;
+
+      overflow: hidden;
     }
 
 
-    .center-logo img {
-      width: 100px;
-      height: 100px;
+    .monitor-center img {
+      width: 104px;
+      height: 104px;
 
       object-fit: contain;
 
+      border-radius: 22px;
+    }
+
+
+    .signal {
+      position: absolute;
+
+      z-index: 3;
+
+      width: 12px;
+      height: 12px;
+
       border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 6px rgba(24, 139, 90, 0.09),
+        0 0 22px rgba(24, 139, 90, 0.45);
+
+      animation:
+        float 3.5s ease-in-out infinite;
+    }
+
+
+    .signal.one {
+      top: 15%;
+      right: 24%;
+    }
+
+
+    .signal.two {
+      bottom: 18%;
+      left: 24%;
+
+      animation-delay: 1s;
+    }
+
+
+    .signal.three {
+      top: 30%;
+      left: 11%;
+
+      width: 8px;
+      height: 8px;
+
+      animation-delay: 0.5s;
     }
 
 
@@ -598,72 +673,70 @@
     .data-chip {
       position: absolute;
 
-      min-width: 145px;
+      z-index: 6;
 
-      padding: 13px 15px;
+      min-width: 160px;
 
-      border-radius: 16px;
+      padding:
+        14px 16px;
+
+      border-radius: 17px;
 
       background:
-        rgba(255, 255, 255, 0.94);
+        rgba(255,255,255,0.96);
 
       border:
-        1px solid rgba(24, 139, 90, 0.15);
+        1px solid
+        rgba(24, 139, 90, 0.13);
 
       box-shadow:
-        0 15px 35px rgba(13, 79, 54, 0.10);
+        0 15px 38px
+        rgba(17, 74, 52, 0.10);
 
-      backdrop-filter: blur(10px);
-
-      z-index: 3;
+      backdrop-filter:
+        blur(10px);
     }
 
 
     .data-chip small {
       display: block;
 
-      margin-bottom: 4px;
+      margin-bottom: 5px;
 
-      color: var(--primary);
+      color: var(--green);
 
       font-size: 9px;
 
-      font-weight: 700;
+      letter-spacing: 0.12em;
 
-      letter-spacing: 0.13em;
+      font-weight: 700;
     }
 
 
     .data-chip strong {
-      display: block;
-
       color: var(--text);
 
       font-size: 13px;
+
+      font-weight: 700;
     }
 
 
-    .chip-1 {
-      top: 10%;
-      left: -8%;
+    .data-chip.one {
+      top: 14%;
+      left: -5%;
     }
 
 
-    .chip-2 {
-      bottom: 11%;
-      left: -10%;
+    .data-chip.two {
+      bottom: 15%;
+      left: -11%;
     }
 
 
-    .chip-3 {
-      top: 17%;
-      right: -9%;
-    }
-
-
-    .chip-4 {
-      bottom: 8%;
-      right: -6%;
+    .data-chip.three {
+      right: -5%;
+      bottom: 23%;
 
       border-color:
         rgba(242, 181, 68, 0.35);
@@ -671,72 +744,31 @@
       background:
         linear-gradient(
           135deg,
-          #fff,
-          var(--warning-light)
+          #fffdf6,
+          var(--warning-soft)
         );
     }
 
 
-    .chip-4 small {
-      color:
-        #B17A00;
+    .data-chip.three small {
+      color: #A56C00;
+    }
+
+
+    .data-chip.three strong {
+      color: #6F510D;
     }
 
 
     /* =========================================================
-       DATA DOTS
-       ========================================================= */
-
-    .data-dot {
-      position: absolute;
-
-      width: 9px;
-      height: 9px;
-
-      border-radius: 50%;
-
-      background: var(--primary);
-
-      box-shadow:
-        0 0 0 6px rgba(24, 139, 90, 0.07),
-        0 0 20px rgba(24, 139, 90, 0.30);
-
-      animation:
-        float 3.5s ease-in-out infinite;
-    }
-
-
-    .dot-1 {
-      top: 13%;
-      right: 27%;
-    }
-
-
-    .dot-2 {
-      bottom: 23%;
-      right: 24%;
-
-      animation-delay: 1.2s;
-    }
-
-
-    .dot-3 {
-      bottom: 28%;
-      left: 23%;
-
-      animation-delay: 0.7s;
-    }
-
-
-    /* =========================================================
-       STATS
+       QUICK STATS
        ========================================================= */
 
     .stats {
       display: grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(3, 1fr);
 
       gap: 0;
 
@@ -753,9 +785,17 @@
 
     .stat {
       padding:
-        0 24px;
+        0 25px;
+    }
 
-      text-align: center;
+
+    .stat:first-child {
+      padding-inline-start: 0;
+    }
+
+
+    .stat:last-child {
+      padding-inline-end: 0;
     }
 
 
@@ -768,72 +808,79 @@
     .stat strong {
       display: block;
 
-      color: var(--primary);
+      color: var(--green);
 
-      font-size: 32px;
+      font-size: 27px;
 
-      line-height: 1.1;
+      line-height: 1.2;
 
-      margin-bottom: 7px;
+      font-weight: 700;
     }
 
 
     .stat span {
-      color: var(--muted);
+      display: block;
+
+      margin-top: 5px;
+
+      color: var(--text-soft);
 
       font-size: 12px;
 
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
 
     /* =========================================================
-       SECTION
+       GENERAL SECTIONS
        ========================================================= */
 
     .section {
       padding:
-        88px 0 70px;
+        90px 0
+        75px;
     }
 
 
     .section-label {
-      color: var(--primary);
+      color: var(--green);
 
       font-size: 11px;
 
-      font-weight: 700;
-
       letter-spacing: 0.16em;
+
+      font-weight: 700;
     }
 
 
     h2 {
-      max-width: 850px;
+      max-width: 750px;
 
       margin:
-        12px 0 35px;
+        12px 0
+        38px;
 
       color: var(--text);
 
       font-size:
         clamp(30px, 4vw, 48px);
 
-      line-height: 1.15;
+      line-height: 1.25;
+
+      font-weight: 700;
 
       letter-spacing: -0.035em;
     }
 
 
-    body.ar h2 {
+    body:not(.en) h2 {
       letter-spacing: 0;
-
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
 
     /* =========================================================
-       CARDS
+       HOW IT WORKS
        ========================================================= */
 
     .cards {
@@ -847,80 +894,59 @@
 
 
     .card {
-      position: relative;
+      min-height: 220px;
 
-      min-height: 230px;
-
-      padding: 26px;
+      padding: 25px;
 
       border-radius: 22px;
 
       border:
-        1px solid rgba(24, 139, 90, 0.12);
+        1px solid var(--border);
 
       background:
         linear-gradient(
           145deg,
           #ffffff,
-          var(--mint)
+          #F8FCFA
         );
 
-      box-shadow:
-        var(--shadow);
-
-      overflow: hidden;
+      box-shadow: var(--shadow-sm);
 
       transition:
         transform 0.3s,
-        box-shadow 0.3s,
-        border-color 0.3s;
-    }
-
-
-    .card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 120px;
-      height: 120px;
-
-      right: -45px;
-      bottom: -50px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(24, 139, 90, 0.07);
+        border-color 0.3s,
+        box-shadow 0.3s;
     }
 
 
     .card:hover {
       transform: translateY(-7px);
 
-      box-shadow:
-        var(--shadow-hover);
-
       border-color:
-        rgba(24, 139, 90, 0.30);
+        rgba(24, 139, 90, 0.25);
+
+      box-shadow: var(--shadow-md);
     }
 
 
     .card-number {
       display: inline-flex;
 
-      width: 36px;
-      height: 36px;
-
       align-items: center;
       justify-content: center;
 
-      border-radius: 11px;
+      width: 39px;
+      height: 39px;
 
-      color: var(--primary);
+      border-radius: 12px;
 
-      background:
-        var(--light-green);
+      color: var(--green);
+
+      background: var(--light-green);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
 
       font-size: 12px;
 
@@ -930,169 +956,445 @@
 
     .card h3 {
       margin:
-        24px 0 9px;
+        23px 0
+        8px;
+
+      color: var(--text);
 
       font-size: 20px;
     }
 
 
     .card p {
-      color: var(--muted);
+      margin: 0;
 
-      font-size: 14px;
-
-      line-height: 1.75;
-    }
-
-
-    /* =========================================================
-       ARCHITECTURE
-       ========================================================= */
-
-    .architecture {
-      margin-top: 55px;
-
-      padding: 28px;
-
-      border-radius: 24px;
-
-      background:
-        var(--primary-deep);
-
-      color: white;
-
-      box-shadow:
-        0 22px 55px rgba(13, 79, 54, 0.16);
-    }
-
-
-    .architecture-title {
-      color: var(--light-green);
-
-      font-size: 12px;
-
-      font-weight: 700;
-
-      letter-spacing: 0.12em;
-
-      margin-bottom: 22px;
-    }
-
-
-    .architecture-flow {
-      display: grid;
-
-      grid-template-columns:
-        repeat(5, 1fr);
-
-      gap: 10px;
-    }
-
-
-    .architecture-step {
-      position: relative;
-
-      padding: 17px 13px;
-
-      min-height: 105px;
-
-      border-radius: 15px;
-
-      border:
-        1px solid rgba(221, 244, 233, 0.16);
-
-      background:
-        rgba(255, 255, 255, 0.055);
-    }
-
-
-    .architecture-step small {
-      color:
-        #A9D9C4;
-
-      font-size: 9px;
-
-      font-weight: 700;
-
-      letter-spacing: 0.1em;
-    }
-
-
-    .architecture-step strong {
-      display: block;
-
-      margin-top: 12px;
+      color: var(--text-soft);
 
       font-size: 13px;
 
-      line-height: 1.4;
+      line-height: 1.9;
     }
 
 
     /* =========================================================
-       ALERT
+       DATA SOURCES
        ========================================================= */
 
-    .alert-box {
-      margin-top: 55px;
+    .data-section {
+      padding:
+        40px 0
+        100px;
+    }
 
+
+    .data-panel {
       display: grid;
 
       grid-template-columns:
-        70px 1fr;
+        0.9fr
+        1.1fr;
 
-      gap: 20px;
+      gap: 50px;
 
       align-items: center;
 
-      padding: 25px;
+      padding: 42px;
 
-      border-radius: 22px;
-
-      border:
-        1px solid rgba(242, 181, 68, 0.35);
+      border-radius: 28px;
 
       background:
         linear-gradient(
           135deg,
-          #fffdf7,
-          var(--warning-light)
+          var(--mint),
+          #ffffff
         );
+
+      border:
+        1px solid
+        rgba(24, 139, 90, 0.10);
+
+      box-shadow: var(--shadow-md);
     }
 
 
-    .alert-icon {
-      width: 62px;
-      height: 62px;
+    .data-panel h2 {
+      margin-bottom: 17px;
+    }
+
+
+    .data-panel-description {
+      color: var(--text-soft);
+
+      line-height: 1.9;
+
+      font-size: 14px;
+
+      margin: 0;
+    }
+
+
+    .data-list {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+
+    .data-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 16px;
+
+      border-radius: 16px;
+
+      background: rgba(255,255,255,0.82);
+
+      border:
+        1px solid
+        rgba(24, 139, 90, 0.09);
+    }
+
+
+    .data-icon {
+      width: 40px;
+      height: 40px;
+
+      flex: 0 0 40px;
 
       display: grid;
+
       place-items: center;
 
-      border-radius: 18px;
+      border-radius: 12px;
 
-      color: #9A6900;
+      color: var(--green);
 
+      background: var(--light-green);
+
+      font-size: 17px;
+    }
+
+
+    .data-item strong {
+      display: block;
+
+      color: var(--text);
+
+      font-size: 13px;
+    }
+
+
+    .data-item span {
+      display: block;
+
+      margin-top: 2px;
+
+      color: var(--text-soft);
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================================
+       EARLY WARNING
+       ========================================================= */
+
+    .warning-section {
+      padding:
+        15px 0
+        100px;
+    }
+
+
+    .warning-layout {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 20px;
+    }
+
+
+    .warning-card {
+      min-height: 245px;
+
+      padding: 30px;
+
+      border-radius: 24px;
+
+      border: 1px solid;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    .warning-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 170px;
+      height: 170px;
+
+      border-radius: 50%;
+
+      right: -65px;
+      bottom: -75px;
+
+      opacity: 0.4;
+    }
+
+
+    .warning-card.alert {
+      background: var(--risk);
+
+      border-color:
+        rgba(185, 74, 72, 0.13);
+    }
+
+
+    .warning-card.alert::after {
       background:
-        rgba(242, 181, 68, 0.18);
-
-      font-size: 27px;
+        rgba(185, 74, 72, 0.09);
     }
 
 
-    .alert-box h3 {
-      margin-bottom: 5px;
+    .warning-card.action {
+      background: var(--warning-soft);
 
-      font-size: 18px;
+      border-color:
+        rgba(242, 181, 68, 0.20);
     }
 
 
-    .alert-box p {
-      color:
-        #75684D;
+    .warning-card.action::after {
+      background:
+        rgba(242, 181, 68, 0.10);
+    }
+
+
+    .warning-tag {
+      display: inline-block;
+
+      padding:
+        6px 10px;
+
+      border-radius: 999px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+    }
+
+
+    .alert .warning-tag {
+      color: var(--risk-text);
+
+      background: #ffffff;
+    }
+
+
+    .action .warning-tag {
+      color: #8A6100;
+
+      background: #ffffff;
+    }
+
+
+    .warning-card h3 {
+      margin:
+        25px 0
+        10px;
+
+      font-size: 24px;
+    }
+
+
+    .warning-card p {
+      max-width: 470px;
+
+      margin: 0;
+
+      color: var(--text-soft);
 
       font-size: 13px;
 
-      line-height: 1.7;
+      line-height: 1.9;
+    }
+
+
+    /* =========================================================
+       CTA
+       ========================================================= */
+
+    .cta {
+      padding:
+        30px 0
+        95px;
+    }
+
+
+    .cta-box {
+      position: relative;
+
+      overflow: hidden;
+
+      padding:
+        60px 55px;
+
+      border-radius: 30px;
+
+      color: var(--white);
+
+      background:
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(255,255,255,0.12),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          var(--green-deep),
+          var(--green)
+        );
+
+      box-shadow:
+        0 30px 65px
+        rgba(17, 74, 52, 0.22);
+    }
+
+
+    .cta-box::before {
+      content: "";
+
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+      top: -190px;
+      right: -80px;
+    }
+
+
+    .cta-box::after {
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+      bottom: -160px;
+      left: 8%;
+    }
+
+
+    .cta-content {
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 750px;
+    }
+
+
+    .cta-label {
+      color:
+        rgba(255,255,255,0.72);
+
+      font-size: 11px;
+
+      letter-spacing: 0.15em;
+
+      font-weight: 700;
+    }
+
+
+    .cta h2 {
+      color: var(--white);
+
+      margin:
+        12px 0
+        13px;
+    }
+
+
+    .cta p {
+      color:
+        rgba(255,255,255,0.78);
+
+      line-height: 1.8;
+
+      font-size: 14px;
+
+      margin:
+        0 0
+        25px;
+    }
+
+
+    .cta-button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      min-height: 57px;
+
+      padding:
+        12px 25px;
+
+      border-radius: 15px;
+
+      color: var(--green-deep);
+
+      background: var(--white);
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 12px 30px
+        rgba(0,0,0,0.15);
+
+      transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+    }
+
+
+    .cta-button:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 18px 35px
+        rgba(0,0,0,0.22);
     }
 
 
@@ -1103,13 +1405,15 @@
     .disclaimer {
       max-width: 820px;
 
-      margin-top: 35px;
+      margin:
+        35px 0
+        0;
 
-      color: #7A8A83;
+      color: #7A878D;
 
       font-size: 12px;
 
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
 
@@ -1118,76 +1422,52 @@
        ========================================================= */
 
     footer {
-      padding:
-        26px 0 35px;
-
-      border-top:
-        1px solid var(--border);
+      min-height: 90px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: space-between;
 
       gap: 20px;
 
-      color: var(--muted);
+      border-top:
+        1px solid var(--border);
+
+      color: var(--text-soft);
 
       font-size: 12px;
     }
 
 
-    .creator {
+    .footer-brand {
       display: flex;
-
-      flex-direction: column;
-
-      gap: 3px;
-    }
-
-
-    .creator strong {
-      color: var(--text);
-
-      font-size: 13px;
-    }
-
-
-    .creator span {
-      color: var(--muted);
-    }
-
-
-    .footer-badge {
-      display: inline-flex;
 
       align-items: center;
 
-      gap: 7px;
-
-      padding: 9px 13px;
-
-      border-radius: 50px;
-
-      color: var(--primary);
-
-      background:
-        var(--light-green);
-
-      font-weight: 600;
+      gap: 9px;
     }
 
 
     .footer-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
 
       border-radius: 50%;
 
-      background: var(--primary);
+      background: var(--green);
 
       box-shadow:
-        0 0 10px rgba(24, 139, 90, 0.5);
+        0 0 10px
+        rgba(24, 139, 90, 0.35);
+    }
+
+
+    .creator {
+      color: var(--green);
+
+      font-weight: 600;
     }
 
 
@@ -1202,25 +1482,22 @@
     }
 
 
-    @keyframes rotateReverse {
-      to {
-        transform: rotate(-360deg);
-      }
-    }
-
-
     @keyframes pulse {
-
       50% {
         box-shadow:
-          0 0 0 20px rgba(24, 139, 90, 0.025),
-          0 0 55px rgba(24, 139, 90, 0.22);
+          0 0 0 20px
+          rgba(24, 139, 90, 0.035),
+
+          0 0 0 36px
+          rgba(24, 139, 90, 0.015),
+
+          0 25px 65px
+          rgba(24, 139, 90, 0.21);
       }
     }
 
 
     @keyframes float {
-
       50% {
         transform: translateY(-13px);
       }
@@ -1236,60 +1513,30 @@
       .hero {
         grid-template-columns: 1fr;
 
-        gap: 15px;
+        gap: 30px;
+
+        padding-top: 55px;
       }
+
 
       .hero-copy {
-        text-align: center;
+        max-width: 760px;
       }
 
-      .eyebrow {
-        justify-content: center;
-      }
-
-      .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .buttons {
-        justify-content: center;
-      }
 
       .visual {
         min-height: 390px;
       }
 
-      .cards {
+
+      .data-panel {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        min-height: 190px;
-      }
 
-      .architecture-flow {
-        grid-template-columns:
-          repeat(3, 1fr);
-      }
-
-      .stats {
+      .cards {
         grid-template-columns:
           repeat(2, 1fr);
-
-        gap: 24px 0;
-      }
-
-      .stat:nth-child(2) {
-        border-inline-end: none;
-      }
-
-      .stat:nth-child(1),
-      .stat:nth-child(2) {
-        padding-bottom: 20px;
-
-        border-bottom:
-          1px solid var(--border);
       }
     }
 
@@ -1298,11 +1545,11 @@
        MOBILE
        ========================================================= */
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
 
       .container {
         width:
-          min(100% - 30px, 1180px);
+          calc(100% - 30px);
       }
 
 
@@ -1319,7 +1566,6 @@
       .logo-box {
         width: 51px;
         height: 51px;
-
         border-radius: 14px;
       }
 
@@ -1331,7 +1577,7 @@
 
 
       .brand-name {
-        font-size: 16px;
+        font-size: 17px;
       }
 
 
@@ -1350,75 +1596,76 @@
 
       .hero {
         padding:
-          42px 0 30px;
+          45px 0
+          35px;
       }
 
 
       h1 {
         font-size:
-          clamp(39px, 11vw, 51px);
+          clamp(38px, 11vw, 50px);
 
-        line-height: 1.1;
+        margin:
+          17px 0
+          18px;
       }
 
 
-      body.ar h1 {
+      body:not(.en) h1 {
         font-size:
           clamp(36px, 10vw, 48px);
       }
 
 
       .hero-description {
-        font-size: 15px;
+        font-size: 14px;
 
-        line-height: 1.8;
+        line-height: 1.9;
       }
 
 
       .buttons {
-        flex-direction: column;
+        display: grid;
+
+        grid-template-columns: 1fr;
 
         width: 100%;
       }
 
 
       .button {
-        width: 100%;
-
         min-height: 58px;
       }
 
 
       .visual {
-        min-height: 325px;
-
-        margin-top: 20px;
+        min-height: 320px;
       }
 
 
-      .orbit {
+      .monitor {
         width: 275px;
         height: 275px;
       }
 
 
-      .orbit::before {
-        inset: 31px;
+      .monitor::before {
+        inset: 28px;
       }
 
 
-      .orbit::after {
-        inset: 69px;
+      .monitor::after {
+        inset: 68px;
       }
 
 
-      .center-logo {
-        width: 94px;
-        height: 94px;
+      .monitor-center {
+        width: 96px;
+        height: 96px;
       }
 
 
-      .center-logo img {
+      .monitor-center img {
         width: 70px;
         height: 70px;
       }
@@ -1427,9 +1674,10 @@
       .data-chip {
         min-width: 105px;
 
-        padding: 9px;
+        padding:
+          9px 10px;
 
-        border-radius: 12px;
+        border-radius: 13px;
       }
 
 
@@ -1439,105 +1687,153 @@
 
 
       .data-chip strong {
-        font-size: 10px;
+        font-size: 9px;
       }
 
 
-      .chip-1 {
-        left: -12%;
+      .data-chip.one {
+        top: 8%;
+        left: -1%;
       }
 
 
-      .chip-2 {
-        left: -14%;
+      .data-chip.two {
+        bottom: 7%;
+        left: -2%;
       }
 
 
-      .chip-3 {
-        right: -12%;
-      }
-
-
-      .chip-4 {
-        right: -10%;
+      .data-chip.three {
+        right: -1%;
+        bottom: 15%;
       }
 
 
       .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          repeat(3, 1fr);
 
-        gap: 0;
+        padding:
+          22px 0;
       }
 
 
       .stat {
         padding:
-          18px 8px;
+          0 9px;
       }
 
 
       .stat strong {
-        font-size: 23px;
+        font-size: 17px;
       }
 
 
       .stat span {
-        font-size: 9px;
+        font-size: 8px;
       }
 
 
       .section {
         padding:
-          65px 0 45px;
+          65px 0
+          55px;
       }
 
 
       h2 {
-        font-size: 31px;
+        font-size:
+          clamp(29px, 8vw, 40px);
 
-        line-height: 1.25;
+        margin-bottom: 27px;
       }
 
 
-      .architecture {
-        padding: 20px;
+      .cards {
+        grid-template-columns: 1fr;
       }
 
 
-      .architecture-flow {
-        grid-template-columns:
-          1fr;
-      }
-
-
-      .architecture-step {
+      .card {
         min-height: auto;
+
+        padding: 22px;
       }
 
 
-      .alert-box {
-        grid-template-columns:
-          1fr;
-
-        text-align: center;
+      .data-section {
+        padding:
+          20px 0
+          65px;
       }
 
 
-      .alert-icon {
-        margin: auto;
+      .data-panel {
+        padding: 25px 19px;
+
+        gap: 28px;
+
+        border-radius: 23px;
+      }
+
+
+      .data-list {
+        grid-template-columns: 1fr;
+      }
+
+
+      .warning-section {
+        padding-bottom: 65px;
+      }
+
+
+      .warning-layout {
+        grid-template-columns: 1fr;
+      }
+
+
+      .warning-card {
+        min-height: auto;
+
+        padding: 25px;
+      }
+
+
+      .cta {
+        padding-bottom: 65px;
+      }
+
+
+      .cta-box {
+        padding:
+          40px 24px;
+
+        border-radius: 24px;
+      }
+
+
+      .cta h2 {
+        font-size: 31px;
       }
 
 
       footer {
+        min-height: 110px;
+
         flex-direction: column;
 
         align-items: flex-start;
+
+        justify-content: center;
+
+        padding:
+          20px 0;
       }
     }
 
 
     /* =========================================================
-       ACCESSIBILITY
+       REDUCED MOTION
        ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
@@ -1561,10 +1857,9 @@
 
   <div class="page">
 
-
-    <!-- =======================================================
+    <!-- =====================================================
          HEADER
-         ======================================================= -->
+         ===================================================== -->
 
     <header class="container">
 
@@ -1573,22 +1868,22 @@
         <div class="logo-box">
           <img
             src="logo%20(2).jpg"
-            alt="FoodGuard logo"
+            alt="FoodGuard AI Logo"
           >
         </div>
 
         <div>
 
           <div class="brand-name">
-            FOODGUARD
+            FoodGuard
           </div>
 
           <div
             class="brand-sub"
             data-en="Early Stress Monitoring for Date Palms"
-            data-ar="الإنذار المبكر لإجهاد نخيل التمر"
+            data-ar="المراقبة المبكرة لإجهاد نخيل التمر"
           >
-            Early Stress Monitoring for Date Palms
+            المراقبة المبكرة لإجهاد نخيل التمر
           </div>
 
         </div>
@@ -1603,7 +1898,7 @@
           type="button"
           aria-label="Switch language"
         >
-          العربية →
+          English →
         </button>
 
       </div>
@@ -1611,46 +1906,47 @@
     </header>
 
 
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
     <main>
 
 
-      <!-- =====================================================
+      <!-- ===================================================
            HERO
-           ===================================================== -->
+           =================================================== -->
 
       <section class="hero container">
 
-
         <div class="hero-copy">
-
 
           <div
             class="eyebrow"
-            data-en="FOODGUARD AI · EARLY WARNING"
-            data-ar="فودجارد AI · الإنذار المبكر"
+            data-en="FOODGUARD AI · SMART AGRICULTURE"
+            data-ar="FOODGUARD AI · الزراعة الذكية"
           >
-            FOODGUARD AI · EARLY WARNING
+            FOODGUARD AI · الزراعة الذكية
           </div>
 
 
           <h1>
 
             <span
-              data-en="Detect palm stress"
-              data-ar="اكتشف إجهاد النخلة"
+              data-en="See palm stress"
+              data-ar="اكتشف إجهاد النخيل"
             >
-              Detect palm stress
+              اكتشف إجهاد النخيل
             </span>
 
             <br>
 
             <span
               class="highlight"
-              data-en="before it becomes visible."
-              data-ar="قبل أن يصبح ظاهرًا."
+              data-en="before it becomes a problem."
+              data-ar="قبل أن يتحول إلى مشكلة."
             >
-              before it becomes visible.
+              قبل أن يتحول إلى مشكلة.
             </span>
 
           </h1>
@@ -1658,17 +1954,14 @@
 
           <p
             class="hero-description"
-            data-en="FoodGuard AI is a conceptual early-warning framework for date palms. It combines plant electrophysiological signals with soil, weather, and irrigation data to support earlier and more explainable decisions."
-            data-ar="FoodGuard AI هو إطار مفاهيمي للإنذار المبكر لإجهاد نخيل التمر. يجمع بين الإشارات الكهروفسيولوجية للنبات وبيانات التربة والطقس والري لدعم قرارات أبكر وأكثر وضوحًا."
+            data-en="FoodGuard AI combines electrophysiological signals, soil conditions, weather and temperature, and irrigation data to identify early signs of date-palm stress and support faster, smarter decisions."
+            data-ar="يجمع FoodGuard AI الإشارات الكهروفسيولوجية وبيانات التربة والطقس ودرجة الحرارة والري لاكتشاف مؤشرات الإجهاد المبكر في نخيل التمر ودعم اتخاذ قرارات أسرع وأذكى."
           >
-            FoodGuard AI is a conceptual early-warning framework for date palms. It combines plant electrophysiological signals with soil, weather, and irrigation data to support earlier and more explainable decisions.
+            يجمع FoodGuard AI الإشارات الكهروفسيولوجية وبيانات التربة والطقس ودرجة الحرارة والري لاكتشاف مؤشرات الإجهاد المبكر في نخيل التمر ودعم اتخاذ قرارات أسرع وأذكى.
           </p>
 
 
           <div class="buttons">
-
-
-            <!-- MAIN BASE44 BUTTON -->
 
             <a
               class="button primary"
@@ -1678,39 +1971,36 @@
               data-en="Try the prototype →"
               data-ar="جرّب النموذج الأولي →"
             >
-              Try the prototype →
+              جرّب النموذج الأولي →
             </a>
 
 
             <a
               class="button secondary"
-              href="#how-it-works"
-              data-en="How it works ↓"
-              data-ar="كيف يعمل؟ ↓"
+              href="#how"
+              data-en="How does it work?"
+              data-ar="كيف يعمل النظام؟"
             >
-              How it works ↓
+              كيف يعمل النظام؟
             </a>
-
 
           </div>
 
 
-          <p
+          <div
             class="small-note"
-            data-en="Conceptual prototype · Simulated data · Research project"
-            data-ar="نموذج أولي مفاهيمي · بيانات محاكاة · مشروع بحثي"
+            data-en="AI-assisted early monitoring · Prototype / Demonstration"
+            data-ar="مراقبة مبكرة مدعومة بالذكاء الاصطناعي · نموذج أولي / تجريبي"
           >
-            Conceptual prototype · Simulated data · Research project
-          </p>
-
+            مراقبة مبكرة مدعومة بالذكاء الاصطناعي · نموذج أولي / تجريبي
+          </div>
 
         </div>
 
 
-
-        <!-- ===================================================
-             HERO VISUAL
-             =================================================== -->
+        <!-- =================================================
+             VISUAL
+             ================================================= -->
 
         <div
           class="visual"
@@ -1720,12 +2010,9 @@
           <div class="visual-glow"></div>
 
 
-          <div class="orbit">
+          <div class="monitor">
 
-
-            <!-- CENTER LOGO -->
-
-            <div class="center-logo">
+            <div class="monitor-center">
 
               <img
                 src="logo%20(2).jpg"
@@ -1735,80 +2022,66 @@
             </div>
 
 
+            <div class="data-chip one">
 
-            <!-- DATA CHIPS -->
-
-            <div class="data-chip chip-1">
-
-              <small>
-                SIGNAL
+              <small
+                data-en="INPUT"
+                data-ar="المدخل"
+              >
+                المدخل
               </small>
 
               <strong
-                data-en="Plant Electrophysiology"
-                data-ar="إشارات النبات"
+                data-en="Palm signals"
+                data-ar="إشارات النخيل"
               >
-                Plant Electrophysiology
+                إشارات النخيل
               </strong>
 
             </div>
 
 
-            <div class="data-chip chip-2">
+            <div class="data-chip two">
 
-              <small>
-                SOIL
+              <small
+                data-en="DATA"
+                data-ar="البيانات"
+              >
+                البيانات
               </small>
 
               <strong
-                data-en="Moisture & Salinity"
-                data-ar="الرطوبة والملوحة"
+                data-en="Soil + Weather + Irrigation"
+                data-ar="التربة + الطقس + الري"
               >
-                Moisture & Salinity
+                التربة + الطقس + الري
               </strong>
 
             </div>
 
 
-            <div class="data-chip chip-3">
+            <div class="data-chip three">
 
-              <small>
-                ENVIRONMENT
+              <small
+                data-en="EARLY WARNING"
+                data-ar="تنبيه مبكر"
+              >
+                تنبيه مبكر
               </small>
 
               <strong
-                data-en="Weather & Temperature"
-                data-ar="الطقس ودرجة الحرارة"
+                data-en="Risk detected →"
+                data-ar="تم رصد الخطر →"
               >
-                Weather & Temperature
+                تم رصد الخطر →
               </strong>
 
             </div>
 
 
-            <div class="data-chip chip-4">
-
-              <small>
-                AI OUTPUT
-              </small>
-
-              <strong
-                data-en="Early Warning"
-                data-ar="إنذار مبكر"
-              >
-                Early Warning
-              </strong>
-
-            </div>
-
-
-
-            <!-- DECORATIVE DOTS -->
-
-            <i class="data-dot dot-1"></i>
-            <i class="data-dot dot-2"></i>
-            <i class="data-dot dot-3"></i>
-
+            <i class="signal one"></i>
+            <i class="signal two"></i>
+            <i class="signal three"></i>
 
           </div>
 
@@ -1817,25 +2090,21 @@
       </section>
 
 
-
-      <!-- =====================================================
-           RESEARCH NUMBERS
-           ===================================================== -->
+      <!-- ===================================================
+           STATS
+           =================================================== -->
 
       <section class="stats container">
 
-
         <div class="stat">
 
-          <strong>
-            76%
-          </strong>
+          <strong>01</strong>
 
           <span
-            data-en="detected problems only at an advanced stage"
-            data-ar="لاحظوا المشكلات فقط في مرحلة متقدمة"
+            data-en="Early stress monitoring"
+            data-ar="مراقبة الإجهاد المبكر"
           >
-            detected problems only at an advanced stage
+            مراقبة الإجهاد المبكر
           </span>
 
         </div>
@@ -1843,15 +2112,13 @@
 
         <div class="stat">
 
-          <strong>
-            68%
-          </strong>
+          <strong>04+</strong>
 
           <span
-            data-en="rated early warning very important"
-            data-ar="اعتبروا الإنذار المبكر مهمًا جدًا"
+            data-en="Data sources combined"
+            data-ar="مصادر بيانات مترابطة"
           >
-            rated early warning very important
+            مصادر بيانات مترابطة
           </span>
 
         </div>
@@ -1859,362 +2126,697 @@
 
         <div class="stat">
 
-          <strong>
-            58%
-          </strong>
+          <strong>AI</strong>
 
           <span
-            data-en="would highly trust an explained AI alert"
-            data-ar="يثقون بدرجة عالية بتنبيه AI المفسّر"
+            data-en="Risk-based recommendations"
+            data-ar="توصيات مبنية على مستوى الخطر"
           >
-            would highly trust an explained AI alert
+            توصيات مبنية على مستوى الخطر
           </span>
 
         </div>
-
-
-        <div class="stat">
-
-          <strong>
-            76%
-          </strong>
-
-          <span
-            data-en="were willing to use such a system"
-            data-ar="كانوا مستعدين لاستخدام النظام"
-          >
-            were willing to use such a system
-          </span>
-
-        </div>
-
 
       </section>
 
 
-
-      <!-- =====================================================
+      <!-- ===================================================
            HOW IT WORKS
-           ===================================================== -->
+           =================================================== -->
 
       <section
         class="section container"
-        id="how-it-works"
+        id="how"
       >
-
 
         <div
           class="section-label"
-          data-en="THE IDEA"
-          data-ar="الفكرة"
+          data-en="HOW IT WORKS"
+          data-ar="كيف يعمل"
         >
-          THE IDEA
+          كيف يعمل
         </div>
 
 
         <h2
-          data-en="From hidden plant signals to an early warning."
-          data-ar="من الإشارات الخفية داخل النخلة إلى الإنذار المبكر."
+          data-en="From signals to an early warning."
+          data-ar="من الإشارات إلى التنبيه المبكر."
         >
-          From hidden plant signals to an early warning.
+          من الإشارات إلى التنبيه المبكر.
         </h2>
-
 
 
         <div class="cards">
 
 
-          <!-- CARD 01 -->
+          <div class="card">
 
-          <article class="card">
-
-            <span class="card-number">
+            <div class="card-number">
               01
-            </span>
+            </div>
 
             <h3
               data-en="Collect"
               data-ar="جمع البيانات"
             >
-              Collect
+              جمع البيانات
             </h3>
 
             <p
-              data-en="FoodGuard brings together electrophysiological signals, soil conditions, weather, temperature, irrigation, and other relevant data."
-              data-ar="يجمع FoodGuard الإشارات الكهروفسيولوجية وبيانات التربة والطقس ودرجة الحرارة والري وغيرها من البيانات ذات الصلة."
+              data-en="FoodGuard brings together multiple signals around the palm, including soil, environmental, irrigation and electrophysiological data."
+              data-ar="يجمع FoodGuard إشارات متعددة حول النخلة، تشمل بيانات التربة والبيئة والري والإشارات الكهروفسيولوجية."
             >
-              FoodGuard brings together electrophysiological signals, soil conditions, weather, temperature, irrigation, and other relevant data.
+              يجمع FoodGuard إشارات متعددة حول النخلة، تشمل بيانات التربة والبيئة والري والإشارات الكهروفسيولوجية.
             </p>
 
-          </article>
+          </div>
 
 
+          <div class="card">
 
-          <!-- CARD 02 -->
-
-          <article class="card">
-
-            <span class="card-number">
+            <div class="card-number">
               02
-            </span>
+            </div>
 
             <h3
               data-en="Analyze"
               data-ar="تحليل البيانات"
             >
-              Analyze
+              تحليل البيانات
             </h3>
 
             <p
-              data-en="The framework applies multimodal data fusion to identify patterns and assess the potential risk of water stress."
-              data-ar="يستخدم الإطار دمج البيانات متعدد الوسائط لاكتشاف الأنماط وتقييم احتمالية وجود إجهاد مائي."
+              data-en="AI analyzes changing patterns and identifies signals that may indicate emerging stress before visible symptoms become severe."
+              data-ar="يحلل الذكاء الاصطناعي الأنماط المتغيرة ويحدد المؤشرات التي قد تدل على بداية الإجهاد قبل تفاقم الأعراض الظاهرة."
             >
-              The framework applies multimodal data fusion to identify patterns and assess the potential risk of water stress.
+              يحلل الذكاء الاصطناعي الأنماط المتغيرة ويحدد المؤشرات التي قد تدل على بداية الإجهاد قبل تفاقم الأعراض الظاهرة.
             </p>
 
-          </article>
+          </div>
 
 
+          <div class="card">
 
-          <!-- CARD 03 -->
-
-          <article class="card">
-
-            <span class="card-number">
+            <div class="card-number">
               03
-            </span>
+            </div>
 
             <h3
-              data-en="Warn & Explain"
-              data-ar="التنبيه والتفسير"
+              data-en="Act Early"
+              data-ar="التدخل المبكر"
             >
-              Warn & Explain
+              التدخل المبكر
             </h3>
 
             <p
-              data-en="FoodGuard provides an early warning with an explanation and a recommended action, helping the grower understand what may be happening."
-              data-ar="يعرض FoodGuard إنذارًا مبكرًا مع تفسير وتوصية بالإجراء المناسب، لمساعدة المزارع على فهم ما قد يحدث."
+              data-en="The system presents a risk level, an early warning, and a recommended action to help users respond sooner."
+              data-ar="يعرض النظام مستوى الخطر والتنبيه المبكر والإجراء المقترح لمساعدة المستخدم على الاستجابة في الوقت المناسب."
             >
-              FoodGuard provides an early warning with an explanation and a recommended action, helping the grower understand what may be happening.
-            </p>
-
-          </article>
-
-
-        </div>
-
-
-
-        <!-- ===================================================
-             ARCHITECTURE
-             =================================================== -->
-
-        <div class="architecture">
-
-
-          <div
-            class="architecture-title"
-            data-en="FOODGUARD FIVE-LAYER FRAMEWORK"
-            data-ar="إطار FOODGUARD المكوّن من خمس طبقات"
-          >
-            FOODGUARD FIVE-LAYER FRAMEWORK
-          </div>
-
-
-          <div class="architecture-flow">
-
-
-            <div class="architecture-step">
-
-              <small>
-                LAYER 01
-              </small>
-
-              <strong
-                data-en="Data Sources"
-                data-ar="مصادر البيانات"
-              >
-                Data Sources
-              </strong>
-
-            </div>
-
-
-            <div class="architecture-step">
-
-              <small>
-                LAYER 02
-              </small>
-
-              <strong
-                data-en="Data Acquisition & Processing"
-                data-ar="جمع ومعالجة البيانات"
-              >
-                Data Acquisition & Processing
-              </strong>
-
-            </div>
-
-
-            <div class="architecture-step">
-
-              <small>
-                LAYER 03
-              </small>
-
-              <strong
-                data-en="FoodGuard AI Analysis"
-                data-ar="تحليل FoodGuard AI"
-              >
-                FoodGuard AI Analysis
-              </strong>
-
-            </div>
-
-
-            <div class="architecture-step">
-
-              <small>
-                LAYER 04
-              </small>
-
-              <strong
-                data-en="Cloud Backend"
-                data-ar="البنية السحابية"
-              >
-                Cloud Backend
-              </strong>
-
-            </div>
-
-
-            <div class="architecture-step">
-
-              <small>
-                LAYER 05
-              </small>
-
-              <strong
-                data-en="User Interface & Alerts"
-                data-ar="واجهة المستخدم والتنبيهات"
-              >
-                User Interface & Alerts
-              </strong>
-
-            </div>
-
-
-          </div>
-
-        </div>
-
-
-
-        <!-- ===================================================
-             AI MODELS
-             =================================================== -->
-
-        <div class="alert-box">
-
-
-          <div class="alert-icon">
-            ⚡
-          </div>
-
-
-          <div>
-
-            <h3
-              data-en="Why multimodal data?"
-              data-ar="لماذا دمج البيانات؟"
-            >
-              Why multimodal data?
-            </h3>
-
-            <p
-              data-en="The research proposes comparing environmental and irrigation data, electrophysiological signals alone, and all sources combined — to test whether the plant's own electrical signals add predictive value."
-              data-ar="يقترح البحث مقارنة بيانات البيئة والري، والإشارات الكهروفسيولوجية وحدها، وجميع المصادر مجتمعة؛ لاختبار ما إذا كانت الإشارات الكهربائية للنبات تضيف قيمة تنبؤية."
-            >
-              The research proposes comparing environmental and irrigation data, electrophysiological signals alone, and all sources combined — to test whether the plant's own electrical signals add predictive value.
+              يعرض النظام مستوى الخطر والتنبيه المبكر والإجراء المقترح لمساعدة المستخدم على الاستجابة في الوقت المناسب.
             </p>
 
           </div>
 
 
         </div>
-
-
-
-        <p
-          class="disclaimer"
-          data-en="FoodGuard AI is currently a conceptual framework and interface prototype using simulated data. Predictive accuracy and the added value of electrophysiological signals have not yet been validated with real-world data."
-          data-ar="FoodGuard AI حاليًا إطار مفاهيمي ونموذج أولي للواجهة باستخدام بيانات محاكاة. لم تتم بعد عملية التحقق من دقة التنبؤ أو القيمة الإضافية للإشارات الكهروفسيولوجية باستخدام بيانات حقيقية."
-        >
-          FoodGuard AI is currently a conceptual framework and interface prototype using simulated data. Predictive accuracy and the added value of electrophysiological signals have not yet been validated with real-world data.
-        </p>
-
 
       </section>
 
 
+      <!-- ===================================================
+           DATA SOURCES
+           =================================================== -->
+
+      <section class="data-section container">
+
+        <div class="data-panel">
+
+          <div>
+
+            <div
+              class="section-label"
+              data-en="MULTIMODAL DATA"
+              data-ar="بيانات متعددة المصادر"
+            >
+              بيانات متعددة المصادر
+            </div>
+
+
+            <h2
+              data-en="One view of the palm's condition."
+              data-ar="صورة متكاملة عن حالة النخلة."
+            >
+              صورة متكاملة عن حالة النخلة.
+            </h2>
+
+
+            <p
+              class="data-panel-description"
+              data-en="Instead of relying on a single indicator, FoodGuard combines different signals to build a clearer picture of palm health and detect changes earlier."
+              data-ar="بدل الاعتماد على مؤشر واحد، يجمع FoodGuard عدة إشارات لبناء صورة أوضح عن صحة النخلة واكتشاف التغيرات في وقت مبكر."
+            >
+              بدل الاعتماد على مؤشر واحد، يجمع FoodGuard عدة إشارات لبناء صورة أوضح عن صحة النخلة واكتشاف التغيرات في وقت مبكر.
+            </p>
+
+          </div>
+
+
+          <div class="data-list">
+
+
+            <div class="data-item">
+
+              <div class="data-icon">
+                ✦
+              </div>
+
+              <div>
+
+                <strong
+                  data-en="Electrophysiological Signals"
+                  data-ar="الإشارات الكهروفسيولوجية"
+                >
+                  الإشارات الكهروفسيولوجية
+                </strong>
+
+                <span
+                  data-en="Palm response signals"
+                  data-ar="إشارات استجابة النخلة"
+                >
+                  إشارات استجابة النخلة
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+              <div class="data-icon">
+                ◌
+              </div>
+
+              <div>
+
+                <strong
+                  data-en="Soil Conditions"
+                  data-ar="حالة التربة"
+                >
+                  حالة التربة
+                </strong>
+
+                <span
+                  data-en="Moisture & soil indicators"
+                  data-ar="الرطوبة ومؤشرات التربة"
+                >
+                  الرطوبة ومؤشرات التربة
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+              <div class="data-icon">
+                ◇
+              </div>
+
+              <div>
+
+                <strong
+                  data-en="Weather & Temperature"
+                  data-ar="الطقس ودرجة الحرارة"
+                >
+                  الطقس ودرجة الحرارة
+                </strong>
+
+                <span
+                  data-en="Environmental conditions"
+                  data-ar="الظروف البيئية"
+                >
+                  الظروف البيئية
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+              <div class="data-icon">
+                ≋
+              </div>
+
+              <div>
+
+                <strong
+                  data-en="Irrigation"
+                  data-ar="الري"
+                >
+                  الري
+                </strong>
+
+                <span
+                  data-en="Watering patterns"
+                  data-ar="أنماط الري"
+                >
+                  أنماط الري
+                </span>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           EARLY WARNING
+           =================================================== -->
+
+      <section class="warning-section container">
+
+        <div
+          class="section-label"
+          data-en="EARLY WARNING"
+          data-ar="التنبيه المبكر"
+        >
+          التنبيه المبكر
+        </div>
+
+
+        <h2
+          data-en="Turn changing signals into a clear next step."
+          data-ar="حوّل التغيرات في البيانات إلى خطوة واضحة."
+        >
+          حوّل التغيرات في البيانات إلى خطوة واضحة.
+        </h2>
+
+
+        <div class="warning-layout">
+
+
+          <div class="warning-card alert">
+
+            <span class="warning-tag">
+
+              <span
+                data-en="RISK LEVEL"
+                data-ar="مستوى الخطر"
+              >
+                مستوى الخطر
+              </span>
+
+            </span>
+
+
+            <h3
+              data-en="Early signs detected"
+              data-ar="تم رصد مؤشرات مبكرة"
+            >
+              تم رصد مؤشرات مبكرة
+            </h3>
+
+
+            <p
+              data-en="FoodGuard can highlight an emerging stress signal and translate it into an understandable risk level."
+              data-ar="يمكن لـ FoodGuard إبراز مؤشرات الإجهاد الناشئة وتحويلها إلى مستوى خطر واضح وسهل الفهم."
+            >
+              يمكن لـ FoodGuard إبراز مؤشرات الإجهاد الناشئة وتحويلها إلى مستوى خطر واضح وسهل الفهم.
+            </p>
+
+          </div>
+
+
+          <div class="warning-card action">
+
+            <span class="warning-tag">
+
+              <span
+                data-en="RECOMMENDED ACTION"
+                data-ar="الإجراء المقترح"
+              >
+                الإجراء المقترح
+              </span>
+
+            </span>
+
+
+            <h3
+              data-en="Respond before the problem grows"
+              data-ar="تدخل قبل تفاقم المشكلة"
+            >
+              تدخل قبل تفاقم المشكلة
+            </h3>
+
+
+            <p
+              data-en="The system supports the user with a recommended next action based on the detected conditions and risk level."
+              data-ar="يدعم النظام المستخدم بإجراء مقترح بناءً على الظروف المرصودة ومستوى الخطر."
+            >
+              يدعم النظام المستخدم بإجراء مقترح بناءً على الظروف المرصودة ومستوى الخطر.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           PLATFORM
+           =================================================== -->
+
+      <section class="section container">
+
+        <div
+          class="section-label"
+          data-en="THE PLATFORM"
+          data-ar="المنصة"
+        >
+          المنصة
+        </div>
+
+
+        <h2
+          data-en="A practical view for monitoring, understanding and responding."
+          data-ar="واجهة عملية للمراقبة والفهم والاستجابة."
+        >
+          واجهة عملية للمراقبة والفهم والاستجابة.
+        </h2>
+
+
+        <div class="cards">
+
+
+          <div class="card">
+
+            <div class="card-number">
+              01
+            </div>
+
+            <h3
+              data-en="Dashboard"
+              data-ar="لوحة التحكم"
+            >
+              لوحة التحكم
+            </h3>
+
+            <p
+              data-en="A central view of current palm status, risk indicators and important signals."
+              data-ar="واجهة مركزية تعرض حالة النخيل الحالية ومؤشرات الخطر والإشارات المهمة."
+            >
+              واجهة مركزية تعرض حالة النخيل الحالية ومؤشرات الخطر والإشارات المهمة.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-number">
+              02
+            </div>
+
+            <h3
+              data-en="Early Warning"
+              data-ar="التنبيه المبكر"
+            >
+              التنبيه المبكر
+            </h3>
+
+            <p
+              data-en="See which palms may require attention and understand why the system raised a warning."
+              data-ar="معرفة النخيل الذي قد يحتاج إلى اهتمام وفهم سبب ظهور التنبيه."
+            >
+              معرفة النخيل الذي قد يحتاج إلى اهتمام وفهم سبب ظهور التنبيه.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-number">
+              03
+            </div>
+
+            <h3
+              data-en="Analytics"
+              data-ar="التحليلات"
+            >
+              التحليلات
+            </h3>
+
+            <p
+              data-en="Explore patterns and changes in the collected signals to support better decisions."
+              data-ar="استكشاف الأنماط والتغيرات في البيانات المجمعة لدعم قرارات أفضل."
+            >
+              استكشاف الأنماط والتغيرات في البيانات المجمعة لدعم قرارات أفضل.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-number">
+              04
+            </div>
+
+            <h3
+              data-en="Farm Map"
+              data-ar="خريطة المزرعة"
+            >
+              خريطة المزرعة
+            </h3>
+
+            <p
+              data-en="Understand where risk is concentrated and identify areas that need closer monitoring."
+              data-ar="معرفة أماكن تركز الخطر وتحديد المناطق التي تحتاج إلى مراقبة أكبر."
+            >
+              معرفة أماكن تركز الخطر وتحديد المناطق التي تحتاج إلى مراقبة أكبر.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-number">
+              05
+            </div>
+
+            <h3
+              data-en="Monitoring"
+              data-ar="المراقبة"
+            >
+              المراقبة
+            </h3>
+
+            <p
+              data-en="Follow changes over time and keep track of important monitoring signals."
+              data-ar="متابعة التغيرات مع الوقت وتتبع مؤشرات المراقبة المهمة."
+            >
+              متابعة التغيرات مع الوقت وتتبع مؤشرات المراقبة المهمة.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-number">
+              06
+            </div>
+
+            <h3
+              data-en="Smart Support"
+              data-ar="الدعم الذكي"
+            >
+              الدعم الذكي
+            </h3>
+
+            <p
+              data-en="Transform complex data into clearer insights that help guide the next decision."
+              data-ar="تحويل البيانات المعقدة إلى رؤى أوضح تساعد في توجيه القرار التالي."
+            >
+              تحويل البيانات المعقدة إلى رؤى أوضح تساعد في توجيه القرار التالي.
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CTA
+           =================================================== -->
+
+      <section class="cta container">
+
+        <div class="cta-box">
+
+          <div class="cta-content">
+
+            <div
+              class="cta-label"
+              data-en="FOODGUARD AI"
+              data-ar="FOODGUARD AI"
+            >
+              FOODGUARD AI
+            </div>
+
+
+            <h2
+              data-en="Ready to explore the prototype?"
+              data-ar="جاهز لتجربة النموذج الأولي؟"
+            >
+              جاهز لتجربة النموذج الأولي؟
+            </h2>
+
+
+            <p
+              data-en="Explore FoodGuard and see how multimodal data can support early monitoring of date-palm stress."
+              data-ar="جرّب FoodGuard واستكشف كيف يمكن للبيانات متعددة المصادر أن تدعم المراقبة المبكرة لإجهاد نخيل التمر."
+            >
+              جرّب FoodGuard واستكشف كيف يمكن للبيانات متعددة المصادر أن تدعم المراقبة المبكرة لإجهاد نخيل التمر.
+            </p>
+
+
+            <a
+              class="cta-button"
+              href="https://radiant-palm-guard-flow.base44.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-en="Try the prototype →"
+              data-ar="جرّب النموذج الأولي →"
+            >
+              جرّب النموذج الأولي →
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <p
+          class="disclaimer"
+          data-en="FoodGuard AI is an early-stage decision-support prototype for date-palm monitoring. AI-generated risk indicators are intended to support monitoring and do not replace expert assessment or field diagnosis."
+          data-ar="FoodGuard AI هو نموذج أولي مبكر لدعم القرار في مراقبة نخيل التمر. مؤشرات الخطر الناتجة عن الذكاء الاصطناعي تهدف إلى دعم المراقبة ولا تحل محل تقييم المختص أو التشخيص الميداني."
+        >
+          FoodGuard AI هو نموذج أولي مبكر لدعم القرار في مراقبة نخيل التمر. مؤشرات الخطر الناتجة عن الذكاء الاصطناعي تهدف إلى دعم المراقبة ولا تحل محل تقييم المختص أو التشخيص الميداني.
+        </p>
+
+      </section>
+
     </main>
 
 
-
-    <!-- =======================================================
+    <!-- =====================================================
          FOOTER
-         ======================================================= -->
+         ===================================================== -->
 
     <footer class="container">
 
-
-      <div class="creator">
-
-        <strong>
-          FoodGuard
-        </strong>
-
-        <span
-          data-en="Design & Development by Jawaher Alhoqish"
-          data-ar="تصميم وشغل جواهر الهقيش"
-        >
-          Design & Development by Jawaher Alhoqish
-        </span>
-
-      </div>
-
-
-      <div class="footer-badge">
+      <div class="footer-brand">
 
         <span class="footer-dot"></span>
 
-        <span
-          data-en="FoodGuard AI"
-          data-ar="FoodGuard AI"
-        >
+        <span>
           FoodGuard AI
         </span>
 
       </div>
 
 
-    </footer>
+      <div>
 
+        <span
+          data-en="Designed & developed by "
+          data-ar="تصميم وشغل "
+        >
+          تصميم وشغل
+        </span>
+
+        <span class="creator">
+          جواهر الهقيش - Jawaher Alhoqish
+        </span>
+
+      </div>
+
+    </footer>
 
   </div>
 
 
-
-  <!-- =========================================================
-       LANGUAGE SWITCH
-       ========================================================= -->
+  <!-- =======================================================
+       LANGUAGE SCRIPT
+       ======================================================= -->
 
   <script>
 
     const langButton =
       document.getElementById("langButton");
 
-    let language = "en";
+    let language = "ar";
+
+
+    function updateLanguage() {
+
+      document.documentElement.lang =
+        language;
+
+      document.documentElement.dir =
+        language === "ar"
+          ? "rtl"
+          : "ltr";
+
+
+      document.body.classList.toggle(
+        "en",
+        language === "en"
+      );
+
+
+      document.querySelectorAll(
+        "[data-en][data-ar]"
+      ).forEach(element => {
+
+        element.textContent =
+          element.getAttribute(
+            "data-" + language
+          );
+
+      });
+
+
+      langButton.textContent =
+        language === "ar"
+          ? "English →"
+          : "العربية →";
+
+
+      document.title =
+        language === "ar"
+          ? "FoodGuard AI | المراقبة المبكرة لإجهاد نخيل التمر"
+          : "FoodGuard AI | Early Stress Monitoring for Date Palms";
+
+    }
 
 
     langButton.addEventListener(
@@ -2222,69 +2824,19 @@
       () => {
 
         language =
-          language === "en"
-            ? "ar"
-            : "en";
-
-
-        /* HTML language */
-
-        document.documentElement.lang =
-          language;
-
-
-        /* Direction */
-
-        document.documentElement.dir =
           language === "ar"
-            ? "rtl"
-            : "ltr";
+            ? "en"
+            : "ar";
 
-
-        /* Arabic body font */
-
-        document.body.classList.toggle(
-          "ar",
-          language === "ar"
-        );
-
-
-        /* Replace all bilingual content */
-
-        document
-          .querySelectorAll(
-            "[data-en][data-ar]"
-          )
-          .forEach(element => {
-
-            element.textContent =
-              element.getAttribute(
-                "data-" + language
-              );
-
-          });
-
-
-        /* Language button */
-
-        langButton.textContent =
-          language === "ar"
-            ? "English →"
-            : "العربية →";
-
-
-        /* Browser title */
-
-        document.title =
-          language === "ar"
-            ? "FoodGuard | الإنذار المبكر لإجهاد نخيل التمر"
-            : "FoodGuard | Early Stress Monitoring for Date Palms";
+        updateLanguage();
 
       }
     );
 
+
+    updateLanguage();
+
   </script>
 
 </body>
-
 </html>
