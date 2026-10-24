@@ -1,677 +1,561 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>FoodGuard AI</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     :root {
-      --bg: #062f2b;
-      --bg2: #0a4039;
-      --card: rgba(11, 66, 58, 0.88);
-      --card2: rgba(15, 78, 69, 0.9);
-
-      --green: #72ffd2;
-      --green2: #39dcb0;
-      --green-soft: rgba(114, 255, 210, 0.14);
-
-      --text: #f2fffb;
-      --muted: #a9d9cf;
-      --gold: #f3c66b;
-
-      --line: rgba(114, 255, 210, 0.42);
-      --grid: rgba(114, 255, 210, 0.075);
+      --bg: #061c22;
+      --bg2: #082831;
+      --text: #f4fbfc;
+      --muted: #a8c0c5;
+      --line: rgba(105, 220, 224, 0.18);
+      --card: rgba(7, 39, 48, 0.72);
+      --card-border: rgba(92, 216, 222, 0.35);
+      --accent: #4ed9dc;
+      --accent2: #70e8df;
+      --shadow: rgba(0, 0, 0, 0.35);
     }
 
     body.light {
-      --bg: #e9f8f3;
-      --bg2: #d8f0e8;
-      --card: rgba(255, 255, 255, 0.88);
-      --card2: rgba(240, 252, 247, 0.94);
-
-      --green: #087f69;
-      --green2: #0aa886;
-      --green-soft: rgba(8, 127, 105, 0.10);
-
-      --text: #073c34;
-      --muted: #4e786f;
-      --gold: #ae7510;
-
-      --line: rgba(8, 127, 105, 0.30);
-      --grid: rgba(8, 127, 105, 0.075);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
+      --bg: #edf7f7;
+      --bg2: #dceff0;
+      --text: #12333a;
+      --muted: #527078;
+      --line: rgba(20, 120, 125, 0.14);
+      --card: rgba(255, 255, 255, 0.78);
+      --card-border: rgba(37, 157, 163, 0.3);
+      --accent: #149da3;
+      --accent2: #27bfc0;
+      --shadow: rgba(25, 90, 95, 0.15);
     }
 
     body {
-      min-height: 100vh;
-      color: var(--text);
-
-      font-family:
-        "Tajawal",
-        "Arial",
-        sans-serif;
-
+      font-family: "Cairo", sans-serif;
       background:
-        radial-gradient(
-          circle at 50% 45%,
-          rgba(76, 255, 198, 0.12),
-          transparent 35%
-        ),
-        linear-gradient(
-          135deg,
-          var(--bg2),
-          var(--bg)
-        );
-
-      transition:
-        background 0.35s ease,
-        color 0.35s ease;
+        radial-gradient(circle at 50% 45%, rgba(30, 150, 160, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: 0.35s ease;
     }
 
+    /* الشبكة بالخلفية */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
       pointer-events: none;
+      opacity: 0.45;
 
       background-image:
-        linear-gradient(
-          to right,
-          var(--grid) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to bottom,
-          var(--grid) 1px,
-          transparent 1px
-        );
+        linear-gradient(rgba(111, 213, 218, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(111, 213, 218, 0.055) 1px, transparent 1px);
 
-      background-size: 70px 70px;
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    /* توهج خفيف */
+    body::after {
+      content: "";
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(39, 196, 201, 0.07);
+      filter: blur(90px);
+      pointer-events: none;
+    }
 
     header {
-      width: min(1350px, 92%);
-      margin: auto;
-
-      padding: 24px 0;
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 26px 0 20px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
       border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 10;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 18px;
-    }
-
-    /* اللوقو هنا خارج الدائرة */
-    .logo {
-      width: 76px;
-      height: 76px;
-
-      background: white;
-      border-radius: 20px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 12px 35px rgba(0,0,0,0.18);
-    }
-
-    .logo img {
-      width: 88%;
-      height: 88%;
-      object-fit: contain;
-    }
-
-    .brand-info small {
-      display: block;
-
-      color: var(--green);
-
-      font-size: 12px;
-      font-weight: 800;
-
-      letter-spacing: 3px;
-
-      margin-bottom: 5px;
-    }
-
-    .brand-info h1 {
-      font-size: clamp(27px, 4vw, 44px);
-      font-weight: 900;
-    }
-
-    .brand-info p {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* =========================
-       DARK / LIGHT BUTTON
-    ========================= */
-
-    .theme-button {
-      width: 52px;
-      height: 52px;
-
-      border: 1px solid var(--line);
-      border-radius: 16px;
-
-      background: var(--green-soft);
-
-      color: var(--green);
-
-      cursor: pointer;
-
+      gap: 12px;
       font-size: 22px;
-
-      transition: 0.3s ease;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    .theme-button:hover {
-      transform: translateY(-3px) rotate(5deg);
-
-      background: var(--green);
-
-      color: var(--bg);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      width: min(1350px, 92%);
-      margin: 65px auto 100px;
+    /* شعار دائري بسيط - بدون صورة */
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(92, 224, 225, 0.6);
 
       display: grid;
+      place-items: center;
 
-      grid-template-columns:
-        1fr
-        1.15fr;
+      background:
+        radial-gradient(circle at center,
+        rgba(78, 217, 220, 0.5) 0 7px,
+        transparent 8px);
 
-      gap: 70px;
+      box-shadow:
+        0 0 22px rgba(78, 217, 220, 0.22),
+        inset 0 0 15px rgba(78, 217, 220, 0.1);
+    }
 
+    .brand-logo::before {
+      content: "";
+      width: 21px;
+      height: 21px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .controls {
+      display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      color: var(--text);
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      transition: 0.25s ease;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(78, 217, 220, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .language-btn {
+      padding: 9px 17px;
+      font-size: 13px;
+    }
+
+    .theme-btn {
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+    }
+
+    main {
+      width: min(1120px, 92%);
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      min-height: calc(100vh - 90px);
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: center;
+      gap: 40px;
+      direction: ltr;
     }
 
     .hero-text {
-      text-align: right;
+      direction: rtl;
+      max-width: 470px;
     }
 
     .eyebrow {
-      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
 
+      color: var(--accent);
       font-size: 13px;
-      font-weight: 900;
+      font-weight: 700;
 
-      letter-spacing: 2px;
+      border: 1px solid var(--card-border);
+      background: rgba(78, 217, 220, 0.055);
+      padding: 7px 13px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
 
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(40px, 5vw, 70px);
+      line-height: 1.08;
+      letter-spacing: -2px;
       margin-bottom: 20px;
     }
 
-    .hero h2 {
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: 1.15;
-
-      font-weight: 900;
-
-      margin-bottom: 24px;
+    h1 span {
+      color: var(--accent);
     }
 
-    .hero h2 span {
-      color: var(--green);
-    }
-
-    .hero p {
+    .description {
       color: var(--muted);
-
-      font-size: 18px;
       line-height: 2;
+      font-size: 16px;
+      max-width: 470px;
+      margin-bottom: 28px;
+    }
 
-      max-width: 650px;
-
-      margin-right: auto;
+    .main-btn {
+      padding: 13px 23px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #062329;
+      border: none;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 10px 30px rgba(50, 210, 213, 0.18);
     }
 
     /* =========================
-       MONITOR DIAGRAM
-    ========================= */
+       الدائرة الرئيسية
+       ========================= */
 
-    .diagram {
+    .visual {
       position: relative;
+      height: 600px;
+      display: grid;
+      place-items: center;
+      direction: ltr;
+    }
 
-      min-height: 570px;
+    .circle-system {
+      width: 470px;
+      height: 470px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
 
-      border-radius: 28px;
+    .circle-system::before,
+    .circle-system::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+    }
+
+    .circle-system::before {
+      width: 470px;
+      height: 470px;
+    }
+
+    .circle-system::after {
+      width: 370px;
+      height: 370px;
+      border-color: rgba(78, 217, 220, 0.25);
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(78, 217, 220, 0.14);
+    }
+
+    .ring.one {
+      width: 290px;
+      height: 290px;
+    }
+
+    .ring.two {
+      width: 210px;
+      height: 210px;
+      border-color: rgba(78, 217, 220, 0.25);
+    }
+
+    .ring.three {
+      width: 145px;
+      height: 145px;
+      border-color: rgba(78, 217, 220, 0.4);
+    }
+
+    /* مركز الدائرة */
+    .center {
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
       background:
         radial-gradient(
           circle at center,
-          rgba(114,255,210,0.13),
-          transparent 52%
-        ),
-        var(--card);
-
-      border: 1px solid var(--line);
-
-      overflow: hidden;
-
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.25);
-    }
-
-    .diagram::before {
-      content: "";
-
-      position: absolute;
-
-      width: 620px;
-      height: 620px;
-
-      border: 1px solid var(--line);
-
-      border-radius: 50%;
-
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
-    }
-
-    .diagram::after {
-      content: "";
-
-      position: absolute;
-
-      width: 410px;
-      height: 410px;
-
-      border: 1px dashed var(--line);
-
-      border-radius: 50%;
-
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
-    }
-
-    .circle-1,
-    .circle-2 {
-      position: absolute;
-
-      border-radius: 50%;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
-      pointer-events: none;
-    }
-
-    .circle-1 {
-      width: 270px;
-      height: 270px;
-
-      border: 1px solid var(--line);
-    }
-
-    .circle-2 {
-      width: 170px;
-      height: 170px;
-
-      border: 1px solid var(--green);
-    }
-
-    /* =========================
-       CENTER
-    ========================= */
-
-    .center {
-      position: absolute;
-
-      width: 105px;
-      height: 105px;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          var(--green2),
-          var(--green)
+          rgba(78, 217, 220, 0.28),
+          rgba(5, 38, 47, 0.92) 65%
         );
 
-      color: #06362e;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      font-weight: 900;
-      font-size: 14px;
-
-      line-height: 1.35;
+      border: 1px solid rgba(101, 228, 226, 0.65);
 
       box-shadow:
-        0 0 45px rgba(114,255,210,0.25);
+        0 0 50px rgba(78, 217, 220, 0.13),
+        inset 0 0 30px rgba(78, 217, 220, 0.1);
     }
 
-    /* =========================
-       DOTS
-    ========================= */
+    body.light .center {
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(78, 217, 220, 0.25),
+          rgba(255,255,255,0.95) 70%
+        );
+    }
 
-    .dot {
-      position: absolute;
-
-      width: 18px;
-      height: 18px;
-
+    .center-symbol {
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--accent);
       border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 20px var(--green);
+      position: relative;
+      margin-bottom: 8px;
     }
 
-    .dot.one {
-      top: 22%;
-      left: 23%;
+    .center-symbol::before,
+    .center-symbol::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
-    .dot.two {
-      bottom: 25%;
-      left: 31%;
+    .center-symbol::before {
+      width: 6px;
+      height: 6px;
+      left: 3px;
+      top: 5px;
+      box-shadow: 15px 12px 0 var(--accent);
     }
 
-    .dot.three {
-      top: 33%;
-      right: 24%;
+    .center-symbol::after {
+      width: 22px;
+      height: 1px;
+      left: 3px;
+      top: 14px;
+      opacity: 0.5;
+      transform: rotate(35deg);
     }
 
-    /* =========================
-       INFO CARDS
-    ========================= */
+    .center-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
 
+    .center-sub {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* النقاط حول الدائرة */
+    .orbit-dot {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .dot1 { top: 76px; left: 105px; }
+    .dot2 { top: 185px; right: 18px; }
+    .dot3 { bottom: 72px; right: 102px; }
+    .dot4 { bottom: 135px; left: 28px; }
+
+    /* الكروت */
     .info-card {
       position: absolute;
-
-      min-width: 205px;
-
-      padding: 22px 25px;
-
-      border-radius: 24px;
-
-      background: var(--card2);
-
-      border: 1px solid var(--line);
-
-      backdrop-filter: blur(10px);
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,0.16);
-    }
-
-    .info-card small {
-      display: block;
-
-      color: var(--gold);
-
-      font-size: 12px;
-
-      font-weight: 900;
-
-      letter-spacing: 2px;
-
-      margin-bottom: 10px;
-    }
-
-    .info-card strong {
-      display: block;
-
-      font-size: 20px;
-
-      color: var(--text);
-    }
-
-    .monitor {
-      top: 45px;
-      right: 35px;
-    }
-
-    .signal {
-      right: 25px;
-      bottom: 65px;
-    }
-
-    .action {
-      left: 35px;
-      bottom: 50px;
-    }
-
-    /* =========================
-       FEATURES
-    ========================= */
-
-    .features {
-      width: min(1350px, 92%);
-      margin: 0 auto 100px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 22px;
-    }
-
-    .feature {
-      padding: 30px;
-
-      border-radius: 24px;
+      min-width: 175px;
+      padding: 15px 18px;
 
       background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
 
-      border: 1px solid var(--line);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
 
-      transition: 0.3s ease;
+      box-shadow:
+        0 20px 50px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+
+      direction: rtl;
     }
 
-    .feature:hover {
-      transform: translateY(-6px);
-
-      border-color: var(--green);
+    .card-top {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 5px;
     }
 
-    .feature-number {
-      color: var(--green);
-
-      font-size: 13px;
-      font-weight: 900;
-
-      letter-spacing: 2px;
-
-      margin-bottom: 15px;
-    }
-
-    .feature h3 {
+    .card-value {
       font-size: 23px;
-
-      margin-bottom: 12px;
-    }
-
-    .feature p {
-      color: var(--muted);
-
-      line-height: 1.9;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      width: min(1350px, 92%);
-      margin: auto;
-
-      padding: 25px 0 35px;
-
-      border-top: 1px solid var(--line);
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    footer span {
-      color: var(--green);
       font-weight: 800;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+    .card-value span {
+      color: var(--accent);
+    }
 
-    @media (max-width: 950px) {
+    .card-status {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    .card1 {
+      top: 68px;
+      right: -15px;
+    }
+
+    .card2 {
+      left: -5px;
+      top: 220px;
+    }
+
+    .card3 {
+      right: 20px;
+      bottom: 63px;
+    }
+
+    .card4 {
+      left: 38px;
+      bottom: 100px;
+    }
+
+    /* خط صغير أسفل البطل */
+    .status-pill {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      padding: 8px 15px;
+      border-radius: 30px;
+
+      border: 1px solid rgba(78, 217, 220, 0.35);
+      background: rgba(78, 217, 220, 0.06);
+
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .status-pill b {
+      color: var(--accent);
+    }
+
+    /* الجوال */
+    @media (max-width: 850px) {
+      header {
+        padding-top: 18px;
+      }
 
       .hero {
         grid-template-columns: 1fr;
-      }
-
-      .hero-text {
+        padding: 55px 0 80px;
         text-align: center;
       }
 
-      .hero p {
+      .hero-text {
         margin: auto;
       }
 
-      .features {
-        grid-template-columns: 1fr;
+      .description {
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .diagram {
-        min-height: 540px;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      header {
-        align-items: flex-start;
+      .visual {
+        height: 500px;
+        transform: scale(0.82);
+        margin-top: -30px;
       }
 
-      .brand {
-        gap: 10px;
-      }
-
-      .logo {
-        width: 58px;
-        height: 58px;
-        border-radius: 15px;
-      }
-
-      .brand-info p {
-        display: none;
-      }
-
-      .diagram {
-        min-height: 480px;
-      }
-
-      .diagram::before {
+      .circle-system {
         width: 430px;
         height: 430px;
       }
 
-      .diagram::after {
-        width: 290px;
-        height: 290px;
+      .circle-system::before {
+        width: 430px;
+        height: 430px;
       }
 
-      .circle-1 {
-        width: 210px;
-        height: 210px;
+      .circle-system::after {
+        width: 340px;
+        height: 340px;
       }
 
-      .circle-2 {
-        width: 135px;
-        height: 135px;
+      .card1 {
+        right: -30px;
       }
 
-      .center {
-        width: 85px;
-        height: 85px;
-        font-size: 12px;
+      .card2 {
+        left: -30px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand {
+        font-size: 18px;
       }
 
-      .info-card {
-        min-width: 150px;
-        padding: 16px;
+      .language-btn {
+        padding: 8px 12px;
       }
 
-      .info-card strong {
-        font-size: 16px;
+      .visual {
+        transform: scale(0.65);
+        height: 420px;
+        margin-top: -60px;
       }
 
-      .monitor {
-        top: 25px;
-        right: 15px;
-      }
-
-      .signal {
-        right: 15px;
-        bottom: 25px;
-      }
-
-      .action {
-        left: 15px;
-        bottom: 25px;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
+      h1 {
+        font-size: 40px;
       }
     }
   </style>
@@ -679,273 +563,276 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
-
   <header>
-
     <div class="brand">
-
-      <!-- ضعي اللوقو الحقيقي هنا باسم logo.png -->
-      <div class="logo">
-        <img
-          src="logo.png"
-          alt="FoodGuard Logo"
-        />
-      </div>
-
-      <div class="brand-info">
-        <small>FOODGUARD AI • DATE PALMS</small>
-
-        <h1>فودقارد</h1>
-
-        <p>
-          المراقبة المبكرة لإجهاد النخيل
-        </p>
-      </div>
-
+      <div class="brand-logo"></div>
+      <div>Food<span>Guard</span></div>
     </div>
 
-
-    <!-- زر Dark / Light -->
-    <div class="header-actions">
-
-      <button
-        class="theme-button"
-        id="themeButton"
-        aria-label="تغيير الوضع"
-        title="Dark / Light Mode"
-      >
-        ☀️
+    <div class="controls">
+      <button class="language-btn" id="languageBtn">
+        English →
       </button>
 
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        ☾
+      </button>
     </div>
-
   </header>
 
-
-  <!-- =========================
-       HERO
-  ========================== -->
 
   <main>
 
     <section class="hero">
 
+      <!-- النص -->
       <div class="hero-text">
 
         <div class="eyebrow">
-          EARLY STRESS MONITORING
+          <span class="eyebrow-dot"></span>
+          <span id="eyebrowText">FoodGuard AI</span>
         </div>
 
-        <h2>
-          لأن الإشارة المبكرة
-          <br />
-          <span>قد تغيّر القرار.</span>
-        </h2>
+        <h1 id="title">
+          اكتشف إجهاد النخيل<br>
+          <span>قبل أن يتحول إلى مشكلة.</span>
+        </h1>
 
-        <p>
-          FoodGuard مصمم لجعل المعلومات المتعلقة بحالة النخيل
-          أسهل في الفهم والمتابعة، بحيث لا تكون البيانات مجرد أرقام،
-          بل نقطة بداية لفهم الحالة والتصرف في الوقت المناسب.
+        <p class="description" id="description">
+          منصة FoodGuard AI تساعدك على فهم حالة النخيل
+          واكتشاف مؤشرات الإجهاد مبكرًا باستخدام الذكاء الاصطناعي،
+          لتتخذ القرار المناسب في الوقت المناسب.
         </p>
+
+        <button class="main-btn" id="mainBtn">
+          ابدأ الآن →
+        </button>
 
       </div>
 
 
-      <!-- =========================
-           DIAGRAM
-      ========================== -->
+      <!-- الدائرة -->
+      <div class="visual">
 
-      <div class="diagram">
+        <div class="circle-system">
 
-        <div class="circle-1"></div>
-        <div class="circle-2"></div>
+          <div class="ring one"></div>
+          <div class="ring two"></div>
+          <div class="ring three"></div>
 
-        <div class="center">
-          FOOD<br />
-          GUARD
+          <div class="orbit-dot dot1"></div>
+          <div class="orbit-dot dot2"></div>
+          <div class="orbit-dot dot3"></div>
+          <div class="orbit-dot dot4"></div>
+
+          <!-- المركز بدون أي صورة -->
+          <div class="center">
+
+            <div class="center-symbol"></div>
+
+            <div class="center-title">
+              FOODGUARD
+            </div>
+
+            <div class="center-sub">
+              AI ANALYSIS
+            </div>
+
+          </div>
+
+
+          <!-- الكروت المحيطة -->
+
+          <div class="info-card card1">
+
+            <div class="card-top" id="card1Title">
+              حالة الإجهاد
+            </div>
+
+            <div class="card-value">
+              <span>31°</span>
+            </div>
+
+            <div class="card-status" id="card1Status">
+              مستقرة
+            </div>
+
+          </div>
+
+
+          <div class="info-card card2">
+
+            <div class="card-top" id="card2Title">
+              رطوبة التربة
+            </div>
+
+            <div class="card-value">
+              <span>64%</span>
+            </div>
+
+            <div class="card-status" id="card2Status">
+              جيدة
+            </div>
+
+          </div>
+
+
+          <div class="info-card card3">
+
+            <div class="card-top" id="card3Title">
+              مؤشر الصحة
+            </div>
+
+            <div class="card-value">
+              <span>87%</span>
+            </div>
+
+            <div class="card-status" id="card3Status">
+              طبيعية
+            </div>
+
+          </div>
+
+
+          <div class="info-card card4">
+
+            <div class="card-top" id="card4Title">
+              تحليل AI
+            </div>
+
+            <div class="card-value">
+              <span>●</span> 92%
+            </div>
+
+            <div class="card-status" id="card4Status">
+              منخفض الإجهاد
+            </div>
+
+          </div>
+
         </div>
 
-
-        <!-- نقاط الإشارة -->
-
-        <div class="dot one"></div>
-        <div class="dot two"></div>
-        <div class="dot three"></div>
-
-
-        <!-- MONITOR -->
-
-        <div class="info-card monitor">
-
-          <small>MONITOR</small>
-
-          <strong>
-            حالة النخيل
-          </strong>
-
-        </div>
-
-
-        <!-- SIGNAL -->
-
-        <div class="info-card signal">
-
-          <small>SIGNAL</small>
-
-          <strong>
-            مؤشرات إجهاد
-          </strong>
-
-        </div>
-
-
-        <!-- ACTION -->
-
-        <div class="info-card action">
-
-          <small>ACTION</small>
-
-          <strong>
-            → تنبيه مبكر
-          </strong>
-
+        <div class="status-pill">
+          <b>● AI</b>
+          <span id="statusText"> تحليل مستمر ومبكر</span>
         </div>
 
       </div>
-
-    </section>
-
-
-    <!-- =========================
-         FEATURES
-    ========================== -->
-
-    <section class="features">
-
-      <article class="feature">
-
-        <div class="feature-number">
-          01 • MONITOR
-        </div>
-
-        <h3>
-          حالة النخيل
-        </h3>
-
-        <p>
-          متابعة حالة النخيل وعرض المعلومات
-          بطريقة واضحة وسهلة القراءة.
-        </p>
-
-      </article>
-
-
-      <article class="feature">
-
-        <div class="feature-number">
-          02 • SIGNAL
-        </div>
-
-        <h3>
-          مؤشرات الإجهاد
-        </h3>
-
-        <p>
-          إبراز المؤشرات التي قد تساعد في
-          ملاحظة التغيرات في وقت مبكر.
-        </p>
-
-      </article>
-
-
-      <article class="feature">
-
-        <div class="feature-number">
-          03 • ACTION
-        </div>
-
-        <h3>
-          تنبيه مبكر
-        </h3>
-
-        <p>
-          تحويل الإشارة إلى معلومة عملية
-          تساعد على اتخاذ القرار في الوقت المناسب.
-        </p>
-
-      </article>
 
     </section>
 
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <div>
-      FoodGuard AI
-    </div>
-
-    <div>
-      Designed for
-      <span>Date Palms</span>
-    </div>
-
-  </footer>
-
-
-  <!-- =========================
-       DARK / LIGHT JAVASCRIPT
-  ========================== -->
-
   <script>
 
-    const themeButton =
-      document.getElementById("themeButton");
+    let arabic = true;
 
-    const savedTheme =
-      localStorage.getItem("foodguard-theme");
+    const languageBtn = document.getElementById("languageBtn");
+    const themeBtn = document.getElementById("themeBtn");
+
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const eyebrowText = document.getElementById("eyebrowText");
+    const mainBtn = document.getElementById("mainBtn");
+
+    const card1Title = document.getElementById("card1Title");
+    const card1Status = document.getElementById("card1Status");
+
+    const card2Title = document.getElementById("card2Title");
+    const card2Status = document.getElementById("card2Status");
+
+    const card3Title = document.getElementById("card3Title");
+    const card3Status = document.getElementById("card3Status");
+
+    const card4Title = document.getElementById("card4Title");
+    const card4Status = document.getElementById("card4Status");
+
+    const statusText = document.getElementById("statusText");
 
 
-    /* إذا كان المستخدم اختار Light سابقاً */
-    if (savedTheme === "light") {
-      document.body.classList.add("light");
-      themeButton.textContent = "🌙";
-    }
+    /* اللغة */
 
+    languageBtn.addEventListener("click", () => {
 
-    themeButton.addEventListener("click", () => {
+      arabic = !arabic;
 
-      document.body.classList.toggle("light");
+      if (arabic) {
 
-      const isLight =
-        document.body.classList.contains("light");
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
 
-      if (isLight) {
+        languageBtn.textContent = "English →";
 
-        themeButton.textContent = "🌙";
+        eyebrowText.textContent = "FoodGuard AI";
 
-        localStorage.setItem(
-          "foodguard-theme",
-          "light"
-        );
+        title.innerHTML =
+          "اكتشف إجهاد النخيل<br><span>قبل أن يتحول إلى مشكلة.</span>";
+
+        description.textContent =
+          "منصة FoodGuard AI تساعدك على فهم حالة النخيل واكتشاف مؤشرات الإجهاد مبكرًا باستخدام الذكاء الاصطناعي، لتتخذ القرار المناسب في الوقت المناسب.";
+
+        mainBtn.textContent = "ابدأ الآن →";
+
+        card1Title.textContent = "حالة الإجهاد";
+        card1Status.textContent = "مستقرة";
+
+        card2Title.textContent = "رطوبة التربة";
+        card2Status.textContent = "جيدة";
+
+        card3Title.textContent = "مؤشر الصحة";
+        card3Status.textContent = "طبيعية";
+
+        card4Title.textContent = "تحليل AI";
+        card4Status.textContent = "منخفض الإجهاد";
+
+        statusText.textContent = " تحليل مستمر ومبكر";
 
       } else {
 
-        themeButton.textContent = "☀️";
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
 
-        localStorage.setItem(
-          "foodguard-theme",
-          "dark"
-        );
+        languageBtn.textContent = "← العربية";
 
+        eyebrowText.textContent = "FoodGuard AI";
+
+        title.innerHTML =
+          "Detect palm stress<br><span>before it becomes a problem.</span>";
+
+        description.textContent =
+          "FoodGuard AI helps you understand palm health and detect early stress indicators using artificial intelligence, so you can make the right decision at the right time.";
+
+        mainBtn.textContent = "Get Started →";
+
+        card1Title.textContent = "Stress Level";
+        card1Status.textContent = "Stable";
+
+        card2Title.textContent = "Soil Moisture";
+        card2Status.textContent = "Good";
+
+        card3Title.textContent = "Health Index";
+        card3Status.textContent = "Normal";
+
+        card4Title.textContent = "AI Analysis";
+        card4Status.textContent = "Low Stress";
+
+        statusText.textContent = " Continuous early analysis";
+      }
+
+    });
+
+
+    /* Dark / Light */
+
+    themeBtn.addEventListener("click", () => {
+
+      document.body.classList.toggle("light");
+
+      if (document.body.classList.contains("light")) {
+        themeBtn.textContent = "☀";
+      } else {
+        themeBtn.textContent = "☾";
       }
 
     });
