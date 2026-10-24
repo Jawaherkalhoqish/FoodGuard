@@ -1,56 +1,106 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#102F24">
-  <meta name="description"
-        content="FoodGuard AI — Early Stress Monitoring for Date Palms. منصة ذكية للمراقبة المبكرة للإجهاد في أشجار النخيل.">
+  <meta name="theme-color" content="#073c32">
+  <meta name="description" content="FoodGuard AI — Early Stress Monitoring for Date Palms">
 
   <title>FoodGuard | Early Stress Monitoring for Date Palms</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
 
     /* =========================================================
-       FOODGUARD — VISUAL SYSTEM
-       ========================================================= */
+       FOODGUARD
+       Early Stress Monitoring for Date Palms
+       Jawaher Alhoqish
+    ========================================================= */
 
     :root {
-      --forest: #102F24;
-      --forest-deep: #0A2119;
 
-      --green: #6BCB9B;
-      --green-bright: #8BE0B3;
-      --green-dark: #285C45;
+      /* ---------- DARK MODE ---------- */
 
-      --sage: #AFCBB9;
-      --cream: #F5F1E7;
-      --white: #FFFFFF;
+      --bg: #073c32;
+      --bg-deep: #032b25;
+      --surface: #0b4b3f;
+      --surface-2: #10594b;
 
-      --gold: #D7B873;
+      --mint: #72e6c0;
+      --mint-bright: #8af3d0;
 
-      --text: #F5F1E7;
-      --muted: #B7C9BE;
+      --cream: #f5f7ee;
+      --white: #ffffff;
 
-      --border: rgba(255,255,255,.13);
+      --muted: #b7d4ca;
+      --muted-2: #8db3a7;
+
+      --gold: #e9c65d;
+
+      --border: rgba(137, 238, 207, .28);
+      --border-soft: rgba(255,255,255,.12);
 
       --shadow:
-        0 24px 70px rgba(0,0,0,.22);
+        0 25px 70px rgba(0,0,0,.25);
+
+      --grid:
+        rgba(160, 235, 215, .075);
+
+      --glow:
+        rgba(79, 224, 181, .22);
     }
+
+
+    /* =========================================================
+       LIGHT MODE
+    ========================================================= */
+
+    body.light {
+
+      --bg: #edf7f2;
+      --bg-deep: #dcefe7;
+
+      --surface: #ffffff;
+      --surface-2: #e4f4ed;
+
+      --mint: #159d78;
+      --mint-bright: #18b88d;
+
+      --cream: #123d34;
+      --white: #082f27;
+
+      --muted: #55766c;
+      --muted-2: #718f87;
+
+      --gold: #b88920;
+
+      --border: rgba(21,157,120,.32);
+      --border-soft: rgba(7,60,50,.13);
+
+      --grid:
+        rgba(10, 87, 69, .09);
+
+      --glow:
+        rgba(35, 190, 147, .17);
+
+      --shadow:
+        0 25px 70px rgba(10,65,50,.12);
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
@@ -58,18 +108,25 @@
     }
 
     body {
-      margin: 0;
-      color: var(--text);
-      background: var(--forest);
+
+      background: var(--bg);
+
+      color: var(--cream);
+
       font-family:
         "IBM Plex Sans Arabic",
         "DM Sans",
         sans-serif;
 
       overflow-x: hidden;
+
+      transition:
+        background .45s ease,
+        color .45s ease;
     }
 
     body.en {
+
       font-family:
         "DM Sans",
         "IBM Plex Sans Arabic",
@@ -81,300 +138,457 @@
       text-decoration: none;
     }
 
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--gold);
-      outline-offset: 5px;
+    button {
+      font-family: inherit;
     }
 
 
     /* =========================================================
        PAGE BACKGROUND
-       ========================================================= */
+    ========================================================= */
 
     .page {
+
       min-height: 100vh;
+
       position: relative;
+
       overflow: hidden;
 
       background:
+
         radial-gradient(
-          circle at 78% 20%,
-          rgba(107,203,155,.17),
+          circle at 70% 30%,
+          var(--glow),
           transparent 30%
         ),
 
         radial-gradient(
-          circle at 10% 75%,
-          rgba(45,112,77,.20),
+          circle at 12% 85%,
+          rgba(30,145,111,.14),
           transparent 32%
         ),
 
-        var(--forest);
+        var(--bg);
     }
 
+
     .page::before {
+
       content: "";
 
       position: absolute;
+
       inset: 0;
 
       pointer-events: none;
 
-      opacity: .055;
+      opacity: .85;
 
       background-image:
+
         linear-gradient(
-          rgba(181,225,200,.7) 1px,
+          var(--grid) 1px,
           transparent 1px
         ),
 
         linear-gradient(
           90deg,
-          rgba(181,225,200,.7) 1px,
+          var(--grid) 1px,
           transparent 1px
         );
 
-      background-size: 70px 70px;
+      background-size: 74px 74px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black 0%,
+          black 80%,
+          transparent 100%
+        );
     }
 
 
-    /* =========================================================
-       CONTAINER
-       ========================================================= */
+    .page::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      right: -280px;
+      top: 180px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(64,211,169,.13),
+          transparent 65%
+        );
+
+      filter: blur(25px);
+
+      pointer-events: none;
+    }
+
 
     .container {
-      width: min(1180px, calc(100% - 44px));
+
+      width:
+        min(
+          1180px,
+          calc(100% - 48px)
+        );
+
       margin: auto;
 
       position: relative;
+
       z-index: 2;
     }
 
 
     /* =========================================================
        HEADER
-       ========================================================= */
+    ========================================================= */
 
     header {
-      min-height: 88px;
+
+      height: 92px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
-      gap: 20px;
-
       border-bottom:
-        1px solid var(--border);
+        1px solid var(--border-soft);
     }
+
 
     .brand {
+
       display: flex;
+
       align-items: center;
-      gap: 14px;
+
+      gap: 15px;
     }
 
+
     .logo-box {
-      width: 58px;
-      height: 58px;
+
+      width: 62px;
+      height: 62px;
 
       display: grid;
+
       place-items: center;
+
+      background: #ffffff;
 
       border-radius: 16px;
 
-      background: var(--cream);
-
-      border:
-        1px solid rgba(255,255,255,.25);
+      overflow: hidden;
 
       box-shadow:
         0 12px 35px rgba(0,0,0,.18);
 
-      overflow: hidden;
+      flex-shrink: 0;
     }
 
+
     .logo-box img {
+
       width: 100%;
       height: 100%;
 
-      object-fit: contain;
+      object-fit: cover;
     }
+
+
+    .brand-info {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 2px;
+    }
+
 
     .brand-name {
-      color: var(--green);
 
-      font-size: 18px;
+      color: var(--mint);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 25px;
+
       font-weight: 700;
 
-      letter-spacing: .08em;
+      letter-spacing: -.03em;
     }
+
 
     .brand-sub {
+
       color: var(--muted);
 
-      font-size: 11px;
+      font-size: 12px;
 
-      margin-top: 2px;
+      white-space: nowrap;
     }
 
-    .header-actions {
+
+    .nav-area {
+
       display: flex;
+
       align-items: center;
-      gap: 12px;
+
+      gap: 30px;
     }
 
-    .lang-button {
+
+    nav {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 27px;
+    }
+
+
+    nav a {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      transition:
+        color .25s ease,
+        transform .25s ease;
+    }
+
+
+    nav a:hover {
+
+      color: var(--mint);
+
+      transform: translateY(-2px);
+    }
+
+
+    .controls {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+
+    .control-button {
+
+      height: 40px;
+
       border:
-        1px solid rgba(107,203,155,.45);
+        1px solid var(--border);
 
       background:
-        rgba(107,203,155,.07);
+        rgba(118,230,192,.06);
 
       color: var(--cream);
 
-      padding: 9px 15px;
+      border-radius: 30px;
 
-      border-radius: 999px;
+      padding: 0 15px;
 
       cursor: pointer;
 
-      font: inherit;
-      font-size: 13px;
-
       transition:
-        .25s ease;
+        background .25s ease,
+        transform .25s ease,
+        border-color .25s ease;
     }
 
-    .lang-button:hover {
-      background:
-        rgba(107,203,155,.17);
 
-      transform:
-        translateY(-2px);
+    .control-button:hover {
+
+      background:
+        rgba(118,230,192,.14);
+
+      transform: translateY(-2px);
+
+      border-color:
+        var(--mint);
+    }
+
+
+    #themeButton {
+
+      width: 42px;
+
+      padding: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      font-size: 17px;
     }
 
 
     /* =========================================================
        HERO
-       ========================================================= */
+    ========================================================= */
 
     .hero {
-      min-height: 650px;
+
+      min-height: 590px;
 
       display: grid;
 
       grid-template-columns:
-        1.03fr
-        .97fr;
+        .92fr 1.08fr;
 
-      gap: 50px;
+      gap: 40px;
 
       align-items: center;
 
       padding:
-        62px 0
-        58px;
+        55px 0 45px;
     }
+
 
     .hero-copy {
-      max-width: 660px;
+
+      max-width: 600px;
     }
 
+
     .eyebrow {
+
       display: inline-flex;
+
       align-items: center;
 
       gap: 9px;
 
-      color: var(--green);
+      color: var(--mint);
 
       font-size: 12px;
+
       font-weight: 700;
 
-      letter-spacing: .09em;
+      letter-spacing: .12em;
+
+      margin-bottom: 19px;
     }
 
+
     .eyebrow::before {
+
       content: "";
 
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
 
       border-radius: 50%;
 
-      background: var(--green);
+      background: var(--mint);
 
       box-shadow:
-        0 0 16px rgba(107,203,155,.9);
+        0 0 18px var(--mint);
     }
 
+
     h1 {
-      margin:
-        18px 0
-        22px;
 
       font-size:
-        clamp(44px, 5.2vw, 70px);
+        clamp(
+          45px,
+          5.5vw,
+          76px
+        );
 
-      line-height: 1.15;
+      line-height: 1.18;
+
+      font-weight: 700;
 
       letter-spacing: -.045em;
 
-      font-weight: 600;
+      margin-bottom: 23px;
     }
 
-    body:not(.en) h1 {
-      line-height: 1.38;
-      letter-spacing: 0;
-    }
 
     h1 .highlight {
-      color: var(--green);
+
+      color: var(--mint);
+
+      display: inline-block;
     }
 
+
     .hero-description {
-      max-width: 620px;
 
       color: var(--muted);
 
-      font-size: 17px;
+      font-size: 16px;
 
-      line-height: 1.9;
+      line-height: 2;
 
-      margin: 0 0 26px;
+      max-width: 570px;
+
+      margin-bottom: 28px;
     }
 
-    .hero-buttons {
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .actions {
+
       display: flex;
 
-      gap: 12px;
-
       flex-wrap: wrap;
+
+      gap: 12px;
     }
 
+
     .button {
-      min-height: 58px;
+
+      min-height: 56px;
 
       display: inline-flex;
 
       align-items: center;
+
       justify-content: center;
 
       padding:
-        13px
-        23px;
+        0 24px;
 
       border-radius: 17px;
 
-      font-size: 15px;
+      font-size: 14px;
+
       font-weight: 700;
+
+      cursor: pointer;
 
       transition:
         transform .25s ease,
@@ -382,389 +596,571 @@
         background .25s ease;
     }
 
+
     .button:hover {
+
       transform:
         translateY(-4px);
-
-      box-shadow:
-        0 18px 38px rgba(0,0,0,.24);
     }
+
 
     .primary {
-      color: #0B2B1E;
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--green-bright),
-          var(--green)
-        );
+      background: var(--mint);
+
+      color: #053a30;
+
+      box-shadow:
+        0 15px 35px
+        rgba(75,224,178,.20);
     }
 
+
+    .primary:hover {
+
+      box-shadow:
+        0 20px 45px
+        rgba(75,224,178,.32);
+    }
+
+
     .secondary {
+
       color: var(--cream);
 
       border:
-        1px solid rgba(255,255,255,.2);
+        1px solid var(--border);
 
       background:
-        rgba(255,255,255,.055);
+        rgba(118,230,192,.045);
     }
+
 
     .secondary:hover {
+
       background:
-        rgba(255,255,255,.1);
-    }
-
-    .hero-note {
-      color: #9FB7AA;
-
-      font-size: 12px;
-
-      margin-top: 14px;
+        rgba(118,230,192,.11);
     }
 
 
     /* =========================================================
-       HERO VISUAL
-       ========================================================= */
+       RADAR VISUAL
+    ========================================================= */
 
-    .hero-visual {
-      min-height: 470px;
+    .visual {
+
+      min-height: 500px;
 
       position: relative;
 
       display: grid;
+
       place-items: center;
     }
 
-    .visual-glow {
-      width: 430px;
-      height: 430px;
+
+    .radar-glow {
 
       position: absolute;
+
+      width: 480px;
+      height: 480px;
 
       border-radius: 50%;
 
       background:
         radial-gradient(
           circle,
-          rgba(107,203,155,.25),
-          transparent 66%
+          rgba(70,225,180,.23),
+          rgba(70,225,180,.06) 35%,
+          transparent 68%
         );
 
-      filter: blur(15px);
+      filter: blur(5px);
+
+      animation:
+        breathe 5s ease-in-out infinite;
     }
 
-    .orbit {
-      width: 390px;
-      height: 390px;
+
+    .radar {
+
+      width: 430px;
+      height: 430px;
 
       position: relative;
 
       border:
         1px solid
-        rgba(139,224,179,.28);
+        rgba(131,238,208,.55);
 
       border-radius: 50%;
 
       box-shadow:
-        inset 0 0 80px
-        rgba(107,203,155,.045);
+        0 0 80px
+        rgba(75,220,177,.08),
+
+        inset 0 0 55px
+        rgba(75,220,177,.08);
     }
 
-    .orbit::before,
-    .orbit::after {
+
+    .radar::before {
+
       content: "";
 
       position: absolute;
 
-      border-radius: 50%;
-
-      inset: 45px;
+      inset: 52px;
 
       border:
         1px dashed
-        rgba(139,224,179,.26);
+        rgba(131,238,208,.43);
+
+      border-radius: 50%;
 
       animation:
-        rotate 50s linear infinite;
+        rotate 45s linear infinite;
     }
 
-    .orbit::after {
-      inset: 100px;
 
-      border-style: solid;
+    .radar::after {
 
-      opacity: .65;
-
-      animation-direction: reverse;
-      animation-duration: 38s;
-    }
-
-    .center-card {
-      width: 130px;
-      height: 130px;
+      content: "";
 
       position: absolute;
 
-      top: 50%;
+      inset: 105px;
+
+      border:
+        1px solid
+        rgba(131,238,208,.35);
+
+      border-radius: 50%;
+    }
+
+
+    .radar-center {
+
+      position: absolute;
+
+      width: 145px;
+      height: 145px;
+
       left: 50%;
+      top: 50%;
 
       transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      display: grid;
-      place-items: center;
-
-      background:
-        linear-gradient(
-          145deg,
-          #316C50,
-          #1C4935
-        );
+        translate(-50%,-50%);
 
       border:
         1px solid
-        var(--green);
-
-      box-shadow:
-        0 0 0 17px rgba(107,203,155,.055),
-        0 0 75px rgba(107,203,155,.28);
-
-      animation:
-        pulse 4s ease-in-out infinite;
-    }
-
-    .center-card img {
-      width: 91px;
-      height: 91px;
-
-      object-fit: contain;
-
-      border-radius: 14px;
-    }
-
-    .info-chip {
-      position: absolute;
-
-      min-width: 155px;
-
-      padding: 13px 15px;
-
-      border-radius: 16px;
-
-      background:
-        rgba(20,54,41,.94);
-
-      border:
-        1px solid
-        rgba(107,203,155,.30);
-
-      box-shadow:
-        0 16px 38px rgba(0,0,0,.23);
-
-      backdrop-filter:
-        blur(10px);
-    }
-
-    .info-chip small {
-      display: block;
-
-      color: var(--gold);
-
-      font-size: 9px;
-      font-weight: 700;
-
-      letter-spacing: .12em;
-
-      margin-bottom: 5px;
-    }
-
-    .info-chip strong {
-      display: block;
-
-      color: var(--cream);
-
-      font-size: 13px;
-    }
-
-    .chip-one {
-      top: 7%;
-      right: -5%;
-    }
-
-    .chip-two {
-      bottom: 13%;
-      right: -9%;
-    }
-
-    .chip-three {
-      bottom: 3%;
-      left: -9%;
-
-      border-color:
-        rgba(107,203,155,.55);
-
-      background:
-        #245A43;
-    }
-
-    .chip-three strong {
-      color: #B9F4D1;
-    }
-
-    .floating-dot {
-      position: absolute;
-
-      width: 9px;
-      height: 9px;
+        rgba(131,238,208,.65);
 
       border-radius: 50%;
 
+      box-shadow:
+        0 0 55px
+        rgba(82,224,183,.20);
+    }
+
+
+    .radar-center::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 76px;
+      height: 76px;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%,-50%);
+
+      border:
+        1px solid
+        rgba(131,238,208,.4);
+
+      border-radius: 50%;
+    }
+
+
+    .radar-line {
+
+      position: absolute;
+
+      left: 50%;
+      top: 0;
+
+      width: 1px;
+      height: 100%;
+
       background:
-        var(--green);
+        rgba(131,238,208,.14);
+    }
+
+
+    .radar-line.horizontal {
+
+      top: 50%;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+    }
+
+
+    .signal-dot {
+
+      position: absolute;
+
+      width: 13px;
+      height: 13px;
+
+      border-radius: 50%;
+
+      background: var(--mint);
 
       box-shadow:
-        0 0 18px
-        var(--green);
+        0 0 22px
+        var(--mint);
 
       animation:
-        float 3.2s ease-in-out infinite;
+        float 3.5s ease-in-out infinite;
     }
+
 
     .dot-one {
-      top: 13%;
+
+      top: 20%;
       left: 23%;
     }
 
+
     .dot-two {
-      bottom: 20%;
-      left: 32%;
+
+      bottom: 23%;
+      left: 43%;
 
       animation-delay: 1s;
     }
 
 
-    /* =========================================================
-       QUICK STATS
-       ========================================================= */
+    .dot-three {
 
-    .stats {
+      top: 43%;
+      right: 13%;
+
+      animation-delay: 1.8s;
+    }
+
+
+    /* =========================================================
+       INFO CHIPS
+    ========================================================= */
+
+    .info-chip {
+
+      position: absolute;
+
+      min-width: 190px;
+
+      padding: 15px 18px;
+
+      border:
+        1px solid
+        rgba(124,235,205,.45);
+
+      border-radius: 20px;
+
+      background:
+        rgba(7,59,49,.82);
+
+      backdrop-filter:
+        blur(12px);
+
+      box-shadow:
+        0 18px 40px
+        rgba(0,0,0,.20);
+
+      z-index: 5;
+    }
+
+
+    body.light .info-chip {
+
+      background:
+        rgba(255,255,255,.82);
+    }
+
+
+    .info-chip small {
+
+      display: block;
+
+      color: var(--gold);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: .13em;
+
+      margin-bottom: 5px;
+    }
+
+
+    .info-chip strong {
+
+      color: var(--cream);
+
+      font-size: 15px;
+
+      font-weight: 700;
+    }
+
+
+    .monitor {
+
+      top: 8%;
+      right: -4%;
+    }
+
+
+    .signal {
+
+      right: -11%;
+      bottom: 20%;
+    }
+
+
+    .action {
+
+      left: -5%;
+      bottom: 8%;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(73,210,167,.92),
+          rgba(34,156,121,.92)
+        );
+
+      border-color:
+        rgba(145,248,218,.65);
+    }
+
+
+    .action strong {
+
+      color: #07382e;
+    }
+
+
+    /* =========================================================
+       FEATURE BAR
+    ========================================================= */
+
+    .feature-bar {
+
       display: grid;
 
       grid-template-columns:
         repeat(3, 1fr);
 
-      border-top:
+      border:
         1px solid var(--border);
 
-      border-bottom:
-        1px solid var(--border);
+      border-radius: 22px;
+
+      background:
+        rgba(9,74,61,.35);
+
+      backdrop-filter:
+        blur(12px);
+
+      overflow: hidden;
+
+      box-shadow: var(--shadow);
     }
 
-    .stat {
-      padding:
-        27px 24px;
+
+    body.light .feature-bar {
+
+      background:
+        rgba(255,255,255,.55);
     }
 
-    .stat:not(:last-child) {
+
+    .feature {
+
+      min-height: 110px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 16px;
+
+      padding: 22px 26px;
+    }
+
+
+    .feature:not(:last-child) {
+
       border-inline-end:
-        1px solid var(--border);
+        1px solid var(--border-soft);
     }
 
-    .stat-number {
+
+    .feature-icon {
+
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: var(--mint);
+
+      background:
+        rgba(89,223,181,.09);
+
+      border:
+        1px solid
+        rgba(89,223,181,.18);
+
+      font-size: 20px;
+
+      flex-shrink: 0;
+    }
+
+
+    .feature strong {
+
       display: block;
 
-      color: var(--green);
+      font-size: 17px;
 
-      font-size: 27px;
-      font-weight: 700;
-
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
-    .stat-label {
+
+    .feature span {
+
       color: var(--muted);
 
-      font-size: 13px;
+      font-size: 12px;
     }
 
 
     /* =========================================================
        SECTIONS
-       ========================================================= */
+    ========================================================= */
 
     .section {
+
       padding:
-        92px 0
-        65px;
+        100px 0 50px;
     }
+
 
     .section-label {
-      color: var(--green);
 
-      font-size: 11px;
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      color: var(--mint);
+
+      font-size: 12px;
+
       font-weight: 700;
 
-      letter-spacing: .14em;
+      letter-spacing: .12em;
+
+      margin-bottom: 14px;
     }
 
-    h2 {
-      max-width: 850px;
 
-      margin:
-        13px 0
-        36px;
+    .section-label::before {
+
+      content: "";
+
+      width: 22px;
+      height: 2px;
+
+      background: var(--mint);
+    }
+
+
+    .section-title {
+
+      text-align: center;
 
       font-size:
-        clamp(31px, 4vw, 49px);
+        clamp(
+          29px,
+          4vw,
+          47px
+        );
 
-      line-height: 1.25;
+      line-height: 1.35;
 
-      font-weight: 600;
-
-      letter-spacing: -.035em;
-    }
-
-    body:not(.en) h2 {
-      letter-spacing: 0;
-      line-height: 1.5;
+      margin-bottom: 38px;
     }
 
 
     /* =========================================================
        CARDS
-       ========================================================= */
+    ========================================================= */
 
     .cards {
+
       display: grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
-      gap: 15px;
+      gap: 16px;
     }
 
+
     .card {
-      min-height: 230px;
 
-      padding: 27px;
+      min-height: 290px;
 
-      border-radius: 22px;
+      padding: 26px;
 
       border:
-        1px solid
-        rgba(255,255,255,.12);
+        1px solid var(--border);
+
+      border-radius: 21px;
 
       background:
         linear-gradient(
           145deg,
-          rgba(44,91,68,.82),
-          rgba(20,49,37,.88)
+          rgba(20,94,76,.48),
+          rgba(6,57,47,.55)
         );
+
+      position: relative;
+
+      overflow: hidden;
 
       transition:
         transform .3s ease,
@@ -772,340 +1168,285 @@
         box-shadow .3s ease;
     }
 
-    .card:hover {
-      transform:
-        translateY(-7px);
 
-      border-color:
-        rgba(107,203,155,.48);
-
-      box-shadow:
-        0 22px 50px rgba(0,0,0,.16);
-    }
-
-    .card-number {
-      color: var(--gold);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: .12em;
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
-      margin-top: 19px;
-
-      border-radius: 14px;
-
-      color: var(--green);
+    body.light .card {
 
       background:
-        rgba(107,203,155,.09);
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.85),
+          rgba(224,244,236,.75)
+        );
+    }
+
+
+    .card:hover {
+
+      transform:
+        translateY(-8px);
+
+      border-color:
+        var(--mint);
+
+      box-shadow:
+        0 22px 50px
+        rgba(0,0,0,.16);
+    }
+
+
+    .card-number {
+
+      color: var(--gold);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: .1em;
+    }
+
+
+    .card-icon {
+
+      width: 58px;
+      height: 58px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        rgba(80,224,180,.08);
 
       border:
         1px solid
-        rgba(107,203,155,.2);
+        rgba(80,224,180,.2);
 
-      font-size: 20px;
+      color: var(--mint);
+
+      font-size: 25px;
+
+      margin:
+        25px 0 20px;
     }
+
 
     .card h3 {
-      margin:
-        17px 0
-        8px;
 
-      font-size: 20px;
+      font-size: 21px;
+
+      margin-bottom: 10px;
     }
 
+
     .card p {
-      margin: 0;
 
       color: var(--muted);
 
+      line-height: 1.9;
+
       font-size: 14px;
+    }
+
+
+    /* =========================================================
+       HOW IT WORKS
+    ========================================================= */
+
+    .steps {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap: 0;
+
+      margin-top: 45px;
+    }
+
+
+    .step {
+
+      position: relative;
+
+      text-align: center;
+
+      padding:
+        0 24px 25px;
+    }
+
+
+    .step:not(:last-child)::after {
+
+      content: "";
+
+      position: absolute;
+
+      top: 31px;
+
+      left: 50%;
+
+      width: 100%;
+
+      border-top:
+        1px dashed
+        rgba(118,230,192,.32);
+
+      z-index: -1;
+    }
+
+
+    .step-number {
+
+      width: 62px;
+      height: 62px;
+
+      display: grid;
+
+      place-items: center;
+
+      margin: auto;
+
+      border-radius: 50%;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid
+        var(--border);
+
+      color: var(--mint);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 0 30px
+        rgba(72,221,176,.08);
+    }
+
+
+    .step h3 {
+
+      font-size: 17px;
+
+      margin:
+        19px 0 7px;
+    }
+
+
+    .step p {
+
+      color: var(--muted);
+
+      font-size: 13px;
 
       line-height: 1.8;
     }
 
 
     /* =========================================================
-       PROCESS
-       ========================================================= */
+       CTA
+    ========================================================= */
 
-    .process-section {
-      padding:
-        65px 0
-        92px;
-    }
+    .cta {
 
-    .process {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 0;
-    }
-
-    .process-item {
-      position: relative;
-
-      padding:
-        22px 24px;
-    }
-
-    .process-item:not(:last-child)::after {
-      content: "";
-
-      position: absolute;
-
-      top: 38px;
-
-      inset-inline-end: 0;
-
-      width: 1px;
-      height: 75px;
-
-      background:
-        var(--border);
-    }
-
-    .process-step {
-      color: var(--green);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: .12em;
-    }
-
-    .process-item h3 {
       margin:
-        14px 0
-        7px;
-
-      font-size: 18px;
-    }
-
-    .process-item p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      line-height: 1.75;
-    }
-
-
-    /* =========================================================
-       FEATURE PANEL
-       ========================================================= */
-
-    .feature-panel {
-      display: grid;
-
-      grid-template-columns:
-        .9fr
-        1.1fr;
-
-      gap: 25px;
-
-      align-items: stretch;
+        55px auto 100px;
 
       padding:
-        28px;
+        55px 40px;
 
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #214E3A,
-          #123226
-        );
+      text-align: center;
 
       border:
-        1px solid
-        rgba(107,203,155,.20);
+        1px solid var(--border);
 
-      box-shadow:
-        var(--shadow);
+      border-radius: 27px;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(79,224,181,.18),
+          transparent 50%
+        ),
+
+        rgba(8,67,55,.38);
+
+      overflow: hidden;
     }
 
-    .feature-copy {
-      padding: 20px;
+
+    body.light .cta {
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(48,190,145,.13),
+          transparent 55%
+        ),
+
+        rgba(255,255,255,.6);
     }
 
-    .feature-copy h2 {
-      margin-top: 10px;
-      margin-bottom: 17px;
+
+    .cta h2 {
+
+      font-size:
+        clamp(
+          28px,
+          4vw,
+          44px
+        );
+
+      margin-bottom: 12px;
     }
 
-    .feature-copy p {
+
+    .cta p {
+
       color: var(--muted);
+
+      max-width: 650px;
+
+      margin:
+        0 auto 26px;
 
       line-height: 1.9;
 
       font-size: 14px;
-
-      max-width: 540px;
-    }
-
-    .monitor {
-      min-height: 300px;
-
-      position: relative;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 22px;
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          rgba(107,203,155,.16),
-          transparent 58%
-        ),
-
-        rgba(7,31,23,.38);
-    }
-
-    .monitor-ring {
-      width: 210px;
-      height: 210px;
-
-      border:
-        1px solid
-        rgba(139,224,179,.3);
-
-      border-radius: 50%;
-
-      position: relative;
-    }
-
-    .monitor-ring::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 25px;
-
-      border-radius: 50%;
-
-      border:
-        1px dashed
-        rgba(139,224,179,.35);
-    }
-
-    .monitor-center {
-      position: absolute;
-
-      width: 75px;
-      height: 75px;
-
-      top: 50%;
-      left: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      display: grid;
-      place-items: center;
-
-      color: #B9F4D1;
-
-      background:
-        #2A654B;
-
-      border:
-        1px solid
-        var(--green);
-
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .monitor-node {
-      position: absolute;
-
-      padding:
-        8px 12px;
-
-      border-radius: 999px;
-
-      color: var(--cream);
-
-      background:
-        rgba(29,71,53,.95);
-
-      border:
-        1px solid
-        rgba(107,203,155,.25);
-
-      font-size: 11px;
-    }
-
-    .node-one {
-      top: 14%;
-      right: 10%;
-    }
-
-    .node-two {
-      bottom: 15%;
-      left: 9%;
-    }
-
-    .node-three {
-      bottom: 11%;
-      right: 12%;
-    }
-
-
-    /* =========================================================
-       DISCLAIMER
-       ========================================================= */
-
-    .disclaimer {
-      max-width: 820px;
-
-      color: #9FB7AA;
-
-      font-size: 12px;
-
-      line-height: 1.9;
-
-      margin-top: 32px;
     }
 
 
     /* =========================================================
        FOOTER
-       ========================================================= */
+    ========================================================= */
 
     footer {
+
       border-top:
-        1px solid
-        var(--border);
+        1px solid var(--border-soft);
 
       padding:
-        26px 0
-        35px;
+        27px 0 34px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: space-between;
 
       gap: 20px;
@@ -1115,273 +1456,373 @@
       font-size: 12px;
     }
 
-    .creator strong {
-      color: var(--green);
-      font-weight: 600;
-    }
 
     .footer-brand {
+
+      color: var(--mint);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-weight: 700;
+
+      font-size: 15px;
+    }
+
+
+    .creator {
+
+      text-align: left;
+    }
+
+
+    .creator strong {
+
       color: var(--cream);
-
-      font-weight: 600;
-
-      letter-spacing: .04em;
     }
 
 
     /* =========================================================
        ANIMATIONS
-       ========================================================= */
+    ========================================================= */
 
     @keyframes rotate {
+
+      from {
+        transform: rotate(0deg);
+      }
+
       to {
-        transform:
-          rotate(360deg);
+        transform: rotate(360deg);
       }
     }
 
-    @keyframes pulse {
-      50% {
-        box-shadow:
-          0 0 0 25px rgba(107,203,155,.025),
-          0 0 90px rgba(107,203,155,.37);
-      }
-    }
 
     @keyframes float {
+
+      0%,100% {
+        transform: translateY(0);
+      }
+
       50% {
-        transform:
-          translateY(-14px);
+        transform: translateY(-13px);
+      }
+    }
+
+
+    @keyframes breathe {
+
+      0%,100% {
+        transform: scale(1);
+        opacity: .75;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
       }
     }
 
 
     /* =========================================================
        RESPONSIVE
-       ========================================================= */
+    ========================================================= */
 
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
 
-      .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 48px;
+      header {
+        height: auto;
+        padding: 18px 0;
       }
 
-      .hero-copy {
-        max-width: 760px;
-      }
-
-      .hero-visual {
-        min-height: 400px;
-      }
-
-      .cards {
-        grid-template-columns:
-          1fr;
-      }
-
-      .process {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .process-item:not(:last-child)::after {
+      nav {
         display: none;
       }
 
-      .feature-panel {
+      .hero {
+
+        grid-template-columns: 1fr;
+
+        padding-top: 50px;
+      }
+
+      .hero-copy {
+
+        max-width: 760px;
+
+        margin: auto;
+
+        text-align: center;
+      }
+
+      .eyebrow {
+
+        justify-content: center;
+      }
+
+      .hero-description {
+
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .actions {
+
+        justify-content: center;
+      }
+
+      .visual {
+
+        min-height: 470px;
+      }
+
+      .feature-bar {
+
+        grid-template-columns: 1fr;
+      }
+
+      .feature:not(:last-child) {
+
+        border-inline-end: 0;
+
+        border-bottom:
+          1px solid var(--border-soft);
+      }
+
+      .cards {
+
         grid-template-columns:
-          1fr;
+          1fr 1fr;
+      }
+
+      .steps {
+
+        grid-template-columns:
+          1fr 1fr;
+
+        row-gap: 35px;
+      }
+
+      .step:nth-child(2)::after {
+
+        display: none;
       }
     }
 
 
-    @media (max-width: 620px) {
+    @media (max-width: 650px) {
 
       .container {
+
         width:
-          min(100% - 28px, 1180px);
+          min(
+            100% - 28px,
+            1180px
+          );
       }
 
       header {
-        min-height: 76px;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+      }
+
+      .brand {
+
+        gap: 10px;
       }
 
       .logo-box {
+
+        width: 54px;
+        height: 54px;
+
+        border-radius: 14px;
+      }
+
+      .brand-name {
+
+        font-size: 21px;
+      }
+
+      .brand-sub {
+
+        font-size: 9px;
+      }
+
+      .nav-area {
+
+        width: 100%;
+
+        justify-content: flex-end;
+      }
+
+      .hero {
+
+        padding:
+          38px 0 25px;
+      }
+
+      h1 {
+
+        font-size:
+          clamp(
+            39px,
+            11vw,
+            55px
+          );
+
+        letter-spacing: -.02em;
+      }
+
+      .hero-description {
+
+        font-size: 14px;
+
+        line-height: 1.9;
+      }
+
+      .actions {
+
+        flex-direction: column;
+      }
+
+      .button {
+
+        width: 100%;
+      }
+
+      .visual {
+
+        min-height: 390px;
+      }
+
+      .radar {
+
+        width: 285px;
+        height: 285px;
+      }
+
+      .radar::before {
+
+        inset: 35px;
+      }
+
+      .radar::after {
+
+        inset: 70px;
+      }
+
+      .radar-center {
+
+        width: 95px;
+        height: 95px;
+      }
+
+      .radar-center::before {
+
         width: 50px;
         height: 50px;
       }
 
-      .brand-sub {
-        font-size: 9px;
+      .radar-glow {
+
+        width: 330px;
+        height: 330px;
       }
 
-      .brand-name {
-        font-size: 16px;
-      }
+      .info-chip {
 
-      .lang-button {
+        min-width: 130px;
+
         padding:
-          8px 11px;
+          10px 12px;
+
+        border-radius: 14px;
+      }
+
+      .info-chip small {
+
+        font-size: 8px;
+      }
+
+      .info-chip strong {
 
         font-size: 11px;
       }
 
-      .hero {
-        padding:
-          38px 0
-          42px;
+      .monitor {
+
+        right: -2%;
+        top: 8%;
       }
 
-      h1 {
-        font-size:
-          clamp(39px, 11vw, 53px);
+      .signal {
+
+        right: -4%;
+        bottom: 17%;
       }
 
-      body:not(.en) h1 {
-        font-size:
-          clamp(37px, 10vw, 49px);
+      .action {
+
+        left: -2%;
+        bottom: 6%;
       }
 
-      .hero-description {
-        font-size: 15px;
-      }
+      .cards {
 
-      .hero-buttons {
-        display: grid;
         grid-template-columns: 1fr;
       }
 
-      .button {
-        width: 100%;
-        min-height: 58px;
+      .card {
+
+        min-height: 250px;
       }
 
-      .hero-visual {
-        min-height: 315px;
+      .steps {
+
+        grid-template-columns: 1fr;
       }
 
-      .orbit {
-        width: 275px;
-        height: 275px;
+      .step::after {
+
+        display: none !important;
       }
 
-      .orbit::before {
-        inset: 32px;
-      }
+      .cta {
 
-      .orbit::after {
-        inset: 72px;
-      }
-
-      .center-card {
-        width: 91px;
-        height: 91px;
-      }
-
-      .center-card img {
-        width: 65px;
-        height: 65px;
-      }
-
-      .info-chip {
-        min-width: 108px;
-        padding: 8px 10px;
-      }
-
-      .info-chip small {
-        font-size: 7px;
-      }
-
-      .info-chip strong {
-        font-size: 10px;
-      }
-
-      .chip-one {
-        right: -7%;
-      }
-
-      .chip-two {
-        right: -11%;
-      }
-
-      .chip-three {
-        left: -10%;
-      }
-
-      .stats {
-        grid-template-columns:
-          1fr;
-      }
-
-      .stat {
         padding:
-          17px 15px;
-      }
+          40px 20px;
 
-      .stat:not(:last-child) {
-        border-inline-end: none;
-
-        border-bottom:
-          1px solid
-          var(--border);
-      }
-
-      .stat-number {
-        font-size: 23px;
-      }
-
-      .section {
-        padding:
-          65px 0
-          45px;
-      }
-
-      h2 {
-        font-size:
-          32px;
-      }
-
-      .process {
-        grid-template-columns:
-          1fr;
-      }
-
-      .process-item {
-        padding:
-          15px 0;
-      }
-
-      .feature-panel {
-        padding:
-          15px;
-      }
-
-      .feature-copy {
-        padding:
-          10px;
-      }
-
-      .monitor {
-        min-height: 260px;
+        margin-bottom: 60px;
       }
 
       footer {
-        flex-direction:
-          column;
 
-        align-items:
-          flex-start;
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+
+      .creator {
+
+        text-align: right;
       }
     }
 
+
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
+
         animation: none !important;
+
         transition: none !important;
+
         scroll-behavior: auto !important;
       }
     }
@@ -1394,75 +1835,114 @@
 
 <div class="page">
 
-  <!-- =======================================================
+  <!-- ======================================================
        HEADER
-       ======================================================= -->
+  ======================================================= -->
 
   <header class="container">
 
-    <div class="brand">
+    <a href="#" class="brand">
 
       <div class="logo-box">
-        <!-- نفس اسم ملف اللوقو الذي طلبتيه -->
         <img
           src="logo (2).jpg"
-          alt="FoodGuard logo"
-        >
+          alt="FoodGuard Logo">
       </div>
 
-      <div>
+      <div class="brand-info">
+
         <div class="brand-name">
-          FOODGUARD
+          FoodGuard
         </div>
 
         <div
           class="brand-sub"
-          data-ar="المراقبة المبكرة للإجهاد في أشجار النخيل"
-          data-en="Early Stress Monitoring for Date Palms"
-        >
-          المراقبة المبكرة للإجهاد في أشجار النخيل
+          data-ar="المراقبة المبكرة للإجهاد"
+          data-en="Early Stress Monitoring">
+          المراقبة المبكرة للإجهاد
         </div>
+
       </div>
 
-    </div>
+    </a>
 
 
-    <div class="header-actions">
+    <div class="nav-area">
 
-      <button
-        class="lang-button"
-        id="langButton"
-        type="button"
-      >
-        English →
-      </button>
+      <nav>
+
+        <a href="#home"
+           data-ar="الرئيسية"
+           data-en="Home">
+          الرئيسية
+        </a>
+
+        <a href="#about"
+           data-ar="عن المشروع"
+           data-en="About">
+          عن المشروع
+        </a>
+
+        <a href="#how"
+           data-ar="كيف تعمل"
+           data-en="How it works">
+          كيف تعمل
+        </a>
+
+        <a href="#features"
+           data-ar="المزايا"
+           data-en="Features">
+          المزايا
+        </a>
+
+      </nav>
+
+
+      <div class="controls">
+
+        <button
+          class="control-button"
+          id="themeButton"
+          type="button"
+          aria-label="Toggle theme">
+          ☾
+        </button>
+
+        <button
+          class="control-button"
+          id="languageButton"
+          type="button">
+          English →
+        </button>
+
+      </div>
 
     </div>
 
   </header>
 
 
-  <!-- =======================================================
-       MAIN
-       ======================================================= -->
-
   <main>
 
-
-    <!-- =====================================================
+    <!-- ====================================================
          HERO
-         ===================================================== -->
+    ===================================================== -->
 
-    <section class="hero container">
+    <section
+      class="hero container"
+      id="home">
+
 
       <div class="hero-copy">
 
-        <div
-          class="eyebrow"
-          data-ar="FOODGUARD AI · DATE PALMS"
-          data-en="FOODGUARD AI · DATE PALMS"
-        >
-          FOODGUARD AI · DATE PALMS
+        <div class="eyebrow">
+
+          <span
+            data-ar="FOODGUARD AI · DATE PALMS"
+            data-en="FOODGUARD AI · DATE PALMS">
+            FOODGUARD AI · DATE PALMS
+          </span>
+
         </div>
 
 
@@ -1470,8 +1950,7 @@
 
           <span
             data-ar="اكتشف إجهاد"
-            data-en="Detect palm"
-          >
+            data-en="Detect Date Palm">
             اكتشف إجهاد
           </span>
 
@@ -1480,8 +1959,7 @@
           <span
             class="highlight"
             data-ar="النخيل قبل أن يتفاقم."
-            data-en="stress before it escalates."
-          >
+            data-en="Stress Before It Escalates.">
             النخيل قبل أن يتفاقم.
           </span>
 
@@ -1490,134 +1968,116 @@
 
         <p
           class="hero-description"
-          data-ar="FoodGuard منصة ذكية للمراقبة المبكرة تساعد على اكتشاف مؤشرات الإجهاد في أشجار النخيل وتحويل البيانات إلى إشارات واضحة تساعد على اتخاذ القرار في الوقت المناسب."
-          data-en="FoodGuard is an intelligent early-monitoring platform designed to identify stress signals in date palms and turn data into clear insights for timely action."
-        >
-          FoodGuard منصة ذكية للمراقبة المبكرة تساعد على اكتشاف مؤشرات الإجهاد في أشجار النخيل وتحويل البيانات إلى إشارات واضحة تساعد على اتخاذ القرار في الوقت المناسب.
+          data-ar="منصة ذكية للمراقبة المبكرة تساعد على اكتشاف مؤشرات الإجهاد في أشجار النخيل وتحويل البيانات إلى إشارات واضحة تساعد على اتخاذ القرار في الوقت المناسب."
+          data-en="An intelligent early-monitoring platform that helps detect stress indicators in date palms and turns data into clear signals for timely decisions.">
+
+          منصة ذكية للمراقبة المبكرة تساعد على اكتشاف مؤشرات الإجهاد في أشجار النخيل وتحويل البيانات إلى إشارات واضحة تساعد على اتخاذ القرار في الوقت المناسب.
+
         </p>
 
 
-        <div class="hero-buttons">
+        <div class="actions">
 
-          <!-- =================================================
-               رابط النموذج الأولي
-               ================================================= -->
+          <!-- BASE44 LINK -->
 
           <a
             class="button primary"
             href="https://radiant-palm-guard-flow.base44.app/"
             target="_blank"
-            rel="noopener noreferrer"
-            data-ar="جرّب النموذج الأولي →"
-            data-en="Try the prototype →"
-          >
-            جرّب النموذج الأولي →
+            rel="noopener noreferrer">
+
+            <span
+              data-ar="جرّب النموذج الأولي →"
+              data-en="Try the Prototype →">
+              جرّب النموذج الأولي →
+            </span>
+
           </a>
 
 
           <a
             class="button secondary"
-            href="#how"
-            data-ar="كيف تعمل المنصة؟"
-            data-en="How does it work?"
-          >
-            كيف تعمل المنصة؟
+            href="#how">
+
+            <span
+              data-ar="كيف تعمل المنصة؟"
+              data-en="How does it work?">
+              كيف تعمل المنصة؟
+            </span>
+
           </a>
 
         </div>
 
-
-        <p
-          class="hero-note"
-          data-ar="FoodGuard AI · Early Stress Monitoring for Date Palms"
-          data-en="FoodGuard AI · Early Stress Monitoring for Date Palms"
-        >
-          FoodGuard AI · Early Stress Monitoring for Date Palms
-        </p>
-
       </div>
 
 
-      <!-- =====================================================
-           VISUAL
-           ===================================================== -->
+      <!-- ==================================================
+           RADAR
+      =================================================== -->
 
-      <div class="hero-visual">
-
-        <div class="visual-glow"></div>
-
-
-        <div class="orbit">
-
-          <div class="center-card">
-
-            <img
-              src="logo (2).jpg"
-              alt="FoodGuard"
-            >
-
-          </div>
+      <div
+        class="visual"
+        aria-label="FoodGuard monitoring visualization">
 
 
-          <div class="info-chip chip-one">
+        <div class="radar-glow"></div>
 
-            <small
-              data-ar="MONITOR"
-              data-en="MONITOR"
-            >
-              MONITOR
-            </small>
+
+        <div class="radar">
+
+          <div class="radar-line"></div>
+
+          <div class="radar-line horizontal"></div>
+
+
+          <div class="radar-center"></div>
+
+
+          <span class="signal-dot dot-one"></span>
+
+          <span class="signal-dot dot-two"></span>
+
+          <span class="signal-dot dot-three"></span>
+
+
+          <div class="info-chip monitor">
+
+            <small>MONITOR</small>
 
             <strong
               data-ar="حالة النخيل"
-              data-en="Palm condition"
-            >
+              data-en="Palm Health">
               حالة النخيل
             </strong>
 
           </div>
 
 
-          <div class="info-chip chip-two">
+          <div class="info-chip signal">
 
-            <small
-              data-ar="SIGNAL"
-              data-en="SIGNAL"
-            >
-              SIGNAL
-            </small>
+            <small>SIGNAL</small>
 
             <strong
               data-ar="مؤشرات إجهاد"
-              data-en="Stress signals"
-            >
+              data-en="Stress Signals">
               مؤشرات إجهاد
             </strong>
 
           </div>
 
 
-          <div class="info-chip chip-three">
+          <div class="info-chip action">
 
-            <small
-              data-ar="ACTION"
-              data-en="ACTION"
-            >
-              ACTION
-            </small>
+            <small>ACTION</small>
 
             <strong
               data-ar="تنبيه مبكر →"
-              data-en="Early alert →"
-            >
+              data-en="Early Alert →">
               تنبيه مبكر →
             </strong>
 
           </div>
-
-
-          <i class="floating-dot dot-one"></i>
-          <i class="floating-dot dot-two"></i>
 
         </div>
 
@@ -1626,97 +2086,122 @@
     </section>
 
 
-    <!-- =====================================================
-         STATS
-         ===================================================== -->
+    <!-- ====================================================
+         FEATURES BAR
+    ===================================================== -->
 
-    <section class="stats container">
+    <section
+      class="container"
+      id="features">
 
-      <div class="stat">
-
-        <span
-          class="stat-number"
-          data-ar="مبكر"
-          data-en="Early"
-        >
-          مبكر
-        </span>
-
-        <span
-          class="stat-label"
-          data-ar="اكتشاف مؤشرات الإجهاد"
-          data-en="Stress signal detection"
-        >
-          اكتشاف مؤشرات الإجهاد
-        </span>
-
-      </div>
+      <div class="feature-bar">
 
 
-      <div class="stat">
+        <div class="feature">
 
-        <span
-          class="stat-number"
-          data-ar="ذكي"
-          data-en="Smart"
-        >
-          ذكي
-        </span>
+          <div class="feature-icon">
+            ♧
+          </div>
 
-        <span
-          class="stat-label"
-          data-ar="تحويل البيانات إلى إشارات"
-          data-en="Turning data into signals"
-        >
-          تحويل البيانات إلى إشارات
-        </span>
+          <div>
 
-      </div>
+            <strong
+              data-ar="مبكر"
+              data-en="Early">
+              مبكر
+            </strong>
+
+            <span
+              data-ar="اكتشاف مؤشرات الإجهاد"
+              data-en="Detect stress indicators early">
+              اكتشاف مؤشرات الإجهاد
+            </span>
+
+          </div>
+
+        </div>
 
 
-      <div class="stat">
+        <div class="feature">
 
-        <span
-          class="stat-number"
-          data-ar="استباقي"
-          data-en="Proactive"
-        >
-          استباقي
-        </span>
+          <div class="feature-icon">
+            ▥
+          </div>
 
-        <span
-          class="stat-label"
-          data-ar="دعم القرار قبل تفاقم المشكلة"
-          data-en="Decision support before escalation"
-        >
-          دعم القرار قبل تفاقم المشكلة
-        </span>
+          <div>
+
+            <strong
+              data-ar="ذكي"
+              data-en="Smart">
+              ذكي
+            </strong>
+
+            <span
+              data-ar="تحويل البيانات إلى إشارات"
+              data-en="Turn data into signals">
+              تحويل البيانات إلى إشارات
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ◇
+          </div>
+
+          <div>
+
+            <strong
+              data-ar="استباقي"
+              data-en="Proactive">
+              استباقي
+            </strong>
+
+            <span
+              data-ar="دعم القرار قبل تفاقم المشكلة"
+              data-en="Support decisions before escalation">
+              دعم القرار قبل تفاقم المشكلة
+            </span>
+
+          </div>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =====================================================
-         WHY FOODGUARD
-         ===================================================== -->
+    <!-- ====================================================
+         ABOUT
+    ===================================================== -->
 
-    <section class="section container" id="how">
+    <section
+      class="section container"
+      id="about">
 
-      <div
-        class="section-label"
-        data-ar="لماذا FOODGUARD؟"
-        data-en="WHY FOODGUARD?"
-      >
-        لماذا FOODGUARD؟
+      <div class="section-label">
+
+        <span
+          data-ar="لماذا FOODGUARD؟"
+          data-en="WHY FOODGUARD?">
+          لماذا FOODGUARD؟
+        </span>
+
       </div>
 
 
       <h2
+        class="section-title"
         data-ar="من مراقبة النخيل إلى فهم ما يحدث فعليًا."
-        data-en="From monitoring palms to understanding what is actually happening."
-      >
+        data-en="From monitoring date palms to understanding what is really happening.">
+
         من مراقبة النخيل إلى فهم ما يحدث فعليًا.
+
       </h2>
 
 
@@ -1725,29 +2210,23 @@
 
         <article class="card">
 
-          <div
-            class="card-number"
-            data-ar="01 / MONITOR"
-            data-en="01 / MONITOR"
-          >
+          <div class="card-number">
             01 / MONITOR
           </div>
 
           <div class="card-icon">
-            ◌
+            ♧
           </div>
 
           <h3
             data-ar="المراقبة المستمرة"
-            data-en="Continuous Monitoring"
-          >
+            data-en="Continuous Monitoring">
             المراقبة المستمرة
           </h3>
 
           <p
             data-ar="متابعة مؤشرات حالة أشجار النخيل بدل الاعتماد فقط على الملاحظة المتأخرة."
-            data-en="Follow palm-condition indicators instead of relying only on late visual observation."
-          >
+            data-en="Track date palm health indicators instead of relying only on late visual observation.">
             متابعة مؤشرات حالة أشجار النخيل بدل الاعتماد فقط على الملاحظة المتأخرة.
           </p>
 
@@ -1756,29 +2235,23 @@
 
         <article class="card">
 
-          <div
-            class="card-number"
-            data-ar="02 / DETECT"
-            data-en="02 / DETECT"
-          >
+          <div class="card-number">
             02 / DETECT
           </div>
 
           <div class="card-icon">
-            ◇
+            ◉
           </div>
 
           <h3
             data-ar="اكتشاف الإشارات"
-            data-en="Signal Detection"
-          >
+            data-en="Signal Detection">
             اكتشاف الإشارات
           </h3>
 
           <p
             data-ar="تحويل البيانات والمؤشرات إلى إشارات تساعد على التعرف المبكر على حالات الإجهاد."
-            data-en="Turn available data and indicators into signals that support early recognition of stress."
-          >
+            data-en="Transform data and indicators into signals that support earlier recognition of stress conditions.">
             تحويل البيانات والمؤشرات إلى إشارات تساعد على التعرف المبكر على حالات الإجهاد.
           </p>
 
@@ -1787,11 +2260,7 @@
 
         <article class="card">
 
-          <div
-            class="card-number"
-            data-ar="03 / ACT"
-            data-en="03 / ACT"
-          >
+          <div class="card-number">
             03 / ACT
           </div>
 
@@ -1801,278 +2270,233 @@
 
           <h3
             data-ar="قرار في الوقت المناسب"
-            data-en="Timely Action"
-          >
+            data-en="Timely Action">
             قرار في الوقت المناسب
           </h3>
 
           <p
             data-ar="إيصال المعلومات المهمة بطريقة واضحة تساعد على اتخاذ الإجراء المناسب قبل تفاقم الحالة."
-            data-en="Present important information clearly so the right action can be considered before conditions escalate."
-          >
+            data-en="Deliver important information clearly to support the right action before the condition escalates.">
             إيصال المعلومات المهمة بطريقة واضحة تساعد على اتخاذ الإجراء المناسب قبل تفاقم الحالة.
           </p>
 
         </article>
+
 
       </div>
 
     </section>
 
 
-    <!-- =====================================================
-         PROCESS
-         ===================================================== -->
+    <!-- ====================================================
+         HOW IT WORKS
+    ===================================================== -->
 
-    <section class="process-section container">
+    <section
+      class="section container"
+      id="how">
 
-      <div
-        class="section-label"
-        data-ar="كيف تعمل؟"
-        data-en="HOW IT WORKS"
-      >
-        كيف تعمل؟
+      <div class="section-label">
+
+        <span
+          data-ar="كيف تعمل؟"
+          data-en="HOW IT WORKS">
+          كيف تعمل؟
+        </span>
+
       </div>
 
 
       <h2
+        class="section-title"
         data-ar="رحلة بسيطة من البيانات إلى التنبيه."
-        data-en="A simple journey from data to an actionable signal."
-      >
+        data-en="A simple journey from data to alert.">
+
         رحلة بسيطة من البيانات إلى التنبيه.
+
       </h2>
 
 
-      <div class="process">
+      <div class="steps">
 
 
-        <div class="process-item">
+        <div class="step">
 
-          <div
-            class="process-step"
-            data-ar="STEP 01"
-            data-en="STEP 01"
-          >
-            STEP 01
+          <div class="step-number">
+            01
           </div>
 
           <h3
             data-ar="جمع البيانات"
-            data-en="Collect"
-          >
+            data-en="Collect">
             جمع البيانات
           </h3>
 
           <p
             data-ar="قراءة المؤشرات المتاحة المرتبطة بحالة النخيل والبيئة المحيطة."
-            data-en="Capture available indicators related to palm and environmental conditions."
-          >
+            data-en="Read available indicators related to palm health and the surrounding environment.">
             قراءة المؤشرات المتاحة المرتبطة بحالة النخيل والبيئة المحيطة.
           </p>
 
         </div>
 
 
-        <div class="process-item">
+        <div class="step">
 
-          <div
-            class="process-step"
-            data-ar="STEP 02"
-            data-en="STEP 02"
-          >
-            STEP 02
+          <div class="step-number">
+            02
           </div>
 
           <h3
             data-ar="تحليل"
-            data-en="Analyze"
-          >
+            data-en="Analyze">
             تحليل
           </h3>
 
           <p
             data-ar="تحليل الأنماط والمؤشرات للبحث عن إشارات غير طبيعية."
-            data-en="Analyze patterns and indicators for potentially abnormal signals."
-          >
+            data-en="Analyze patterns and indicators to identify abnormal signals.">
             تحليل الأنماط والمؤشرات للبحث عن إشارات غير طبيعية.
           </p>
 
         </div>
 
 
-        <div class="process-item">
+        <div class="step">
 
-          <div
-            class="process-step"
-            data-ar="STEP 03"
-            data-en="STEP 03"
-          >
-            STEP 03
+          <div class="step-number">
+            03
           </div>
 
           <h3
             data-ar="اكتشاف"
-            data-en="Detect"
-          >
+            data-en="Detect">
             اكتشاف
           </h3>
 
           <p
             data-ar="تحديد مؤشرات الإجهاد التي تستحق الانتباه والمتابعة."
-            data-en="Identify stress indicators that deserve attention and follow-up."
-          >
+            data-en="Identify stress indicators that require attention and follow-up.">
             تحديد مؤشرات الإجهاد التي تستحق الانتباه والمتابعة.
           </p>
 
         </div>
 
 
-        <div class="process-item">
+        <div class="step">
 
-          <div
-            class="process-step"
-            data-ar="STEP 04"
-            data-en="STEP 04"
-          >
-            STEP 04
+          <div class="step-number">
+            04
           </div>
 
           <h3
             data-ar="استجابة"
-            data-en="Respond"
-          >
+            data-en="Respond">
             استجابة
           </h3>
 
           <p
             data-ar="تقديم إشارة مبكرة تساعد على توجيه الخطوة التالية."
-            data-en="Provide an early signal that helps guide the next step."
-          >
+            data-en="Provide an early signal that helps guide the next action.">
             تقديم إشارة مبكرة تساعد على توجيه الخطوة التالية.
           </p>
 
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- =====================================================
-         FEATURE PANEL
-         ===================================================== -->
+    <!-- ====================================================
+         CTA
+    ===================================================== -->
 
-    <section class="section container">
+    <section class="container">
 
-      <div class="feature-panel">
+      <div class="cta">
 
+        <div class="section-label">
 
-        <div class="feature-copy">
-
-          <div
-            class="section-label"
-            data-ar="EARLY STRESS MONITORING"
-            data-en="EARLY STRESS MONITORING"
-          >
-            EARLY STRESS MONITORING
-          </div>
-
-
-          <h2
-            data-ar="لأن الإشارة المبكرة قد تغيّر القرار."
-            data-en="Because an early signal can change the decision."
-          >
-            لأن الإشارة المبكرة قد تغيّر القرار.
-          </h2>
-
-
-          <p
-            data-ar="FoodGuard مصمم ليجعل المعلومات المتعلقة بحالة النخيل أسهل في الفهم والمتابعة، بحيث لا تكون البيانات مجرد أرقام، بل نقطة بداية لفهم الحالة والتصرف في الوقت المناسب."
-            data-en="FoodGuard is designed to make palm-condition information easier to understand and follow, turning data from isolated numbers into a starting point for understanding and timely action."
-          >
-            FoodGuard مصمم ليجعل المعلومات المتعلقة بحالة النخيل أسهل في الفهم والمتابعة، بحيث لا تكون البيانات مجرد أرقام، بل نقطة بداية لفهم الحالة والتصرف في الوقت المناسب.
-          </p>
+          <span
+            data-ar="FOODGUARD AI"
+            data-en="FOODGUARD AI">
+            FOODGUARD AI
+          </span>
 
         </div>
 
 
-        <div class="monitor">
+        <h2
+          data-ar="ابدأ باستكشاف النموذج الأولي."
+          data-en="Explore the prototype.">
 
-          <div class="monitor-ring">
+          ابدأ باستكشاف النموذج الأولي.
 
-            <div class="monitor-center">
-              FOOD<br>GUARD
-            </div>
-
-          </div>
+        </h2>
 
 
-          <div
-            class="monitor-node node-one"
-            data-ar="Palm Health"
-            data-en="Palm Health"
-          >
-            Palm Health
-          </div>
+        <p
+          data-ar="تعرّف على طريقة عمل FoodGuard وكيف يمكن تحويل مؤشرات الإجهاد إلى إشارات مبكرة تساعد على اتخاذ القرار."
+          data-en="Explore how FoodGuard transforms stress indicators into early signals that support better decisions.">
+
+          تعرّف على طريقة عمل FoodGuard وكيف يمكن تحويل مؤشرات الإجهاد إلى إشارات مبكرة تساعد على اتخاذ القرار.
+
+        </p>
 
 
-          <div
-            class="monitor-node node-two"
-            data-ar="Stress Signal"
-            data-en="Stress Signal"
-          >
-            Stress Signal
-          </div>
+        <a
+          class="button primary"
+          href="https://radiant-palm-guard-flow.base44.app/"
+          target="_blank"
+          rel="noopener noreferrer">
 
+          <span
+            data-ar="جرّب النموذج الأولي →"
+            data-en="Try the Prototype →">
 
-          <div
-            class="monitor-node node-three"
-            data-ar="Early Alert"
-            data-en="Early Alert"
-          >
-            Early Alert
-          </div>
+            جرّب النموذج الأولي →
 
-        </div>
+          </span>
+
+        </a>
 
       </div>
-
-
-      <p
-        class="disclaimer"
-        data-ar="FoodGuard هو نموذج أولي لدعم المراقبة المبكرة، ولا يُقصد به أن يحل محل التقييم الميداني أو الخبرة الزراعية المتخصصة."
-        data-en="FoodGuard is an early-stage monitoring prototype and is not intended to replace field assessment or professional agricultural expertise."
-      >
-        FoodGuard هو نموذج أولي لدعم المراقبة المبكرة، ولا يُقصد به أن يحل محل التقييم الميداني أو الخبرة الزراعية المتخصصة.
-      </p>
 
     </section>
 
   </main>
 
 
-  <!-- =======================================================
+  <!-- ======================================================
        FOOTER
-       ======================================================= -->
+  ======================================================= -->
 
   <footer class="container">
+
+    <div>
+
+      <div class="footer-brand">
+        FoodGuard
+      </div>
+
+      <div
+        data-ar="Early Stress Monitoring for Date Palms"
+        data-en="Early Stress Monitoring for Date Palms">
+
+        Early Stress Monitoring for Date Palms
+
+      </div>
+
+    </div>
+
 
     <div class="creator">
 
       <span
-        class="footer-brand"
-        data-ar="FoodGuard"
-        data-en="FoodGuard"
-      >
-        FoodGuard
-      </span>
-
-      <span> · </span>
-
-      <span
         data-ar="تصميم وشغل"
-        data-en="Designed & developed by"
-      >
+        data-en="Designed & Built by">
         تصميم وشغل
       </span>
 
@@ -2082,82 +2506,152 @@
 
     </div>
 
-
-    <div>
-      © FoodGuard AI
-    </div>
-
   </footer>
 
 
 </div>
 
 
-<!-- =========================================================
-     LANGUAGE SWITCH
-     ========================================================= -->
-
 <script>
 
-  const langButton =
-    document.getElementById("langButton");
+  /* =========================================================
+     LANGUAGE
+  ========================================================= */
 
-  let language = "ar";
+  const languageButton =
+    document.getElementById("languageButton");
+
+  let currentLanguage =
+    localStorage.getItem("foodguard-language") || "ar";
 
 
-  langButton.addEventListener("click", () => {
+  function applyLanguage(language) {
 
-    language =
-      language === "ar"
-        ? "en"
-        : "ar";
-
+    currentLanguage = language;
 
     document.documentElement.lang =
       language;
 
     document.documentElement.dir =
-      language === "ar"
-        ? "rtl"
-        : "ltr";
-
+      language === "ar" ? "rtl" : "ltr";
 
     document.body.classList.toggle(
       "en",
       language === "en"
     );
 
-
     document
-      .querySelectorAll(
-        "[data-ar][data-en]"
-      )
+      .querySelectorAll("[data-ar][data-en]")
       .forEach(element => {
 
         element.textContent =
           element.getAttribute(
-            "data-" + language
+            `data-${language}`
           );
 
       });
 
 
-    langButton.textContent =
+    languageButton.textContent =
       language === "ar"
         ? "English →"
-        : "العربية →";
+        : "العربية ←";
 
 
     document.title =
       language === "ar"
-        ? "FoodGuard | المراقبة المبكرة للإجهاد في أشجار النخيل"
+        ? "FoodGuard | المراقبة المبكرة للإجهاد"
         : "FoodGuard | Early Stress Monitoring for Date Palms";
 
-  });
+
+    localStorage.setItem(
+      "foodguard-language",
+      language
+    );
+  }
+
+
+  languageButton.addEventListener(
+    "click",
+    () => {
+
+      applyLanguage(
+        currentLanguage === "ar"
+          ? "en"
+          : "ar"
+      );
+
+    }
+  );
+
+
+  /* =========================================================
+     DARK / LIGHT MODE
+  ========================================================= */
+
+  const themeButton =
+    document.getElementById("themeButton");
+
+
+  let currentTheme =
+    localStorage.getItem("foodguard-theme") ||
+    "dark";
+
+
+  function applyTheme(theme) {
+
+    currentTheme = theme;
+
+    document.body.classList.toggle(
+      "light",
+      theme === "light"
+    );
+
+
+    themeButton.textContent =
+      theme === "light"
+        ? "☀"
+        : "☾";
+
+
+    themeButton.setAttribute(
+      "aria-label",
+      theme === "light"
+        ? "Switch to dark mode"
+        : "Switch to light mode"
+    );
+
+
+    localStorage.setItem(
+      "foodguard-theme",
+      theme
+    );
+  }
+
+
+  themeButton.addEventListener(
+    "click",
+    () => {
+
+      applyTheme(
+        currentTheme === "dark"
+          ? "light"
+          : "dark"
+      );
+
+    }
+  );
+
+
+  /* =========================================================
+     INITIALIZE
+  ========================================================= */
+
+  applyLanguage(currentLanguage);
+
+  applyTheme(currentTheme);
 
 </script>
 
-
 </body>
 </html>
-```
